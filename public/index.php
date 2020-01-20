@@ -17,7 +17,7 @@ function chargerClasse($classe)
 spl_autoload_register('chargerClasse');
 //http://www.git.local/?controller=Article&action=Add
 
-$controller = (!empty($_GET['controller']) ? $_GET['controller'] : 'Article');
+$controller = (!empty($_GET['controller']) ? $_GET['controller'] : 'Utilisateur');
 $action = (!empty($_GET['action']) ? $_GET['action'] : 'Index');
 $param = (!empty($_GET['id']) ? $_GET['id'] : '');
 
