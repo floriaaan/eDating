@@ -8,10 +8,10 @@ class AbstractController {
     public function __construct()
     {
         //Conf de TWIG
-        $this->loader = new \Twig\Loader\FilesystemLoader($_SERVER['DOCUMENT_ROOT'].'/eDating/public/'.'/../templates');
+        $this->loader = new \Twig\Loader\FilesystemLoader($_SERVER['DOCUMENT_ROOT'].'/../templates');
         $this->twig = new \Twig\Environment(
             $this->loader,[
-                'cache' => $_SERVER['DOCUMENT_ROOT'].'/eDating/public/'.'/../var/cache',
+                'cache' => $_SERVER['DOCUMENT_ROOT'].'/../var/cache',
                 'debug' => true
             ]
         );
