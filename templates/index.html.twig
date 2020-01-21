@@ -13,24 +13,32 @@
 
 <nav class="navbar sticky-top nav-pills navbar-expand-lg navbar-light bg-light">
 
-    <a class="navbar-brand" href="/Utilisateur/">Find My Mate</a>
+    <a class="navbar-brand" href="#">
+        <img src="./doc/fym.svg" width="30" height="30" class="d-inline-block align-top" alt="">
+        Find My Mate
+    </a>
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarTogglerDemo02" aria-controls="navbarTogglerDemo02" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
     </button>
     <div class="collapse navbar-collapse" id="navbarTogglerDemo02">
         <!--<div class="row">-->
 
-        <ul class="navbar-nav mr-auto mt-2 mt-lg-0">
-            <li class="nav-item">
-                <a class="nav-link" href="/Utilisateur/ListFav">Mes Favoris</a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link" href="/Notifications/">Mes Notifications</a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link" href="/Utilisateur/Me">Mon Profil</a>
-            </li>
+        <ul class="nav navbar-nav ml-md--auto">
 
+            <li class="dropdown">
+
+                <a href="#" class="nav-link dropdown-toggle" id="navbarDropdown" data-toggle="dropdown" aria-expanded="false">
+                    Welcome, User <b class="caret"></b>
+                </a>
+
+                <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                    <a class="dropdown-item" href="#">Action</a>
+                    <a class="dropdown-item" href="#">Another action</a>
+                    <div class="dropdown-divider"></div>
+                    <a class="dropdown-item" href="#">Something else here</a>
+                </div>
+
+            </li>
         </ul>
 
 
