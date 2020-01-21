@@ -1,0 +1,10 @@
+{% extends "index.html.twig" %}
+{% block title %}{{ parent() }} - Carte {% endblock %}
+
+{% block body %}
+
+    {% for user in userList %}
+        {{ dump(user) }}
+    {% endfor %}
+
+{% endblock %}

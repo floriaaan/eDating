@@ -17,8 +17,29 @@ class UtilisateurController extends AbstractController
         $user = new Utilisateur();
         $listUser = $user->SqlGetAll(Bdd::GetInstance());
         return $this->twig->render(
-            'Map.html.twig', [
+            'map.html.twig', [
                 'userList' => $listUser
         ]);
     }
+
+    public function Mate(){
+        $user = new Utilisateur();
+        return $this->twig->render(
+            'mate.html.twig', [
+                'user' => $user->SqlGet(Bdd::GetInstance(), $_POST['search']),
+                'post' => $_POST
+            ]
+        );
+    }
+
+    public function Me(){
+        $user = new Utilisateur();
+        return $this->twig->render(
+            'profile.html.twig', [
+                'user' => $user->SqlGet(Bdd::GetInstance(), $_SESSION['id']),
+            ]
+        );
+    }
+
+
 }

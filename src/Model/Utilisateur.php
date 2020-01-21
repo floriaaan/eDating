@@ -13,11 +13,20 @@ class Utilisateur implements \JsonSerializable
     private $Email;
     private $Description;
     private $Sexe;
-    private $ActivitePro;
     private $Travail;
     private $estConnecte;
     private $Telephone;
     private $Titre;
+    private $Latitude;
+    private $Longitude;
+    private $MotDePasse;
+
+
+
+
+
+
+
 
 
     /**
@@ -148,24 +157,6 @@ class Utilisateur implements \JsonSerializable
     /**
      * @return mixed
      */
-    public function getActivitePro()
-    {
-        return $this->ActivitePro;
-    }
-
-    /**
-     * @param mixed $ActivitePro
-     * @return Utilisateur
-     */
-    public function setActivitePro($ActivitePro)
-    {
-        $this->ActivitePro = $ActivitePro;
-        return $this;
-    }
-
-    /**
-     * @return mixed
-     */
     public function getTravail()
     {
         return $this->Travail;
@@ -235,6 +226,60 @@ class Utilisateur implements \JsonSerializable
         return $this;
     }
 
+    /**
+     * @return mixed
+     */
+    public function getLatitude()
+    {
+        return $this->Latitude;
+    }
+
+    /**
+     * @param mixed $Latitude
+     * @return Utilisateur
+     */
+    public function setLatitude($Latitude)
+    {
+        $this->Latitude = $Latitude;
+        return $this;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getLongitude()
+    {
+        return $this->Longitude;
+    }
+
+    /**
+     * @param mixed $Longitude
+     * @return Utilisateur
+     */
+    public function setLongitude($Longitude)
+    {
+        $this->Longitude = $Longitude;
+        return $this;
+    }
+
+
+    /**
+     * @return mixed
+     */
+    public function getMotDePasse()
+    {
+        return $this->MotDePasse;
+    }
+
+    /**
+     * @param mixed $MotDePasse
+     * @return Utilisateur
+     */
+    public function setMotDePasse($MotDePasse)
+    {
+        $this->MotDePasse = $MotDePasse;
+        return $this;
+    }
 
     /**
      * @inheritDoc
@@ -243,17 +288,19 @@ class Utilisateur implements \JsonSerializable
     {
         return [
             'UID' => $this->getUID(),
+            'Password' => $this->getMotDePasse(),
             'Nom' => $this->getNom(),
             'Prenom' => $this->getPrenom(),
             'DateInscription' => $this->getDateInscription(),
             'Email' => $this->getEmail(),
             'Description' => $this->getDescription(),
             'Sexe' => $this->getSexe(),
-            'ActivitePro' => $this->getActivitePro(),
             'Travail' => $this->getTravail(),
             'estConnecte' => $this->getEstConnecte(),
             'Telephone' => $this->getTelephone(),
             'Titre' => $this->getTitre(),
+            'Latitude' => $this->getLatitude(),
+            'Longitude' => $this->getLatitude()
         ];
     }
 
@@ -261,7 +308,7 @@ class Utilisateur implements \JsonSerializable
 
     public function SqlAdd(\PDO $bdd) {
         try{
-            $requete = $bdd->prepare('INSERT INTO T_UTILISATEUR (UTI_NOM, UTI_PRENOM, UTI_DATE_INSCRIPTION, UTI_EMAIL, UTI_DESCRIPTION, UTI_SEXE, UTI_ACTIVITE_PRO, UTI_TRAVAIL, UTI_CONNECTE, UTI_TEL, UTI_TITRE) VALUES(:Nom, :Prenom, :DateInscription, :Email, :Description, :Sexe, :ActivitePro, :Travail, :estConnecte, :Telephone, :Titre)');
+            $requete = $bdd->prepare('INSERT INTO T_UTILISATEUR (UTI_NOM, UTI_PRENOM, UTI_DATE_INSCRIPTION, UTI_EMAIL, UTI_DESCRIPTION, UTI_SEXE, UTI_TRAVAIL, UTI_CONNECTE, UTI_TEL, UTI_TITRE, UTI_POS_LAT, UTI_POS_LONG, UTI_MDP) VALUES(:Nom, :Prenom, :DateInscription, :Email, :Description, :Sexe, :Travail, :estConnecte, :Telephone, :Titre, :Latitude, :Longitude, :Mdp)');
             $requete->execute([
                 'Nom' => $this->getNom(),
                 'Prenom' => $this->getPrenom(),
@@ -269,11 +316,13 @@ class Utilisateur implements \JsonSerializable
                 'Email' => $this->getEmail(),
                 'Description' => $this->getDescription(),
                 'Sexe' => $this->getSexe(),
-                'ActivitePro' => $this->getActivitePro(),
                 'Travail' => $this->getTravail(),
                 'estConnecte' => $this->getEstConnecte(),
                 'Telephone' => $this->getTelephone(),
-                'Titre' => $this->getTitre()
+                'Titre' => $this->getTitre(),
+                'Latitude' => $this->getLatitude(),
+                'Longitude' => $this->getLatitude(),
+                'Mdp' => $this->getMotDePasse()
             ]);
             return array("result"=>true,"message"=>$bdd->lastInsertId());
         }catch (\Exception $e){
@@ -297,14 +346,40 @@ class Utilisateur implements \JsonSerializable
             $user->setEmail($userSQL['UTI_EMAIL']);
             $user->setDescription($userSQL['UTI_DESCRIPTION']);
             $user->setSexe($userSQL['UTI_SEXE']);
-            $user->setActivitePro($userSQL['UTI_ACTIVITE_PRO']);
             $user->setTravail($userSQL['UTI_TRAVAIL']);
             $user->setEstConnecte($userSQL['UTI_CONNECTE']);
             $user->setTelephone($userSQL['UTI_TEL']);
             $user->setTitre($userSQL['UTI_TITRE']);
+            $user->setLatitude($userSQL['UTI_POS_LAT']);
+            $user->setLongitude($userSQL['UTI_POS_LONG']);
+            $user->setMotDePasse($userSQL['UTI_MDP']);
 
             $listUser[] = $user;
         }
         return $listUser;
+    }
+
+    public function SqlGet(\PDO $bdd, $id){
+        $query = $bdd->prepare('SELECT * FROM T_UTILISATEUR WHERE ID_UTILISATEUR =:ID');
+        $query->execute(['ID' => $id]);
+        $userSQL = $query->fetch();
+
+        $user = new Utilisateur();
+        $user->setUID($userSQL['ID_UTILISATEUR']);
+        $user->setNom($userSQL['UTI_NOM']);
+        $user->setPrenom($userSQL['UTI_PRENOM']);
+        $user->setDateInscription($userSQL['UTI_DATE_INSCRIPTION']);
+        $user->setEmail($userSQL['UTI_EMAIL']);
+        $user->setDescription($userSQL['UTI_DESCRIPTION']);
+        $user->setSexe($userSQL['UTI_SEXE']);
+        $user->setTravail($userSQL['UTI_TRAVAIL']);
+        $user->setEstConnecte($userSQL['UTI_CONNECTE']);
+        $user->setTelephone($userSQL['UTI_TEL']);
+        $user->setTitre($userSQL['UTI_TITRE']);
+        $user->setLatitude($userSQL['UTI_POS_LAT']);
+        $user->setLongitude($userSQL['UTI_POS_LONG']);
+        $user->setMotDePasse($userSQL['UTI_MDP']);
+
+        return $user;
     }
 }

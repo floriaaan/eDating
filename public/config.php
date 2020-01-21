@@ -1,4 +1,7 @@
 <?php
+
+session_start();
+
 $hostname="mysql-floriaaan.alwaysdata.net";
 $username="floriaaan_fym";
 $password="6Ug@G59W5WfjSci";
