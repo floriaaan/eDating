@@ -15,8 +15,8 @@
 
 <nav class="navbar sticky-top nav-pills navbar-expand-lg navbar-light bg-light">
 
-    <a class="navbar-brand" href="#">
-        <img src="./doc/fym.svg" width="30" height="30" class="d-inline-block align-top" alt="">
+    <a class="navbar-brand" href="{{ server.document_root }}/index.php">
+        <img src="{{ server.document_root }}/doc/fmm.svg" width="30" height="30" class="d-inline-block align-top" alt="Find My Mate">
         Find My Mate
     </a>
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarTogglerDemo02" aria-controls="navbarTogglerDemo02" aria-expanded="false" aria-label="Toggle navigation">
@@ -37,7 +37,7 @@
                     <a class="dropdown-item" href="#">Action</a>
                     <a class="dropdown-item" href="#">Another action</a>
                     <div class="dropdown-divider"></div>
-                    <a class="dropdown-item" href="#">Something else here</a>
+                    <a class="dropdown-item" data-toggle="modal" data-target="#login">Se connecter</a>
                 </div>
 
             </li>
@@ -45,9 +45,9 @@
 
 
 
-        <form class="form-inline" method="post" action="/Utilisateur/Show/{{ post.search }}">
+        <form class="form-inline" method="post" action="/Utilisateur/Mate/">
             <input class="form-control mr-sm-2" type="search" placeholder="Rechercher" name="search">
-            <input type="submit" class="btn btn-outline-success my-2 my-sm-0" value="Rechercher" name="searchSubmit">
+            <input type="submit" class="btn btn-outline-success my-2 my-sm-0" value="Rechercher">
         </form>
     </div>
 
@@ -55,7 +55,42 @@
 
 {% block body %}{% endblock %}
 
+<div class="modal fade" id="login" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Se connecter</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <form method="post" action="./traitement.php">
+                <div class="modal-body">
+                    <div class="form-group">
+                        <label for="inputEmail">Adresse mail</label>
+                        <input type="email" class="form-control" id="inputEmail" name="inputEmail" aria-describedby="helpEmail" placeholder="Entrez votre adresse mail" required>
+                        <small id="helpEmail" class="form-text text-muted">Nous ne partagerons pas vos données personnelles promis &#128521;</small>
+                    </div>
+                    <div class="form-group">
+                        <label for="inputPassword">Mot de passe</label>
+                        <input type="password" class="form-control" id="inputPassword" name="inputPassword" placeholder="Entrez votre mot de passe" required>
+                    </div>
+                    <div class="custom-control custom-checkbox my-1 mr-sm-2">
+                        <input type="checkbox" class="custom-control-input" name="checkRemember" id="checkRemember">
+                        <label class="custom-control-label" for="checkRemember">Se souvenir de moi</label>
+                    </div>
+                </div>
 
+                <div class="modal-footer">
+                    <input type="hidden" name="origin" value="login"/>
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Fermer</button>
+                    <input type="submit" class="btn btn-primary" value="Se connecter"/>
+                </div>
+            </form>
+
+        </div>
+    </div>
+</div>
 
 <script src="https://code.jquery.com/jquery-3.4.0.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
