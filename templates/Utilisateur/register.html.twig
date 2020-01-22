@@ -3,5 +3,91 @@
 
 {% block body %}
 
+    <form method="post" action="{{ server.document_root }}/Utilisateur/Register">
+        <div class="modal-body">
 
+            <div class="form-group form-row">
+
+                <div class="col-md-5">
+                    <label for="registerPrenom">Prenom</label>
+                    <input type="text" class="form-control text-muted" placeholder="Prénom" name="registerPrenom" id="registerPrenom">
+                </div>
+                <div class="col-md-5">
+                    <label for="registerNom">Nom</label>
+                    <input type="text" class="form-control text-muted" placeholder="Nom" name="registerNom" id="registerNom">
+                </div>
+                <div class="col-md-2">
+                    <label for="registerSexe">Sexe</label>
+                    <select id="registerSexe" name="registerSexe" class="form-control">
+                        <option>Homme</option>
+                        <option>Femme</option>
+                        <option>Autre</option>
+                        <option>Dauphin</option>
+                    </select>
+                </div>
+
+
+            </div>
+
+            <div class="form-group">
+                <label for="registerTravail">Travail</label>
+                <input type="text" class="form-control" id="registerTravail" name="registerTravail" placeholder="Travail">
+            </div>
+
+            <hr>
+
+            <div class="form-group">
+                <label for="registerTitre">Une brève description de vous</label>
+                <input class="form-control form-control-lg" type="text" placeholder="Votre première description" id="registerTitre" name="registerTitre">
+
+                <label for="registerDescription" class="mt-2">Dites nous en plus</label>
+                <textarea class="form-control" id="registerDescription" name="registerDescription" rows="5"></textarea>
+            </div>
+
+            <hr>
+
+            <div class="form-row">
+                <div class="form-group col-md-6">
+                    <label for="registerEmail">Email</label>
+                    <input type="email" class="form-control" id="registerEmail" name="registerEmail" placeholder="Email" required>
+                </div>
+                <div class="form-group col-md-6">
+                    <label for="registerMotDePasse">Mot de passe</label>
+                    <input type="password" class="form-control" id="registerMotDePasse" name="registerMotDePasse" placeholder="Mot de passe" required>
+                </div>
+            </div>
+
+            <hr>
+
+            <div class="form-group">
+                <label for="registerAdresse">Adresse</label>
+                <input type="text" class="form-control" id="registerAdresse" name="registerAdresse" placeholder="1234 Main St">
+            </div>
+            <div class="form-row">
+                <div class="form-group col-md-8">
+                    <label for="registerVille">Ville</label>
+                    <input type="text" class="form-control" id="registerVille" name="registerVille">
+                </div>
+
+                <div class="form-group col-md-4">
+                    <label for="registerCP">Code postal</label>
+                    <input type="text" class="form-control" id="registerCP" name="registerCP">
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="registerTelephone">Téléphone</label>
+                <input type="text" class="form-control" id="registerTelephone" name="registerTelephone" placeholder="06 12 34 56 78">
+            </div>
+
+
+        </div>
+
+        <div class="modal-footer">
+            <input type="hidden" name="origin" value="register"/>
+            <input type="hidden" name="registerLat" value="0"/>
+            <input type="hidden" name="registerLong" value="0"/>
+            <button type="button" class="btn btn-secondary" data-dismiss="modal">Fermer</button>
+            <input type="submit" class="btn btn-primary" value="Se créer un compte"/>
+        </div>
+    </form>
 {% endblock %}
