@@ -47,6 +47,19 @@ class UtilisateurController extends AbstractController
 
     }
 
+    public function message(){
+        if(isset($_SESSION['USER'])) {
+            return $this->twig->render(
+                'messages.html.twig', [
+                    'user' => $_SESSION['USER'],
+                    'session' => $_SESSION
+                ]
+            );
+        } else {
+            header('Location:/Error');
+        }
+    }
+
     public function Add(){
         if(isset($_POST)){
             $dateNow = new DateTime();
