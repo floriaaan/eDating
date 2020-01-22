@@ -6,7 +6,7 @@
 
 class Messages
 {
-    protected $table = 'discussions';
+    protected $table = 'T_MESSAGES';
     
     public function getDiscussion($currentUser, $otherUser)
     {
