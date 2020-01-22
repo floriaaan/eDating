@@ -8,6 +8,7 @@ class AbstractController {
     public function __construct()
     {
         //Conf de TWIG
+        var_dump($_SERVER['DOCUMENT_ROOT']);
         $this->loader = new \Twig\Loader\FilesystemLoader($_SERVER['DOCUMENT_ROOT'].'/../templates');
         $this->twig = new \Twig\Environment(
             $this->loader,[

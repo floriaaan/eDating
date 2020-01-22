@@ -1,8 +1,10 @@
 {% extends "index.html.twig" %}
-{% block title %}{{ parent() }} - {{ user.Prenom }} {{ user.Nom }} {% endblock %}
+{% block title %}{{ parent() }} - Liste des Mates{% endblock %}
 
 {% block body %}
 
-    {{ dump(user) }}
+
+    {{ dump(post) }}
+    {{ dump(listUser) }}
 
 {% endblock %}
