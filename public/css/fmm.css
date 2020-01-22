@@ -1,0 +1,7 @@
+.conteneur-part-1{
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    left: auto;
+    right: auto;
+}

@@ -50,14 +50,21 @@ class __TwigTemplate_19335565a47056d217480548d9c7e5fb854a2fd88c7b5389a23d034cd9c
     <link rel=\"stylesheet\" href=\"https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.7/css/select2.min.css\">
     <link rel=\"stylesheet\" href=\"https://unpkg.com/leaflet@1.5.1/dist/leaflet.css\" integrity=\"sha512-xwE/Az9zrjBIphAcBb3F6JVqxf46+CDLwfLMHloNu6KEQCAWi6HcDUbeOfBIptF7tcCzusKFjFw2yuvEpDL9wQ==\" crossorigin=\"\"/>
     <script src=\"https://api.mapbox.com/mapbox-gl-js/v1.6.1/mapbox-gl.js\"></script>
-    <link rel=\"stylesheet\" href=\"/css/style.css\">
+    <link rel=\"stylesheet\" href=\"/css/map.css\">
+    <link rel=\"stylesheet\" href=\"/css/fmm.css\">
 
 <body>
 
 <nav class=\"navbar sticky-top nav-pills navbar-expand-lg navbar-light bg-light\">
 
-    <a class=\"navbar-brand\" href=\"#\">
-        <img src=\"./doc/fym.svg\" width=\"30\" height=\"30\" class=\"d-inline-block align-top\" alt=\"\">
+    <a class=\"navbar-brand\" href=\"";
+        // line 19
+        echo twig_escape_filter($this->env, twig_get_attribute($this->env, $this->source, ($context["server"] ?? null), "document_root", [], "any", false, false, false, 19), "html", null, true);
+        echo "/index.php\">
+        <img src=\"";
+        // line 20
+        echo twig_escape_filter($this->env, twig_get_attribute($this->env, $this->source, ($context["server"] ?? null), "document_root", [], "any", false, false, false, 20), "html", null, true);
+        echo "/doc/fmm.svg\" width=\"30\" height=\"30\" class=\"d-inline-block align-top\" alt=\"Find My Mate\">
         Find My Mate
     </a>
     <button class=\"navbar-toggler\" type=\"button\" data-toggle=\"collapse\" data-target=\"#navbarTogglerDemo02\" aria-controls=\"navbarTogglerDemo02\" aria-expanded=\"false\" aria-label=\"Toggle navigation\">
@@ -76,9 +83,10 @@ class __TwigTemplate_19335565a47056d217480548d9c7e5fb854a2fd88c7b5389a23d034cd9c
 
                 <div class=\"dropdown-menu\" aria-labelledby=\"navbarDropdown\">
                     <a class=\"dropdown-item\" href=\"#\">Action</a>
-                    <a class=\"dropdown-item\" href=\"#\">Another action</a>
+
                     <div class=\"dropdown-divider\"></div>
-                    <a class=\"dropdown-item\" href=\"#\">Something else here</a>
+                    <a class=\"dropdown-item\" data-toggle=\"modal\" data-target=\"#register\">Se créer un compte</a>
+                    <a class=\"dropdown-item\" data-toggle=\"modal\" data-target=\"#login\">Se connecter</a>
                 </div>
 
             </li>
@@ -86,23 +94,110 @@ class __TwigTemplate_19335565a47056d217480548d9c7e5fb854a2fd88c7b5389a23d034cd9c
 
 
 
-        <form class=\"form-inline\" method=\"post\" action=\"/Utilisateur/Show/";
-        // line 48
-        echo twig_escape_filter($this->env, twig_get_attribute($this->env, $this->source, ($context["post"] ?? null), "search", [], "any", false, false, false, 48), "html", null, true);
-        echo "\">
+        <form class=\"form-inline\" method=\"post\" action=\"/Utilisateur/Mate/\">
             <input class=\"form-control mr-sm-2\" type=\"search\" placeholder=\"Rechercher\" name=\"search\">
-            <input type=\"submit\" class=\"btn btn-outline-success my-2 my-sm-0\" value=\"Rechercher\" name=\"searchSubmit\">
+            <input type=\"submit\" class=\"btn btn-outline-success my-2 my-sm-0\" value=\"Rechercher\">
         </form>
     </div>
 
 </nav>
 
 ";
-        // line 56
+        // line 58
         $this->displayBlock('body', $context, $blocks);
-        // line 57
+        // line 59
         echo "
+<div class=\"modal fade\" id=\"login\" tabindex=\"-1\" role=\"dialog\" aria-labelledby=\"exampleModalLabel\" aria-hidden=\"true\">
+    <div class=\"modal-dialog\" role=\"document\">
+        <div class=\"modal-content\">
+            <div class=\"modal-header\">
+                <h5 class=\"modal-title\" id=\"exampleModalLabel\">Se connecter</h5>
+                <button type=\"button\" class=\"close\" data-dismiss=\"modal\" aria-label=\"Close\">
+                    <span aria-hidden=\"true\">&times;</span>
+                </button>
+            </div>
+            <form method=\"post\" action=\"./traitement.php\">
+                <div class=\"modal-body\">
+                    <div class=\"form-group\">
+                        <label for=\"loginEmail\">Adresse mail</label>
+                        <input type=\"email\" class=\"form-control\" id=\"loginEmail\" name=\"loginEmail\" aria-describedby=\"loginHelpEmail\" placeholder=\"Entrez votre adresse mail\" required>
+                        <small id=\"loginHelpEmail\" class=\"form-text text-muted\">Nous ne partagerons pas vos données personnelles promis &#128521;</small>
+                    </div>
+                    <div class=\"form-group\">
+                        <label for=\"loginPassword\">Mot de passe</label>
+                        <input type=\"password\" class=\"form-control\" id=\"loginPassword\" name=\"loginPassword\" placeholder=\"Entrez votre mot de passe\" required>
+                    </div>
+                    <div class=\"custom-control custom-checkbox my-1 mr-sm-2\">
+                        <input type=\"checkbox\" class=\"custom-control-input\" name=\"loginCheckRemember\" id=\"loginCheckRemember\">
+                        <label class=\"custom-control-label\" for=\"loginCheckRemember\">Se souvenir de moi</label>
+                    </div>
+                </div>
 
+                <div class=\"modal-footer\">
+                    <input type=\"hidden\" name=\"origin\" value=\"login\"/>
+                    <button type=\"button\" class=\"btn btn-secondary\" data-dismiss=\"modal\">Fermer</button>
+                    <input type=\"submit\" class=\"btn btn-primary\" value=\"Se connecter\"/>
+                </div>
+            </form>
+
+        </div>
+    </div>
+</div>
+
+
+
+
+
+
+<div class=\"modal fade\" id=\"register\" tabindex=\"-1\" role=\"dialog\" aria-labelledby=\"exampleModalLabel\" aria-hidden=\"true\">
+    <div class=\"modal-dialog\" role=\"document\">
+        <div class=\"modal-content\">
+            <div class=\"modal-header\">
+                <h5 class=\"modal-title\" id=\"exampleModalLabel\">Se créer un compte</h5>
+                <button type=\"button\" class=\"close\" data-dismiss=\"modal\" aria-label=\"Close\">
+                    <span aria-hidden=\"true\">&times;</span>
+                </button>
+            </div>
+            <form method=\"post\" action=\"./traitement.php\">
+                <div class=\"modal-body\">
+
+                    <div class=\"form-group form-row\">
+
+                        <div class=\"col\">
+                            <input type=\"text\" class=\"form-control\" placeholder=\"Prénom\" name=\"\">
+                        </div>
+                        <div class=\"col\">
+                            <input type=\"text\" class=\"form-control\" placeholder=\"Nom\">
+                        </div>
+
+                    </div>
+
+
+                    <div class=\"form-group\">
+                        <label for=\"loginEmail\">Adresse mail</label>
+                        <input type=\"email\" class=\"form-control\" id=\"loginEmail\" name=\"loginEmail\" aria-describedby=\"loginHelpEmail\" placeholder=\"Entrez votre adresse mail\" required>
+                        <small id=\"loginHelpEmail\" class=\"form-text text-muted\">Nous ne partagerons pas vos données personnelles promis &#128521;</small>
+                    </div>
+                    <div class=\"form-group\">
+                        <label for=\"loginPassword\">Mot de passe</label>
+                        <input type=\"password\" class=\"form-control\" id=\"loginPassword\" name=\"loginPassword\" placeholder=\"Entrez votre mot de passe\" required>
+                    </div>
+                    <div class=\"custom-control custom-checkbox my-1 mr-sm-2\">
+                        <input type=\"checkbox\" class=\"custom-control-input\" name=\"loginCheckRemember\" id=\"loginCheckRemember\">
+                        <label class=\"custom-control-label\" for=\"loginCheckRemember\">Se souvenir de moi</label>
+                    </div>
+                </div>
+
+                <div class=\"modal-footer\">
+                    <input type=\"hidden\" name=\"origin\" value=\"register\"/>
+                    <button type=\"button\" class=\"btn btn-secondary\" data-dismiss=\"modal\">Fermer</button>
+                    <input type=\"submit\" class=\"btn btn-primary\" value=\"Se créer un compte\"/>
+                </div>
+            </form>
+
+        </div>
+    </div>
+</div>
 
 <script src=\"https://code.jquery.com/jquery-3.4.0.min.js\"></script>
 <script src=\"https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js\"></script>
@@ -123,7 +218,7 @@ class __TwigTemplate_19335565a47056d217480548d9c7e5fb854a2fd88c7b5389a23d034cd9c
         echo "Find My Mate";
     }
 
-    // line 56
+    // line 58
     public function block_body($context, array $blocks = [])
     {
         $macros = $this->macros;
@@ -141,7 +236,7 @@ class __TwigTemplate_19335565a47056d217480548d9c7e5fb854a2fd88c7b5389a23d034cd9c
 
     public function getDebugInfo()
     {
-        return array (  127 => 56,  120 => 5,  104 => 57,  102 => 56,  91 => 48,  45 => 5,  39 => 1,);
+        return array (  222 => 58,  215 => 5,  109 => 59,  107 => 58,  66 => 20,  62 => 19,  45 => 5,  39 => 1,);
     }
 
     public function getSourceContext()
@@ -157,14 +252,15 @@ class __TwigTemplate_19335565a47056d217480548d9c7e5fb854a2fd88c7b5389a23d034cd9c
     <link rel=\"stylesheet\" href=\"https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.7/css/select2.min.css\">
     <link rel=\"stylesheet\" href=\"https://unpkg.com/leaflet@1.5.1/dist/leaflet.css\" integrity=\"sha512-xwE/Az9zrjBIphAcBb3F6JVqxf46+CDLwfLMHloNu6KEQCAWi6HcDUbeOfBIptF7tcCzusKFjFw2yuvEpDL9wQ==\" crossorigin=\"\"/>
     <script src=\"https://api.mapbox.com/mapbox-gl-js/v1.6.1/mapbox-gl.js\"></script>
-    <link rel=\"stylesheet\" href=\"/css/style.css\">
+    <link rel=\"stylesheet\" href=\"/css/map.css\">
+    <link rel=\"stylesheet\" href=\"/css/fmm.css\">
 
 <body>
 
 <nav class=\"navbar sticky-top nav-pills navbar-expand-lg navbar-light bg-light\">
 
-    <a class=\"navbar-brand\" href=\"#\">
-        <img src=\"./doc/fym.svg\" width=\"30\" height=\"30\" class=\"d-inline-block align-top\" alt=\"\">
+    <a class=\"navbar-brand\" href=\"{{ server.document_root }}/index.php\">
+        <img src=\"{{ server.document_root }}/doc/fmm.svg\" width=\"30\" height=\"30\" class=\"d-inline-block align-top\" alt=\"Find My Mate\">
         Find My Mate
     </a>
     <button class=\"navbar-toggler\" type=\"button\" data-toggle=\"collapse\" data-target=\"#navbarTogglerDemo02\" aria-controls=\"navbarTogglerDemo02\" aria-expanded=\"false\" aria-label=\"Toggle navigation\">
@@ -183,9 +279,10 @@ class __TwigTemplate_19335565a47056d217480548d9c7e5fb854a2fd88c7b5389a23d034cd9c
 
                 <div class=\"dropdown-menu\" aria-labelledby=\"navbarDropdown\">
                     <a class=\"dropdown-item\" href=\"#\">Action</a>
-                    <a class=\"dropdown-item\" href=\"#\">Another action</a>
+
                     <div class=\"dropdown-divider\"></div>
-                    <a class=\"dropdown-item\" href=\"#\">Something else here</a>
+                    <a class=\"dropdown-item\" data-toggle=\"modal\" data-target=\"#register\">Se créer un compte</a>
+                    <a class=\"dropdown-item\" data-toggle=\"modal\" data-target=\"#login\">Se connecter</a>
                 </div>
 
             </li>
@@ -193,9 +290,9 @@ class __TwigTemplate_19335565a47056d217480548d9c7e5fb854a2fd88c7b5389a23d034cd9c
 
 
 
-        <form class=\"form-inline\" method=\"post\" action=\"/Utilisateur/Show/{{ post.search }}\">
+        <form class=\"form-inline\" method=\"post\" action=\"/Utilisateur/Mate/\">
             <input class=\"form-control mr-sm-2\" type=\"search\" placeholder=\"Rechercher\" name=\"search\">
-            <input type=\"submit\" class=\"btn btn-outline-success my-2 my-sm-0\" value=\"Rechercher\" name=\"searchSubmit\">
+            <input type=\"submit\" class=\"btn btn-outline-success my-2 my-sm-0\" value=\"Rechercher\">
         </form>
     </div>
 
@@ -203,7 +300,97 @@ class __TwigTemplate_19335565a47056d217480548d9c7e5fb854a2fd88c7b5389a23d034cd9c
 
 {% block body %}{% endblock %}
 
+<div class=\"modal fade\" id=\"login\" tabindex=\"-1\" role=\"dialog\" aria-labelledby=\"exampleModalLabel\" aria-hidden=\"true\">
+    <div class=\"modal-dialog\" role=\"document\">
+        <div class=\"modal-content\">
+            <div class=\"modal-header\">
+                <h5 class=\"modal-title\" id=\"exampleModalLabel\">Se connecter</h5>
+                <button type=\"button\" class=\"close\" data-dismiss=\"modal\" aria-label=\"Close\">
+                    <span aria-hidden=\"true\">&times;</span>
+                </button>
+            </div>
+            <form method=\"post\" action=\"./traitement.php\">
+                <div class=\"modal-body\">
+                    <div class=\"form-group\">
+                        <label for=\"loginEmail\">Adresse mail</label>
+                        <input type=\"email\" class=\"form-control\" id=\"loginEmail\" name=\"loginEmail\" aria-describedby=\"loginHelpEmail\" placeholder=\"Entrez votre adresse mail\" required>
+                        <small id=\"loginHelpEmail\" class=\"form-text text-muted\">Nous ne partagerons pas vos données personnelles promis &#128521;</small>
+                    </div>
+                    <div class=\"form-group\">
+                        <label for=\"loginPassword\">Mot de passe</label>
+                        <input type=\"password\" class=\"form-control\" id=\"loginPassword\" name=\"loginPassword\" placeholder=\"Entrez votre mot de passe\" required>
+                    </div>
+                    <div class=\"custom-control custom-checkbox my-1 mr-sm-2\">
+                        <input type=\"checkbox\" class=\"custom-control-input\" name=\"loginCheckRemember\" id=\"loginCheckRemember\">
+                        <label class=\"custom-control-label\" for=\"loginCheckRemember\">Se souvenir de moi</label>
+                    </div>
+                </div>
 
+                <div class=\"modal-footer\">
+                    <input type=\"hidden\" name=\"origin\" value=\"login\"/>
+                    <button type=\"button\" class=\"btn btn-secondary\" data-dismiss=\"modal\">Fermer</button>
+                    <input type=\"submit\" class=\"btn btn-primary\" value=\"Se connecter\"/>
+                </div>
+            </form>
+
+        </div>
+    </div>
+</div>
+
+
+
+
+
+
+<div class=\"modal fade\" id=\"register\" tabindex=\"-1\" role=\"dialog\" aria-labelledby=\"exampleModalLabel\" aria-hidden=\"true\">
+    <div class=\"modal-dialog\" role=\"document\">
+        <div class=\"modal-content\">
+            <div class=\"modal-header\">
+                <h5 class=\"modal-title\" id=\"exampleModalLabel\">Se créer un compte</h5>
+                <button type=\"button\" class=\"close\" data-dismiss=\"modal\" aria-label=\"Close\">
+                    <span aria-hidden=\"true\">&times;</span>
+                </button>
+            </div>
+            <form method=\"post\" action=\"./traitement.php\">
+                <div class=\"modal-body\">
+
+                    <div class=\"form-group form-row\">
+
+                        <div class=\"col\">
+                            <input type=\"text\" class=\"form-control\" placeholder=\"Prénom\" name=\"\">
+                        </div>
+                        <div class=\"col\">
+                            <input type=\"text\" class=\"form-control\" placeholder=\"Nom\">
+                        </div>
+
+                    </div>
+
+
+                    <div class=\"form-group\">
+                        <label for=\"loginEmail\">Adresse mail</label>
+                        <input type=\"email\" class=\"form-control\" id=\"loginEmail\" name=\"loginEmail\" aria-describedby=\"loginHelpEmail\" placeholder=\"Entrez votre adresse mail\" required>
+                        <small id=\"loginHelpEmail\" class=\"form-text text-muted\">Nous ne partagerons pas vos données personnelles promis &#128521;</small>
+                    </div>
+                    <div class=\"form-group\">
+                        <label for=\"loginPassword\">Mot de passe</label>
+                        <input type=\"password\" class=\"form-control\" id=\"loginPassword\" name=\"loginPassword\" placeholder=\"Entrez votre mot de passe\" required>
+                    </div>
+                    <div class=\"custom-control custom-checkbox my-1 mr-sm-2\">
+                        <input type=\"checkbox\" class=\"custom-control-input\" name=\"loginCheckRemember\" id=\"loginCheckRemember\">
+                        <label class=\"custom-control-label\" for=\"loginCheckRemember\">Se souvenir de moi</label>
+                    </div>
+                </div>
+
+                <div class=\"modal-footer\">
+                    <input type=\"hidden\" name=\"origin\" value=\"register\"/>
+                    <button type=\"button\" class=\"btn btn-secondary\" data-dismiss=\"modal\">Fermer</button>
+                    <input type=\"submit\" class=\"btn btn-primary\" value=\"Se créer un compte\"/>
+                </div>
+            </form>
+
+        </div>
+    </div>
+</div>
 
 <script src=\"https://code.jquery.com/jquery-3.4.0.min.js\"></script>
 <script src=\"https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js\"></script>

@@ -9,7 +9,8 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.7/css/select2.min.css">
     <link rel="stylesheet" href="https://unpkg.com/leaflet@1.5.1/dist/leaflet.css" integrity="sha512-xwE/Az9zrjBIphAcBb3F6JVqxf46+CDLwfLMHloNu6KEQCAWi6HcDUbeOfBIptF7tcCzusKFjFw2yuvEpDL9wQ==" crossorigin=""/>
     <script src="https://api.mapbox.com/mapbox-gl-js/v1.6.1/mapbox-gl.js"></script>
-    <link rel="stylesheet" href="/css/style.css">
+    <link rel="stylesheet" href="/css/map.css">
+    <link rel="stylesheet" href="/css/fmm.css">
 
 <body>
 
@@ -68,17 +69,17 @@
             <form method="post" action="./traitement.php">
                 <div class="modal-body">
                     <div class="form-group">
-                        <label for="inputEmail">Adresse mail</label>
-                        <input type="email" class="form-control" id="inputEmail" name="inputEmail" aria-describedby="helpEmail" placeholder="Entrez votre adresse mail" required>
-                        <small id="helpEmail" class="form-text text-muted">Nous ne partagerons pas vos données personnelles promis &#128521;</small>
+                        <label for="loginEmail">Adresse mail</label>
+                        <input type="email" class="form-control" id="loginEmail" name="loginEmail" aria-describedby="loginHelpEmail" placeholder="Entrez votre adresse mail" required>
+                        <small id="loginHelpEmail" class="form-text text-muted">Nous ne partagerons pas vos données personnelles promis &#128521;</small>
                     </div>
                     <div class="form-group">
-                        <label for="inputPassword">Mot de passe</label>
-                        <input type="password" class="form-control" id="inputPassword" name="inputPassword" placeholder="Entrez votre mot de passe" required>
+                        <label for="loginPassword">Mot de passe</label>
+                        <input type="password" class="form-control" id="loginPassword" name="loginPassword" placeholder="Entrez votre mot de passe" required>
                     </div>
                     <div class="custom-control custom-checkbox my-1 mr-sm-2">
-                        <input type="checkbox" class="custom-control-input" name="checkRemember" id="checkRemember">
-                        <label class="custom-control-label" for="checkRemember">Se souvenir de moi</label>
+                        <input type="checkbox" class="custom-control-input" name="loginCheckRemember" id="loginCheckRemember">
+                        <label class="custom-control-label" for="loginCheckRemember">Se souvenir de moi</label>
                     </div>
                 </div>
 
