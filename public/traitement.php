@@ -29,6 +29,7 @@ if(isset($_POST)){
 
         } else {
             $_SESSION['connected'] = false;
+            $_SESSION['USER'] = null;
         }
     } elseif ($_POST['origin'] == "register") {
 

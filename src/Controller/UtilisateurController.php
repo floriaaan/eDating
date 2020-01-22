@@ -36,7 +36,7 @@ class UtilisateurController extends AbstractController
         $user = new Utilisateur();
         return $this->twig->render(
             'profile.html.twig', [
-                'user' => $user->SqlGet(Bdd::GetInstance(), $_SESSION['id']),
+                'user' => $user->SqlGet(Bdd::GetInstance(), $_SESSION['USER']),
             ]
         );
     }
