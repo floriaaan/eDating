@@ -25,16 +25,21 @@ if(isset($_POST)){
             $user = new Utilisateur();
             $user = $user->SqlGet($bdd, $returnSQL['ID_UTILISATEUR']);
             $_SESSION['USER'] = $user;
-
+            header('Location:/Utilisateur/Me');
 
         } else {
             $_SESSION['connected'] = false;
             $_SESSION['USER'] = null;
+            header('Location:/Error');
         }
     } elseif ($_POST['origin'] == "register") {
+        var_dump($_POST);
 
+    } else {
+        header('Location:/Error');
     }
-    var_dump($_SESSION);
+
+
 
 }
 

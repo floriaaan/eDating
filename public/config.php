@@ -1,6 +1,6 @@
 <?php
 
-session_start();
+
 
 function chargerClasse($classe)
 {
@@ -15,6 +15,8 @@ function chargerClasse($classe)
 }
 
 spl_autoload_register('chargerClasse');
+
+session_start();
 
 $hostname="mysql-floriaaan.alwaysdata.net";
 $username="floriaaan_fym";
