@@ -1,7 +1,14 @@
-.conteneur-part-1{
+/*.conteneur-part-1{
     text-align: center;
     display: flex;
     flex-direction: column;
     left: auto;
     right: auto;
+}*/
+.item-card{
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    margin-left: auto;
+    margin-right: auto;
 }
