@@ -93,7 +93,7 @@ class UtilisateurController extends AbstractController
             header('Location:/Utilisateur/Me');
         }else{
 
-            $this->twig->render('Utilisateur/register.html.twig');
+            return $this->twig->render('Utilisateur/register.html.twig');
         }
     }
 
@@ -129,7 +129,7 @@ class UtilisateurController extends AbstractController
             }
         } else {
 
-            $this->twig->render('Utilisateur/toto.html.twig');
+            return $this->twig->render('Utilisateur/login.html.twig');
         }
     }
 
