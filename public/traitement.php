@@ -6,11 +6,11 @@ include "config.php";
 
 if(isset($_POST)){
     if($_POST['origin'] == "login") {
-        $password = $_POST['inputPassword'];
+        $password = $_POST['loginPassword'];
 
         $requete = $bdd->prepare("SELECT ID_UTILISATEUR, UTI_MDP FROM T_UTILISATEUR WHERE UTI_EMAIL =:Email");
         $requete->execute([
-            'Email' => $_POST['inputEmail']]);
+            'Email' => $_POST['loginEmail']]);
         $returnSQL = $requete->fetch();
 
 
@@ -19,7 +19,7 @@ if(isset($_POST)){
 
             $requete = $bdd->prepare("UPDATE T_UTILISATEUR SET UTI_CONNECTE=1 WHERE UTI_EMAIL =:Email");
             $requete->execute([
-                'Email' => $_POST['inputEmail']]);
+                'Email' => $_POST['loginEmail']]);
 
 
             $user = new Utilisateur();
