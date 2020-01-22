@@ -382,4 +382,34 @@ class Utilisateur implements \JsonSerializable
 
         return $user;
     }
+
+    public function SqlGetBy(\PDO $bdd, $SQL, $id){
+        $query = $bdd->prepare($SQL);
+        $query->execute([
+            'Search' => $id
+        ]);
+        $arrayUser = $query->fetchAll();
+
+        $listUser = [];
+        foreach ($arrayUser as $userSQL){
+            $user = new Utilisateur();
+            $user->setUID($userSQL['ID_UTILISATEUR']);
+            $user->setNom($userSQL['UTI_NOM']);
+            $user->setPrenom($userSQL['UTI_PRENOM']);
+            $user->setDateInscription($userSQL['UTI_DATE_INSCRIPTION']);
+            $user->setEmail($userSQL['UTI_EMAIL']);
+            $user->setDescription($userSQL['UTI_DESCRIPTION']);
+            $user->setSexe($userSQL['UTI_SEXE']);
+            $user->setTravail($userSQL['UTI_TRAVAIL']);
+            $user->setEstConnecte($userSQL['UTI_CONNECTE']);
+            $user->setTelephone($userSQL['UTI_TEL']);
+            $user->setTitre($userSQL['UTI_TITRE']);
+            $user->setLatitude($userSQL['UTI_POS_LAT']);
+            $user->setLongitude($userSQL['UTI_POS_LONG']);
+            $user->setMotDePasse($userSQL['UTI_MDP']);
+
+            $listUser[] = $user;
+        }
+        return $listUser;
+    }
 }

@@ -23,12 +23,13 @@ class UtilisateurController extends AbstractController
         ]);
     }
 
-    public function Mate(){
+    public function Search(){
         $user = new Utilisateur();
+        $listUser = $user->SqlGetBy(Bdd::GetInstance(),"SELECT * FROM T_UTILISATEUR WHERE UTI_NOM =:Search OR UTI_PRENOM =:Search OR ID_UTILISATEUR =:Search", $_POST['search']);
+
         return $this->twig->render(
             'mate.html.twig', [
-                'user' => $user->SqlGet(Bdd::GetInstance(), $_POST['search']),
-                'post' => $_POST
+                'listUser' => $listUser,
             ]
         );
     }
@@ -36,13 +37,13 @@ class UtilisateurController extends AbstractController
     public function Me(){
         if(isset($_SESSION['USER'])) {
             return $this->twig->render(
-                'profile.html.twig', [
+                'Utilisateur/profile.html.twig', [
                     'user' => $_SESSION['USER'],
                     'session' => $_SESSION
                 ]
             );
         } else {
-            header('Location:/Error');
+            header('Location:/Error/NoUser');
         }
 
     }
@@ -60,8 +61,8 @@ class UtilisateurController extends AbstractController
         }
     }
 
-    public function Add(){
-        if(isset($_POST)){
+    public function Register(){
+        if($_POST){
             $dateNow = new DateTime();
             $sqlRepository = null;
             $nomImage = null;
@@ -101,9 +102,47 @@ class UtilisateurController extends AbstractController
             $user->setImgRepo($sqlRepository);*/
             $user->SqlAdd(BDD::getInstance());
             $_SESSION['USER'] = $user;
+            $_SESSION['connected'] = true;
             header('Location:/Utilisateur/Me');
         }else{
-            header('Location:/Error/');
+
+            return $this->twig->render('Utilisateur/register.html.twig');
+        }
+    }
+
+    public function Login(){
+
+        if($_POST) {
+            $bdd = Bdd::GetInstance();
+            $password = $_POST['loginPassword'];
+
+            $requete = $bdd->prepare("SELECT ID_UTILISATEUR, UTI_MDP FROM T_UTILISATEUR WHERE UTI_EMAIL =:Email");
+            $requete->execute([
+                'Email' => $_POST['loginEmail']]);
+            $returnSQL = $requete->fetch();
+
+
+            if(password_verify($password, $returnSQL['UTI_MDP'])) {
+                $_SESSION['connected'] = true;
+
+                $requete = $bdd->prepare("UPDATE T_UTILISATEUR SET UTI_CONNECTE=1 WHERE UTI_EMAIL =:Email");
+                $requete->execute([
+                    'Email' => $_POST['loginEmail']]);
+
+
+                $user = new Utilisateur();
+                $user = $user->SqlGet($bdd, $returnSQL['ID_UTILISATEUR']);
+                $_SESSION['USER'] = $user;
+                header('Location:/Utilisateur/Me');
+
+            } else {
+                $_SESSION['connected'] = false;
+                $_SESSION['USER'] = null;
+                header('Location:/Error/BadLogin');
+            }
+        } else {
+
+            return $this->twig->render('Utilisateur/login.html.twig');
         }
     }
 
