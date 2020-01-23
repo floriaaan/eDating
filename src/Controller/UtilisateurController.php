@@ -10,7 +10,12 @@ use DateTime;
 class UtilisateurController extends AbstractController
 {
     public function Index(){
-        return $this->Map();
+        if(isset($_SESSION['USER'])) {
+            return $this->Map();
+        } else {
+            header('Location:/Utilisateur/Login');
+        }
+
     }
 
     public function Map(){
@@ -117,7 +122,7 @@ class UtilisateurController extends AbstractController
                 $user = new Utilisateur();
                 $user = $user->SqlGet($bdd, $returnSQL['ID_UTILISATEUR']);
                 $_SESSION['USER'] = $user;
-                header('Location:/Utilisateur/Me');
+                header('Location:/');
 
             } else {
                 $_SESSION['connected'] = false;
@@ -132,7 +137,7 @@ class UtilisateurController extends AbstractController
 
     public function Disconnect(){
         session_unset();
-        header('Location:/');
+        header('Location:/Utilisateur/Login');
     }
 
 
