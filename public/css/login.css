@@ -211,6 +211,10 @@ iframe {
   padding: 0 5px;
 }
 
+.textarea100{
+  height: inherit !important;
+}
+
 /*---------------------------------------------*/ 
 .focus-input100 {
   position: absolute;

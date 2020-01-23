@@ -30,17 +30,44 @@
 					</span>
 
 
-            <div class="form-group form-row mt-5">
+            <div class="row mt-5">
 
-                <div class="col-md-5">
-                    <label for="registerPrenom">Prenom</label>
-                    <input type="text" class="form-control text-muted wrap-input100 validate-input" placeholder="Prénom" name="registerPrenom" id="registerPrenom">
+                <div class="col-sm-6 wrap-input100 validate-input">
+                    <input type="text" class="input100" name="registerPrenom" id="registerPrenom">
+                    <span class="focus-input100" data-placeholder="Prénom"></span>
                 </div>
-                <div class="col-md-5">
-                    <label for="registerNom">Nom</label>
-                    <input type="text" class="form-control text-muted wrap-input100 validate-input" placeholder="Nom" name="registerNom" id="registerNom">
+                <div class="col-sm-6 wrap-input100 validate-input">
+                    <input type="text" class="input100" name="registerNom" id="registerNom">
+                    <span class="focus-input100" data-placeholder="Nom de famille"></span>
                 </div>
-                <div class="col-md-2">
+
+
+
+            </div>
+
+
+                <div class="wrap-input100 validate-input mt-4">
+                    <input type="email" class="input100" id="registerEmail" name="registerEmail" required>
+                    <span class="focus-input100" data-placeholder="Adresse e-mail"></span>
+                </div>
+                <div class="wrap-input100 validate-input mt-4">
+                    <input type="password" class="input100" id="registerMotDePasse" name="registerMotDePasse" required>
+                    <span class="focus-input100" data-placeholder="Mot de passe"></span>
+
+                </div>
+
+
+            <hr>
+
+
+            <div class="row mt-5">
+                <div class="col-md-8 wrap-input100 validate-input">
+                    <input type="text" class="input100" id="registerTravail" name="registerTravail">
+                    <span class="focus-input100" data-placeholder="Votre job"></span>
+                </div>
+
+
+                <div class="col-md-4">
                     <label for="registerSexe">Sexe</label>
                     <select id="registerSexe" name="registerSexe" class="form-control">
                         <option>Homme</option>
@@ -49,64 +76,51 @@
                         <option>Dauphin</option>
                     </select>
                 </div>
+            </div>
+
+            <div class=" wrap-input100 validate-input mt-4">
+                <input class="input100" type="text" id="registerTitre" name="registerTitre">
+                <span class="focus-input100" data-placeholder="Une brève description de vous"></span>
+
 
 
             </div>
 
-            <div class="form-group">
-                <label for="registerTravail">Travail</label>
-                <input type="text" class="form-control wrap-input100 validate-input" id="registerTravail" name="registerTravail" placeholder="Travail">
+            <div class=" wrap-input100 validate-input mt-5">
+                <textarea class="input100 textarea100" id="registerDescription" name="registerDescription" rows="5"></textarea>
+                <span class="focus-input100" data-placeholder="Dites nous en plus"></span>
             </div>
+
+
 
             <hr>
 
-            <div class="form-group">
-                <label for="registerTitre">Une brève description de vous</label>
-                <input class="form-control form-control-lg wrap-input100 validate-input" type="text" placeholder="Votre première description" id="registerTitre" name="registerTitre">
 
-                <label for="registerDescription" class="mt-2">Dites nous en plus</label>
-                <textarea class="form-control wrap-input100 validate-input" id="registerDescription" name="registerDescription" rows="5"></textarea>
+
+            <div class="wrap-input100 validate-input mt-4">
+                <input type="text" class="input100" id="registerAdresse" name="registerAdresse">
+                <span class="focus-input100" data-placeholder="Adresse"></span>
             </div>
-
-            <hr>
-
-            <div class="form-row">
-                <div class="form-group col-md-6">
-                    <label for="registerEmail">Email</label>
-                    <input type="email" class="form-control wrap-input100 validate-input" id="registerEmail" name="registerEmail" placeholder="Email" required>
-                </div>
-                <div class="form-group col-md-6">
-                    <label for="registerMotDePasse">Mot de passe</label>
-                    <input type="password" class="form-control wrap-input100 validate-input" id="registerMotDePasse" name="registerMotDePasse" placeholder="Mot de passe" required>
-                </div>
-            </div>
-
-            <hr>
-
-            <div class="form-group">
-                <label for="registerAdresse">Adresse</label>
-                <input type="text" class="form-control wrap-input100 validate-input" id="registerAdresse" name="registerAdresse" placeholder="1234 Main St">
-            </div>
-            <div class="form-row">
-                <div class="form-group col-md-8">
-                    <label for="registerVille">Ville</label>
-                    <input type="text" class="form-control wrap-input100 validate-input" id="registerVille" name="registerVille">
+            <div class="row mt-4">
+                <div class="col-md-8 wrap-input100 validate-input">
+                    <input type="text" class="input100" id="registerVille" name="registerVille">
+                    <span class="focus-input100" data-placeholder="Ville"></span>
                 </div>
 
-                <div class="form-group col-md-4">
-                    <label for="registerCP">Code postal</label>
-                    <input type="text" class="form-control wrap-input100 validate-input" id="registerCP" name="registerCP">
+                <div class="col-md-4 wrap-input100 validate-input">
+                    <input type="text" class="input100" id="registerCP" name="registerCP">
+                    <span class="focus-input100" data-placeholder="Code postal"></span>
                 </div>
             </div>
-            <div class="form-group">
-                <label for="registerTelephone">Téléphone</label>
-                <input type="text" class="form-control wrap-input100 validate-input" id="registerTelephone" name="registerTelephone" placeholder="06 12 34 56 78">
+            <div class="wrap-input100 validate-input mt-4 mb-5">
+                <input type="text" class="input100" id="registerTelephone" name="registerTelephone">
+                <span class="focus-input100" data-placeholder="Téléphone"></span>
             </div>
 
 
 
 
-            <div class="container-login100-form-btn mb-5">
+            <div class="container-login100-form-btn mt-5 mb-5">
                 <button class="login100-form-btn">
                     S'inscrire
                 </button>
