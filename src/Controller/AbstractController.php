@@ -17,6 +17,10 @@ class AbstractController {
             ]
         );
         $this->twig->addExtension(new \Twig\Extension\DebugExtension());
+        if(isset($_SESSION['USER'])) {
+            $this->twig->addGlobal('userr', $_SESSION['USER']);
+        }
+
 
 
         // Ajout d'une fonction PHP

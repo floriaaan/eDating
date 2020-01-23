@@ -18,8 +18,7 @@ class UtilisateurController extends AbstractController
         $listUser = $user->SqlGetAll(Bdd::GetInstance());
         return $this->twig->render(
             'map.html.twig', [
-                'userList' => $listUser,
-                'session' => $_SESSION
+                'userList' => $listUser
         ]);
     }
 
@@ -28,7 +27,7 @@ class UtilisateurController extends AbstractController
         $listUser = $user->SqlGetBy(Bdd::GetInstance(),"SELECT * FROM T_UTILISATEUR WHERE UTI_NOM =:Search OR UTI_PRENOM =:Search OR ID_UTILISATEUR =:Search", $_POST['search']);
 
         return $this->twig->render(
-            'mate.html.twig', [
+            'search.html.twig', [
                 'listUser' => $listUser,
             ]
         );
@@ -37,13 +36,11 @@ class UtilisateurController extends AbstractController
     public function Me(){
         if(isset($_SESSION['USER'])) {
             return $this->twig->render(
-                'Utilisateur/profile.html.twig', [
-                    'user' => $_SESSION['USER'],
-                    'session' => $_SESSION
-                ]
+                'Utilisateur/profile.html.twig'
+
             );
         } else {
-            header('Location:/Error/NoUser');
+            header('Location:/Utilisateur/Login');
         }
 
     }
@@ -78,7 +75,7 @@ class UtilisateurController extends AbstractController
                     $nomImage = md5(uniqid()) .'.'. $extension;
 
                     $sqlRepository = $dateNow->format('Y/m');
-                    $repository = './uploads/images/'.$dateNow->format('Y/m');
+                    $repository = './uploads/images/'.$_POST['registerEmail'];
                     if(!is_dir($repository)){
                         mkdir($repository,0777,true);
                     }
@@ -131,6 +128,11 @@ class UtilisateurController extends AbstractController
 
             return $this->twig->render('Utilisateur/login.html.twig');
         }
+    }
+
+    public function Disconnect(){
+        session_unset();
+        header('Location:/');
     }
 
 
