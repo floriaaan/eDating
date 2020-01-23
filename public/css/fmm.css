@@ -12,3 +12,28 @@
     margin-left: auto;
     margin-right: auto;
 }
+.card{
+  border: none;
+  background-color: gray;
+}
+.card-title{
+    margin: 2em;
+}
+.wrapper-imgs-flex{
+    display: flex;
+    justify-content: space-between;
+    /*border: 1px solid black;*/
+    text-align: center;
+    margin: 5em;
+}
+.img{
+    width: 12em;
+    height: 12em;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 2em;
+    /*border: 1px solid black;*/
+}
+.nam{
+    font-size: 2em;
+}
