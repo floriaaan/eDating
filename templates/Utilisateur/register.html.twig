@@ -1,20 +1,44 @@
-{% extends "index.html.twig" %}
-{% block title %}{{ parent() }} - Créer un compte {% endblock %}
+<!doctype html>
+<html lang="fr">
+<head>
+    <meta charset="utf-8">
+    <title>{% block title %}Find My Mate - S'inscrire{% endblock %}</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://ajax.googleapis.com/ajax/libs/jqueryui/1.11.4/themes/pepper-grinder/jquery-ui.css">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.7/css/select2.min.css">
+    <link rel="stylesheet" href="{{ server.document_root }}/css/fmm.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.7.2/animate.css" integrity="sha256-a2tobsqlbgLsWs7ZVUGgP5IvWZsx8bTNQpzsqCSm5mk=" crossorigin="anonymous" />
+    <link rel="stylesheet" type="text/css" href="{{ server.document_root }}/css/util.css">
+    <link rel="stylesheet" type="text/css" href="{{ server.document_root }}/css/login.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animsition/4.0.2/css/animsition.css" integrity="sha256-eacfEFFt07So0i0jcf0GCoJfYEnTpTelDK3/9zN+P0g=" crossorigin="anonymous" />
 
-{% block body %}
 
-    <form method="post" action="{{ server.document_root }}/Utilisateur/Register">
-        <div class="modal-body">
+<body>
 
-            <div class="form-group form-row">
+<div class="container-login100 ">
+    <div class="wrap-login100 p-3">
+        <form class="login100-form validate-form mt-5" method="post" action="{{ server.document_root }}/Utilisateur/Register">
+                    <span class="login100-form-avatar">
+						<img src="{{ server.document_root }}/doc/fmm.svg" alt="Find My Mate">
+					</span>
+            <span class="login100-form-title pb-2">
+						Find My Mate
+					</span>
+            <span class="display-4 pb-1">
+						Création d'un compte
+					</span>
+
+
+            <div class="form-group form-row mt-5">
 
                 <div class="col-md-5">
                     <label for="registerPrenom">Prenom</label>
-                    <input type="text" class="form-control text-muted" placeholder="Prénom" name="registerPrenom" id="registerPrenom">
+                    <input type="text" class="form-control text-muted wrap-input100 validate-input" placeholder="Prénom" name="registerPrenom" id="registerPrenom">
                 </div>
                 <div class="col-md-5">
                     <label for="registerNom">Nom</label>
-                    <input type="text" class="form-control text-muted" placeholder="Nom" name="registerNom" id="registerNom">
+                    <input type="text" class="form-control text-muted wrap-input100 validate-input" placeholder="Nom" name="registerNom" id="registerNom">
                 </div>
                 <div class="col-md-2">
                     <label for="registerSexe">Sexe</label>
@@ -31,17 +55,17 @@
 
             <div class="form-group">
                 <label for="registerTravail">Travail</label>
-                <input type="text" class="form-control" id="registerTravail" name="registerTravail" placeholder="Travail">
+                <input type="text" class="form-control wrap-input100 validate-input" id="registerTravail" name="registerTravail" placeholder="Travail">
             </div>
 
             <hr>
 
             <div class="form-group">
                 <label for="registerTitre">Une brève description de vous</label>
-                <input class="form-control form-control-lg" type="text" placeholder="Votre première description" id="registerTitre" name="registerTitre">
+                <input class="form-control form-control-lg wrap-input100 validate-input" type="text" placeholder="Votre première description" id="registerTitre" name="registerTitre">
 
                 <label for="registerDescription" class="mt-2">Dites nous en plus</label>
-                <textarea class="form-control" id="registerDescription" name="registerDescription" rows="5"></textarea>
+                <textarea class="form-control wrap-input100 validate-input" id="registerDescription" name="registerDescription" rows="5"></textarea>
             </div>
 
             <hr>
@@ -49,11 +73,11 @@
             <div class="form-row">
                 <div class="form-group col-md-6">
                     <label for="registerEmail">Email</label>
-                    <input type="email" class="form-control" id="registerEmail" name="registerEmail" placeholder="Email" required>
+                    <input type="email" class="form-control wrap-input100 validate-input" id="registerEmail" name="registerEmail" placeholder="Email" required>
                 </div>
                 <div class="form-group col-md-6">
                     <label for="registerMotDePasse">Mot de passe</label>
-                    <input type="password" class="form-control" id="registerMotDePasse" name="registerMotDePasse" placeholder="Mot de passe" required>
+                    <input type="password" class="form-control wrap-input100 validate-input" id="registerMotDePasse" name="registerMotDePasse" placeholder="Mot de passe" required>
                 </div>
             </div>
 
@@ -61,33 +85,74 @@
 
             <div class="form-group">
                 <label for="registerAdresse">Adresse</label>
-                <input type="text" class="form-control" id="registerAdresse" name="registerAdresse" placeholder="1234 Main St">
+                <input type="text" class="form-control wrap-input100 validate-input" id="registerAdresse" name="registerAdresse" placeholder="1234 Main St">
             </div>
             <div class="form-row">
                 <div class="form-group col-md-8">
                     <label for="registerVille">Ville</label>
-                    <input type="text" class="form-control" id="registerVille" name="registerVille">
+                    <input type="text" class="form-control wrap-input100 validate-input" id="registerVille" name="registerVille">
                 </div>
 
                 <div class="form-group col-md-4">
                     <label for="registerCP">Code postal</label>
-                    <input type="text" class="form-control" id="registerCP" name="registerCP">
+                    <input type="text" class="form-control wrap-input100 validate-input" id="registerCP" name="registerCP">
                 </div>
             </div>
             <div class="form-group">
                 <label for="registerTelephone">Téléphone</label>
-                <input type="text" class="form-control" id="registerTelephone" name="registerTelephone" placeholder="06 12 34 56 78">
+                <input type="text" class="form-control wrap-input100 validate-input" id="registerTelephone" name="registerTelephone" placeholder="06 12 34 56 78">
             </div>
 
 
-        </div>
 
-        <div class="modal-footer">
-            <input type="hidden" name="origin" value="register"/>
+
+            <div class="container-login100-form-btn mb-5">
+                <button class="login100-form-btn">
+                    S'inscrire
+                </button>
+            </div>
+
+            <ul class="login-more">
+                <li class="mb-2">
+                    <a href="#" class="txt2">
+                        Identifiants
+                    </a>
+                    <span class="txt1">
+								oubliés ?
+							</span>
+
+
+                </li>
+
+                <li>
+							<span class="txt1">
+								J'ai déjà un compte,
+							</span>
+
+                    <a href="{{ server.document_root }}/Utilisateur/Login" class="txt2">
+                        je me connecte!
+                    </a>
+                </li>
+            </ul>
             <input type="hidden" name="registerLat" value="0"/>
             <input type="hidden" name="registerLong" value="0"/>
-            <button type="button" class="btn btn-secondary" data-dismiss="modal">Fermer</button>
-            <input type="submit" class="btn btn-primary" value="Se créer un compte"/>
-        </div>
-    </form>
-{% endblock %}
+        </form>
+    </div>
+</div>
+
+
+<div id="dropDownSelect1"></div>
+
+
+<script src="https://code.jquery.com/jquery-3.4.0.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.11.4/i18n/jquery-ui-i18n.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.7/js/select2.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/animsition/4.0.2/js/animsition.js"></script>
+<script src="{{ server.document_root }}/js/login.js"></script>
+
+
+</body>
+</html>
