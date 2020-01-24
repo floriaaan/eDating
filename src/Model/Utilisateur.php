@@ -7,19 +7,25 @@ namespace src\Model;
 class Utilisateur implements \JsonSerializable
 {
     private $UID;
+    private $MotDePasse;
     private $Nom;
     private $Prenom;
     private $DateInscription;
     private $Email;
+    private $Titre;
     private $Description;
     private $Sexe;
-    private $Travail;
-    private $estConnecte;
+    private $Ville;
     private $Telephone;
-    private $Titre;
+
+    private $Campus;
+    private $Situation;
+    private $Age;
+    private $Attirance;
+    private $ProfilImgName;
+    private $ProfilImgRepo;
     private $Latitude;
     private $Longitude;
-    private $MotDePasse;
 
 
 
@@ -154,41 +160,7 @@ class Utilisateur implements \JsonSerializable
         return $this;
     }
 
-    /**
-     * @return mixed
-     */
-    public function getTravail()
-    {
-        return $this->Travail;
-    }
 
-    /**
-     * @param mixed $Travail
-     * @return Utilisateur
-     */
-    public function setTravail($Travail)
-    {
-        $this->Travail = $Travail;
-        return $this;
-    }
-
-    /**
-     * @return mixed
-     */
-    public function getEstConnecte()
-    {
-        return $this->estConnecte;
-    }
-
-    /**
-     * @param mixed $estConnecte
-     * @return Utilisateur
-     */
-    public function setEstConnecte($estConnecte)
-    {
-        $this->estConnecte = $estConnecte;
-        return $this;
-    }
 
     /**
      * @return mixed
@@ -281,6 +253,135 @@ class Utilisateur implements \JsonSerializable
         return $this;
     }
 
+
+    /**
+     * @return mixed
+     */
+    public function getVille()
+    {
+        return $this->Ville;
+    }
+
+    /**
+     * @param mixed $Ville
+     * @return Utilisateur
+     */
+    public function setVille($Ville)
+    {
+        $this->Ville = $Ville;
+        return $this;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getCampus()
+    {
+        return $this->Campus;
+    }
+
+    /**
+     * @param mixed $Campus
+     * @return Utilisateur
+     */
+    public function setCampus($Campus)
+    {
+        $this->Campus = $Campus;
+        return $this;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getSituation()
+    {
+        return $this->Situation;
+    }
+
+    /**
+     * @param mixed $Situation
+     * @return Utilisateur
+     */
+    public function setSituation($Situation)
+    {
+        $this->Situation = $Situation;
+        return $this;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getAge()
+    {
+        return $this->Age;
+    }
+
+    /**
+     * @param mixed $Age
+     * @return Utilisateur
+     */
+    public function setAge($Age)
+    {
+        $this->Age = $Age;
+        return $this;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getProfilImgName()
+    {
+        return $this->ProfilImgName;
+    }
+
+    /**
+     * @param mixed $ProfilImgName
+     * @return Utilisateur
+     */
+    public function setProfilImgName($ProfilImgName)
+    {
+        $this->ProfilImgName = $ProfilImgName;
+        return $this;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getProfilImgRepo()
+    {
+        return $this->ProfilImgRepo;
+    }
+
+    /**
+     * @param mixed $ProfilImgRepo
+     * @return Utilisateur
+     */
+    public function setProfilImgRepo($ProfilImgRepo)
+    {
+        $this->ProfilImgRepo = $ProfilImgRepo;
+        return $this;
+    }
+
+
+    /**
+     * @return mixed
+     */
+    public function getAttirance()
+    {
+        return $this->Attirance;
+    }
+
+    /**
+     * @param mixed $Attirance
+     * @return Utilisateur
+     */
+    public function setAttirance($Attirance)
+    {
+        $this->Attirance = $Attirance;
+        return $this;
+    }
+
+
     /**
      * @inheritDoc
      */
@@ -293,12 +394,17 @@ class Utilisateur implements \JsonSerializable
             'Prenom' => $this->getPrenom(),
             'DateInscription' => $this->getDateInscription(),
             'Email' => $this->getEmail(),
+            'Titre' => $this->getTitre(),
             'Description' => $this->getDescription(),
             'Sexe' => $this->getSexe(),
-            'Travail' => $this->getTravail(),
-            'estConnecte' => $this->getEstConnecte(),
+            'Ville' => $this->getVille(),
             'Telephone' => $this->getTelephone(),
-            'Titre' => $this->getTitre(),
+            'Campus' => $this->getCampus(),
+            'Situation' => $this->getSituation(),
+            'Age' => $this->getAge(),
+            'Attirance' => $this->getAttirance(),
+            'ProfilImgName' => $this->getProfilImgName(),
+            'ProfilImgRepo' => $this->getProfilImgRepo(),
             'Latitude' => $this->getLatitude(),
             'Longitude' => $this->getLatitude()
         ];
@@ -308,21 +414,28 @@ class Utilisateur implements \JsonSerializable
 
     public function SqlAdd(\PDO $bdd) {
         try{
-            $requete = $bdd->prepare('INSERT INTO T_UTILISATEUR (UTI_NOM, UTI_PRENOM, UTI_DATE_INSCRIPTION, UTI_EMAIL, UTI_DESCRIPTION, UTI_SEXE, UTI_TRAVAIL, UTI_CONNECTE, UTI_TEL, UTI_TITRE, UTI_POS_LAT, UTI_POS_LONG, UTI_MDP) VALUES(:Nom, :Prenom, :DateInscription, :Email, :Description, :Sexe, :Travail, :estConnecte, :Telephone, :Titre, :Latitude, :Longitude, :Mdp)');
+            $requete = $bdd->prepare('INSERT INTO T_UTILISATEUR 
+                (UTI_NOM, UTI_PRENOM, UTI_DATE_INSCRIPTION, UTI_EMAIL, UTI_TITRE, UTI_DESCRIPTION, UTI_SEXE, UTI_VILLE, UTI_TEL, UTI_MDP, UTI_CAMPUS, UTI_SITUATION, UTI_ATTIRANCE, UTI_IMAGE_NOM, UTI_IMAGE_LIEN, UTI_POS_LAT, UTI_POS_LONG, UTI_MDP)
+                VALUES(:Nom, :Prenom, :DateInscription, :Email, :Titre, :Description, :Sexe, :Ville, :Telephone, :Mdp, :Campus, :Situation, :Attirance, :ProfilImgName, :ProfilImgRepo, :Latitude, :Longitude)');
             $requete->execute([
                 'Nom' => $this->getNom(),
                 'Prenom' => $this->getPrenom(),
                 'DateInscription' => $this->getDateInscription(),
                 'Email' => $this->getEmail(),
+                'Titre' => $this->getTitre(),
                 'Description' => $this->getDescription(),
                 'Sexe' => $this->getSexe(),
-                'Travail' => $this->getTravail(),
-                'estConnecte' => $this->getEstConnecte(),
+                'Ville' => $this->getVille(),
                 'Telephone' => $this->getTelephone(),
-                'Titre' => $this->getTitre(),
+                'Mdp' => $this->getMotDePasse(),
+                'Campus' => $this->getCampus(),
+                'Situation' => $this->getSituation(),
+                'Attirance' => $this->getAttirance(),
+                'ProfilImgName' => $this->getCampus(),
+                'ProfilImgRepo' => $this->getCampus(),
                 'Latitude' => $this->getLatitude(),
                 'Longitude' => $this->getLatitude(),
-                'Mdp' => $this->getMotDePasse()
+
             ]);
             return array("result"=>true,"message"=>$bdd->lastInsertId());
         }catch (\Exception $e){
@@ -340,19 +453,24 @@ class Utilisateur implements \JsonSerializable
         foreach ($arrayUser as $userSQL){
             $user = new Utilisateur();
             $user->setUID($userSQL['ID_UTILISATEUR']);
+            $user->setMotDePasse($userSQL['UTI_MDP']);
             $user->setNom($userSQL['UTI_NOM']);
             $user->setPrenom($userSQL['UTI_PRENOM']);
             $user->setDateInscription($userSQL['UTI_DATE_INSCRIPTION']);
             $user->setEmail($userSQL['UTI_EMAIL']);
+            $user->setTitre($userSQL['UTI_TITRE']);
             $user->setDescription($userSQL['UTI_DESCRIPTION']);
             $user->setSexe($userSQL['UTI_SEXE']);
-            $user->setTravail($userSQL['UTI_TRAVAIL']);
-            $user->setEstConnecte($userSQL['UTI_CONNECTE']);
+            $user->setVille($userSQL['UTI_VILLE']);
             $user->setTelephone($userSQL['UTI_TEL']);
-            $user->setTitre($userSQL['UTI_TITRE']);
+            $user->setCampus($userSQL['UTI_CAMPUS']);
+            $user->setSituation($userSQL['UTI_SITUATION']);
+            $user->setAge($userSQL['UTI_AGE']);
+            $user->setAttirance($userSQL['UTI_ATTIRANCE']);
+            $user->setProfilImgName($userSQL['UTI_IMAGE_NOM']);
+            $user->setProfilImgRepo($userSQL['UTI_IMAGE_LIEN']);
             $user->setLatitude($userSQL['UTI_POS_LAT']);
             $user->setLongitude($userSQL['UTI_POS_LONG']);
-            $user->setMotDePasse($userSQL['UTI_MDP']);
 
             $listUser[] = $user;
         }
@@ -366,19 +484,24 @@ class Utilisateur implements \JsonSerializable
 
         $user = new Utilisateur();
         $user->setUID($userSQL['ID_UTILISATEUR']);
+        $user->setMotDePasse($userSQL['UTI_MDP']);
         $user->setNom($userSQL['UTI_NOM']);
         $user->setPrenom($userSQL['UTI_PRENOM']);
         $user->setDateInscription($userSQL['UTI_DATE_INSCRIPTION']);
         $user->setEmail($userSQL['UTI_EMAIL']);
+        $user->setTitre($userSQL['UTI_TITRE']);
         $user->setDescription($userSQL['UTI_DESCRIPTION']);
         $user->setSexe($userSQL['UTI_SEXE']);
-        $user->setTravail($userSQL['UTI_TRAVAIL']);
-        $user->setEstConnecte($userSQL['UTI_CONNECTE']);
+        $user->setVille($userSQL['UTI_VILLE']);
         $user->setTelephone($userSQL['UTI_TEL']);
-        $user->setTitre($userSQL['UTI_TITRE']);
+        $user->setCampus($userSQL['UTI_CAMPUS']);
+        $user->setSituation($userSQL['UTI_SITUATION']);
+        $user->setAge($userSQL['UTI_AGE']);
+        $user->setAttirance($userSQL['UTI_ATTIRANCE']);
+        $user->setProfilImgName($userSQL['UTI_IMAGE_NOM']);
+        $user->setProfilImgRepo($userSQL['UTI_IMAGE_LIEN']);
         $user->setLatitude($userSQL['UTI_POS_LAT']);
         $user->setLongitude($userSQL['UTI_POS_LONG']);
-        $user->setMotDePasse($userSQL['UTI_MDP']);
 
         return $user;
     }
@@ -394,19 +517,24 @@ class Utilisateur implements \JsonSerializable
         foreach ($arrayUser as $userSQL){
             $user = new Utilisateur();
             $user->setUID($userSQL['ID_UTILISATEUR']);
+            $user->setMotDePasse($userSQL['UTI_MDP']);
             $user->setNom($userSQL['UTI_NOM']);
             $user->setPrenom($userSQL['UTI_PRENOM']);
             $user->setDateInscription($userSQL['UTI_DATE_INSCRIPTION']);
             $user->setEmail($userSQL['UTI_EMAIL']);
+            $user->setTitre($userSQL['UTI_TITRE']);
             $user->setDescription($userSQL['UTI_DESCRIPTION']);
             $user->setSexe($userSQL['UTI_SEXE']);
-            $user->setTravail($userSQL['UTI_TRAVAIL']);
-            $user->setEstConnecte($userSQL['UTI_CONNECTE']);
+            $user->setVille($userSQL['UTI_VILLE']);
             $user->setTelephone($userSQL['UTI_TEL']);
-            $user->setTitre($userSQL['UTI_TITRE']);
+            $user->setCampus($userSQL['UTI_CAMPUS']);
+            $user->setSituation($userSQL['UTI_SITUATION']);
+            $user->setAge($userSQL['UTI_AGE']);
+            $user->setAttirance($userSQL['UTI_ATTIRANCE']);
+            $user->setProfilImgName($userSQL['UTI_IMAGE_NOM']);
+            $user->setProfilImgRepo($userSQL['UTI_IMAGE_LIEN']);
             $user->setLatitude($userSQL['UTI_POS_LAT']);
             $user->setLongitude($userSQL['UTI_POS_LONG']);
-            $user->setMotDePasse($userSQL['UTI_MDP']);
 
             $listUser[] = $user;
         }
