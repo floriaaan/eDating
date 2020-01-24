@@ -144,9 +144,19 @@
                     </a>
                 </li>
             </ul>
-            <input type="hidden" name="registerSituation" value="Célibataire"/>
-            <input type="hidden" name="registerAge" value="18"/>
-            <input type="hidden" name="registerAttirance" value="Bisexuel"/>
+            <select id="registerSituation" name="registerSituation" class="form-control">
+                <option>Célibataire</option>
+                <option>En couple</option>
+                <option>Marié</option>
+                <option>Autre</option>
+            </select>
+            <input type="number" id="registerAge" name="registerAge" min="15" max="100">
+            <select id="registerAttirance" name="registerAttirance" class="form-control">
+                <option>Hétérosexuel</option>
+                <option>Homosexuel</option>
+                <option>Bisexuel</option>
+                <option>Autre</option>
+            </select>
             <input type="hidden" name="registerLat" value="0"/>
             <input type="hidden" name="registerLong" value="0"/>
         </form>
