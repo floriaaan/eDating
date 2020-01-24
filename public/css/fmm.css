@@ -335,3 +335,7 @@
 .nam{
     font-size: 2em;
 }
+
+.no-hover:hover{
+    text-decoration: none;
+}
