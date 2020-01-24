@@ -36,15 +36,21 @@
             <div class="dropdown">
 
                 <a href="#" class="btn dropdown-toggle btn-secondary" id="navbarDropdown" data-toggle="dropdown" aria-expanded="false">
-                    Welcome, {{ session.USER.Prenom }} <b class="caret"></b>
+                    Bienvenue {{ userr.Prenom }} <b class="caret"></b>
                 </a>
 
                 <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                    <a class="dropdown-item" href="#">Action</a>
+                    {% if userr is defined %}
+                        <a class="dropdown-item" href="/Utilisateur/Me">Votre compte</a>
+                        <a class="dropdown-item" href="/Messages/">Vos Messages</a>
+                        <a class="dropdown-item" href="/Utilisateur/Mates">Vos Mates</a>
+                        <div class="dropdown-divider"></div>
+                        <a class="dropdown-item" href="/Utilisateur/Disconnect">Se déconnecter</a>
+                    {% else %}
 
-                    <div class="dropdown-divider"></div>
-                    <a class="dropdown-item" href="/Utilisateur/Register">Se créer un compte</a>
-                    <a class="dropdown-item" href="/Utilisateur/Login">Se connecter</a>
+                        <a class="dropdown-item" href="/Utilisateur/Register">Se créer un compte</a>
+                        <a class="dropdown-item" href="/Utilisateur/Login">Se connecter</a>
+                    {% endif %}
                 </div>
 
             </div>
@@ -61,148 +67,7 @@
 
 {% block body %}{% endblock %}
 
-<!--<div class="modal fade" id="login" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-    <div class="modal-dialog" role="document">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title" id="exampleModalLabel">Se connecter</h5>
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                </button>
-            </div>
-            <form method="post" action="{{ server.document_root }}/Utilisateur/Login">
-                <div class="modal-body">
-                    <div class="form-group">
-                        <label for="loginEmail">Adresse mail</label>
-                        <input type="email" class="form-control" id="loginEmail" name="loginEmail" aria-describedby="loginHelpEmail" placeholder="Entrez votre adresse mail" required>
-                        <small id="loginHelpEmail" class="form-text text-muted">Nous ne partagerons pas vos données personnelles promis &#128521;</small>
-                    </div>
-                    <div class="form-group">
-                        <label for="loginPassword">Mot de passe</label>
-                        <input type="password" class="form-control" id="loginPassword" name="loginPassword" placeholder="Entrez votre mot de passe" required>
-                    </div>
-                    <div class="custom-control custom-checkbox my-1 mr-sm-2">
-                        <input type="checkbox" class="custom-control-input" name="loginCheckRemember" id="loginCheckRemember">
-                        <label class="custom-control-label" for="loginCheckRemember">Se souvenir de moi</label>
-                    </div>
-                </div>
 
-                <div class="modal-footer">
-                    <input type="hidden" name="origin" value="login"/>
-                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Fermer</button>
-                    <input type="submit" class="btn btn-primary" value="Se connecter"/>
-                </div>
-            </form>
-
-        </div>
-    </div>
-</div>
-
-
-
-
-
-
-<div class="modal fade " id="register" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-    <div class="modal-dialog modal-lg" role="document">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title" id="exampleModalLabel">Se créer un compte</h5>
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                </button>
-            </div>
-            <form method="post" action="{{ server.document_root }}/Utilisateur/Register">
-                <div class="modal-body">
-
-                    <div class="form-group form-row">
-
-                        <div class="col-md-5">
-                            <label for="registerPrenom">Prenom</label>
-                            <input type="text" class="form-control text-muted" placeholder="Prénom" name="registerPrenom" id="registerPrenom">
-                        </div>
-                        <div class="col-md-5">
-                            <label for="registerNom">Nom</label>
-                            <input type="text" class="form-control text-muted" placeholder="Nom" name="registerNom" id="registerNom">
-                        </div>
-                        <div class="col-md-2">
-                            <label for="registerSexe">Sexe</label>
-                            <select id="registerSexe" name="registerSexe" class="form-control">
-                                <option>Homme</option>
-                                <option>Femme</option>
-                                <option>Autre</option>
-                                <option>Dauphin</option>
-                            </select>
-                        </div>
-
-
-                    </div>
-
-                    <div class="form-group">
-                        <label for="registerTravail">Travail</label>
-                        <input type="text" class="form-control" id="registerTravail" name="registerTravail" placeholder="Travail">
-                    </div>
-
-                    <hr>
-
-                    <div class="form-group">
-                        <label for="registerTitre">Une brève description de vous</label>
-                        <input class="form-control form-control-lg" type="text" placeholder="Votre première description" id="registerTitre" name="registerTitre">
-
-                        <label for="registerDescription" class="mt-2">Dites nous en plus</label>
-                        <textarea class="form-control" id="registerDescription" name="registerDescription" rows="5"></textarea>
-                    </div>
-
-                    <hr>
-
-                    <div class="form-row">
-                        <div class="form-group col-md-6">
-                            <label for="registerEmail">Email</label>
-                            <input type="email" class="form-control" id="registerEmail" name="registerEmail" placeholder="Email" required>
-                        </div>
-                        <div class="form-group col-md-6">
-                            <label for="registerMotDePasse">Mot de passe</label>
-                            <input type="password" class="form-control" id="registerMotDePasse" name="registerMotDePasse" placeholder="Mot de passe" required>
-                        </div>
-                    </div>
-
-                    <hr>
-
-                    <div class="form-group">
-                        <label for="registerAdresse">Adresse</label>
-                        <input type="text" class="form-control" id="registerAdresse" name="registerAdresse" placeholder="1234 Main St">
-                    </div>
-                    <div class="form-row">
-                        <div class="form-group col-md-8">
-                            <label for="registerVille">Ville</label>
-                            <input type="text" class="form-control" id="registerVille" name="registerVille">
-                        </div>
-
-                        <div class="form-group col-md-4">
-                            <label for="registerCP">Code postal</label>
-                            <input type="text" class="form-control" id="registerCP" name="registerCP">
-                        </div>
-                    </div>
-                    <div class="form-group">
-                        <label for="registerTelephone">Téléphone</label>
-                        <input type="text" class="form-control" id="registerTelephone" name="registerTelephone" placeholder="06 12 34 56 78">
-                    </div>
-
-
-                </div>
-
-                <div class="modal-footer">
-                    <input type="hidden" name="origin" value="register"/>
-                    <input type="hidden" name="registerLat" value="0"/>
-                    <input type="hidden" name="registerLong" value="0"/>
-                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Fermer</button>
-                    <input type="submit" class="btn btn-primary" value="Se créer un compte"/>
-                </div>
-            </form>
-
-        </div>
-    </div>
-</div>-->
 
 <script src="https://code.jquery.com/jquery-3.4.0.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>

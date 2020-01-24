@@ -2,9 +2,31 @@
 {% block title %}{{ parent() }} - Carte {% endblock %}
 
 {% block body %}
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.5.1/dist/leaflet.css" integrity="sha512-xwE/Az9zrjBIphAcBb3F6JVqxf46+CDLwfLMHloNu6KEQCAWi6HcDUbeOfBIptF7tcCzusKFjFw2yuvEpDL9wQ==" crossorigin=""/>
+    <script src="https://unpkg.com/leaflet@1.5.1/dist/leaflet.js" integrity="sha512-GffPMF3RvMeYyc1LWMHtK8EbPv0iNZ8/oTtHPx9/cc2ILxQ+u905qIwdpULaqDkyBKgOaB57QTMg7ztg8Jm2Og==" crossorigin=""></script>
 
-    {% for user in userList %}
-        {{ dump(user) }}
-    {% endfor %}
+    <div id="mapid" style="width:100% ; height:92.5vh;"></div>
+
+
+
+{% endblock %}
+
+{% block javascript %}
+    <script src="{{ server.document_root }}/js/map.js"></script>
+    <script>
+
+
+
+        $(document).ready(function() {
+            displayMap();
+            {% for user in userList %}
+                displayUser({{ user.Latitude }}, {{ user.Longitude }}, "{{ user.Prenom }}", "{{ user.Nom }}");
+            {% endfor %}
+
+        });
+
+    </script>
+
+
 
 {% endblock %}

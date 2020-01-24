@@ -10,7 +10,12 @@ use DateTime;
 class UtilisateurController extends AbstractController
 {
     public function Index(){
-        return $this->Map();
+        if(isset($_SESSION['USER'])) {
+            return $this->Map();
+        } else {
+            header('Location:/Utilisateur/Login');
+        }
+
     }
 
     public function Map(){
@@ -18,8 +23,7 @@ class UtilisateurController extends AbstractController
         $listUser = $user->SqlGetAll(Bdd::GetInstance());
         return $this->twig->render(
             'map.html.twig', [
-                'userList' => $listUser,
-                'session' => $_SESSION
+                'userList' => $listUser
         ]);
     }
 
@@ -28,7 +32,7 @@ class UtilisateurController extends AbstractController
         $listUser = $user->SqlGetBy(Bdd::GetInstance(),"SELECT * FROM T_UTILISATEUR WHERE UTI_NOM =:Search OR UTI_PRENOM =:Search OR ID_UTILISATEUR =:Search", $_POST['search']);
 
         return $this->twig->render(
-            'mate.html.twig', [
+            'search.html.twig', [
                 'listUser' => $listUser,
             ]
         );
@@ -37,13 +41,11 @@ class UtilisateurController extends AbstractController
     public function Me(){
         if(isset($_SESSION['USER'])) {
             return $this->twig->render(
-                'Utilisateur/profile.html.twig', [
-                    'user' => $_SESSION['USER'],
-                    'session' => $_SESSION
-                ]
+                'Utilisateur/profile.html.twig'
+
             );
         } else {
-            header('Location:/Error/NoUser');
+            header('Location:/Utilisateur/Login');
         }
 
     }
@@ -68,19 +70,23 @@ class UtilisateurController extends AbstractController
             $nomImage = null;
 
             $user = new Utilisateur();
-            $user->setNom($_POST['registerNom'])
+            $user->setMotDePasse(password_hash($_POST['registerMotDePasse'], PASSWORD_BCRYPT))
+                ->setNom($_POST['registerNom'])
                 ->setPrenom($_POST['registerPrenom'])
                 ->setDateInscription($dateNow->format('Y-m-d'))
                 ->setEmail($_POST['registerEmail'])
                 ->setTitre($_POST['registerTitre'])
                 ->setDescription($_POST['registerDescription'])
                 ->setSexe($_POST['registerSexe'])
-                ->setTravail($_POST['registerTravail'])
-                ->setEstConnecte(1)
-                ->setTelephone($_POST['registerTelephone'])
-                ->setLatitude($_POST['registerLat'])
-                ->setLongitude($_POST['registerLong'])
-                ->setMotDePasse(password_hash($_POST['registerMotDePasse'], PASSWORD_BCRYPT))
+                ->setVille($_POST['registerVille'])
+                ->setTelephone($_POST['registerNom'])
+                ->setCampus($_POST['registerCampus'])
+                ->setSituation($_POST['registerSituation'])
+                ->setAge($_POST['registerAge'])
+                ->setAttirance($_POST['registerAttirance'])
+                ->setLatitude(mt_rand(-90, 90))
+                ->setLongitude(mt_rand(-180, 180));
+
             ;
             /*if(!empty($_FILES['registerImage']['name']) )
             {
@@ -91,7 +97,7 @@ class UtilisateurController extends AbstractController
                     $nomImage = md5(uniqid()) .'.'. $extension;
 
                     $sqlRepository = $dateNow->format('Y/m');
-                    $repository = './uploads/images/'.$dateNow->format('Y/m');
+                    $repository = './uploads/images/'.$_POST['registerEmail'];
                     if(!is_dir($repository)){
                         mkdir($repository,0777,true);
                     }
@@ -100,10 +106,13 @@ class UtilisateurController extends AbstractController
             }
             $user->setImgFileName($nomImage);
             $user->setImgRepo($sqlRepository);*/
-            $user->SqlAdd(BDD::getInstance());
-            $_SESSION['USER'] = $user;
-            $_SESSION['connected'] = true;
-            header('Location:/Utilisateur/Me');
+            if($user->SqlAdd(BDD::getInstance())['result']) {
+                $_SESSION['USER'] = $user;
+                header('Location:/Utilisateur/Me');
+            } else {
+                header('Location:/Error/');
+            }
+
         }else{
 
             return $this->twig->render('Utilisateur/register.html.twig');
@@ -123,17 +132,12 @@ class UtilisateurController extends AbstractController
 
 
             if(password_verify($password, $returnSQL['UTI_MDP'])) {
-                $_SESSION['connected'] = true;
-
-                $requete = $bdd->prepare("UPDATE T_UTILISATEUR SET UTI_CONNECTE=1 WHERE UTI_EMAIL =:Email");
-                $requete->execute([
-                    'Email' => $_POST['loginEmail']]);
 
 
                 $user = new Utilisateur();
                 $user = $user->SqlGet($bdd, $returnSQL['ID_UTILISATEUR']);
                 $_SESSION['USER'] = $user;
-                header('Location:/Utilisateur/Me');
+                header('Location:/');
 
             } else {
                 $_SESSION['connected'] = false;
@@ -144,6 +148,11 @@ class UtilisateurController extends AbstractController
 
             return $this->twig->render('Utilisateur/login.html.twig');
         }
+    }
+
+    public function Disconnect(){
+        session_unset();
+        header('Location:/Utilisateur/Login');
     }
 
 

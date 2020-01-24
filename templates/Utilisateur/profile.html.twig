@@ -1,8 +1,69 @@
 {% extends "index.html.twig" %}
 {% block title %}{{ parent() }} - Profil {% endblock %}
 
+
+
 {% block body %}
 
-    <div>{{ dump(user) }}</div>
 
+    <div class="card item-card" style="width: 30rem;">
+        <img class="card-img-top img" src="/uploads/images/mittie.effertz@example.net/logo-violet.svg" alt="Card image cap">
+        <div class="card-body">
+            <button class="btn btn-primary">Modifier</button>
+        </div>
+    </div>
+    <div class="card item-card" style="width: 30rem;">
+        <div class="card-body">
+            <h5 class="card-title nam">{{ userr.Prenom }} {{ userr.Nom }}</h5>
+            <button class="btn btn-primary">Modifier</button>
+        </div>
+        <div class="card item-card" style="width: 30rem;">
+            <div class="card-body">
+                <p class="card-title">{{ userr.Titre }}</p>
+                <button class="btn btn-primary">Modifier</button>
+            </div>
+        </div>
+    </div>
+    <div class="wrapper-imgs-flex">
+        <div class="card card-imgs" style="width: 50rem;">
+            <img class="card-img-top" src=".../100px180/" alt="Card image cap">
+            <div class="card-body">
+                <button class="btn btn-primary">Modifier</button>
+            </div>
+        </div>
+        <div class="card card-imgs" style="width: 50rem;">
+            <img class="card-img-top" src=".../100px180/" alt="Card image cap">
+            <div class="card-body">
+                <button class="btn btn-primary">Modifier</button>
+            </div>
+        </div>
+    </div>
+    <div class="wrapper-imgs-flex">
+        <div class="card card-imgs" style="width: 50rem;">
+            <img class="card-img-top" src=".../100px180/" alt="Card image cap">
+            <div class="card-body">
+                <button class="btn btn-primary">Modifier</button>
+            </div>
+        </div>
+        <div class="card card-imgs" style="width: 50rem;">
+            <img class="card-img-top" src=".../100px180/" alt="Card image cap">
+            <div class="card-body">
+                <button class="btn btn-primary">Modifier</button>
+            </div>
+        </div>
+    </div>
+    <div class="wrapper-imgs-flex">
+        <div class="card card-imgs" style="width: 50rem;">
+            <img class="card-img-top" src=".../100px180/" alt="Card image cap">
+            <div class="card-body">
+                <button class="btn btn-primary">Modifier</button>
+            </div>
+        </div>
+        <div class="card card-imgs" style="width: 50rem;">
+            <img class="card-img-top" src=".../100px180/" alt="Card image cap">
+            <div class="card-body">
+                <button class="btn btn-primary">Modifier</button>
+            </div>
+        </div>
+    </div>
 {% endblock %}
