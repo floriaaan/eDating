@@ -415,7 +415,7 @@ class Utilisateur implements \JsonSerializable
     public function SqlAdd(\PDO $bdd) {
         try{
             $requete = $bdd->prepare('INSERT INTO T_UTILISATEUR 
-                (UTI_NOM, UTI_PRENOM, UTI_DATE_INSCRIPTION, UTI_EMAIL, UTI_TITRE, UTI_DESCRIPTION, UTI_SEXE, UTI_VILLE, UTI_TEL, UTI_MDP, UTI_CAMPUS, UTI_SITUATION, UTI_ATTIRANCE, UTI_IMAGE_NOM, UTI_IMAGE_LIEN, UTI_POS_LAT, UTI_POS_LONG, UTI_MDP)
+                (UTI_NOM, UTI_PRENOM, UTI_DATE_INSCRIPTION, UTI_EMAIL, UTI_TITRE, UTI_DESCRIPTION, UTI_SEXE, UTI_VILLE, UTI_TEL, UTI_MDP, UTI_CAMPUS, UTI_SITUATION, UTI_ATTIRANCE, UTI_IMAGE_NOM, UTI_IMAGE_LIEN, UTI_POS_LAT, UTI_POS_LONG)
                 VALUES(:Nom, :Prenom, :DateInscription, :Email, :Titre, :Description, :Sexe, :Ville, :Telephone, :Mdp, :Campus, :Situation, :Attirance, :ProfilImgName, :ProfilImgRepo, :Latitude, :Longitude)');
             $requete->execute([
                 'Nom' => $this->getNom(),
@@ -452,25 +452,25 @@ class Utilisateur implements \JsonSerializable
         $listUser = [];
         foreach ($arrayUser as $userSQL){
             $user = new Utilisateur();
-            $user->setUID($userSQL['ID_UTILISATEUR']);
-            $user->setMotDePasse($userSQL['UTI_MDP']);
-            $user->setNom($userSQL['UTI_NOM']);
-            $user->setPrenom($userSQL['UTI_PRENOM']);
-            $user->setDateInscription($userSQL['UTI_DATE_INSCRIPTION']);
-            $user->setEmail($userSQL['UTI_EMAIL']);
-            $user->setTitre($userSQL['UTI_TITRE']);
-            $user->setDescription($userSQL['UTI_DESCRIPTION']);
-            $user->setSexe($userSQL['UTI_SEXE']);
-            $user->setVille($userSQL['UTI_VILLE']);
-            $user->setTelephone($userSQL['UTI_TEL']);
-            $user->setCampus($userSQL['UTI_CAMPUS']);
-            $user->setSituation($userSQL['UTI_SITUATION']);
-            $user->setAge($userSQL['UTI_AGE']);
-            $user->setAttirance($userSQL['UTI_ATTIRANCE']);
-            $user->setProfilImgName($userSQL['UTI_IMAGE_NOM']);
-            $user->setProfilImgRepo($userSQL['UTI_IMAGE_LIEN']);
-            $user->setLatitude($userSQL['UTI_POS_LAT']);
-            $user->setLongitude($userSQL['UTI_POS_LONG']);
+            $user->setUID($userSQL['ID_UTILISATEUR'])
+                ->setMotDePasse($userSQL['UTI_MDP'])
+                ->setNom($userSQL['UTI_NOM'])
+                ->setPrenom($userSQL['UTI_PRENOM'])
+                ->setDateInscription($userSQL['UTI_DATE_INSCRIPTION'])
+                ->setEmail($userSQL['UTI_EMAIL'])
+                ->setTitre($userSQL['UTI_TITRE'])
+                ->setDescription($userSQL['UTI_DESCRIPTION'])
+                ->setSexe($userSQL['UTI_SEXE'])
+                ->setVille($userSQL['UTI_VILLE'])
+                ->setTelephone($userSQL['UTI_TEL'])
+                ->setCampus($userSQL['UTI_CAMPUS'])
+                ->setSituation($userSQL['UTI_SITUATION'])
+                ->setAge($userSQL['UTI_AGE'])
+                ->setAttirance($userSQL['UTI_ATTIRANCE'])
+                ->setProfilImgName($userSQL['UTI_IMAGE_NOM'])
+                ->setProfilImgRepo($userSQL['UTI_IMAGE_LIEN'])
+                ->setLatitude($userSQL['UTI_POS_LAT'])
+                ->setLongitude($userSQL['UTI_POS_LONG']);
 
             $listUser[] = $user;
         }
@@ -483,25 +483,25 @@ class Utilisateur implements \JsonSerializable
         $userSQL = $query->fetch();
 
         $user = new Utilisateur();
-        $user->setUID($userSQL['ID_UTILISATEUR']);
-        $user->setMotDePasse($userSQL['UTI_MDP']);
-        $user->setNom($userSQL['UTI_NOM']);
-        $user->setPrenom($userSQL['UTI_PRENOM']);
-        $user->setDateInscription($userSQL['UTI_DATE_INSCRIPTION']);
-        $user->setEmail($userSQL['UTI_EMAIL']);
-        $user->setTitre($userSQL['UTI_TITRE']);
-        $user->setDescription($userSQL['UTI_DESCRIPTION']);
-        $user->setSexe($userSQL['UTI_SEXE']);
-        $user->setVille($userSQL['UTI_VILLE']);
-        $user->setTelephone($userSQL['UTI_TEL']);
-        $user->setCampus($userSQL['UTI_CAMPUS']);
-        $user->setSituation($userSQL['UTI_SITUATION']);
-        $user->setAge($userSQL['UTI_AGE']);
-        $user->setAttirance($userSQL['UTI_ATTIRANCE']);
-        $user->setProfilImgName($userSQL['UTI_IMAGE_NOM']);
-        $user->setProfilImgRepo($userSQL['UTI_IMAGE_LIEN']);
-        $user->setLatitude($userSQL['UTI_POS_LAT']);
-        $user->setLongitude($userSQL['UTI_POS_LONG']);
+        $user->setUID($userSQL['ID_UTILISATEUR'])
+            ->setMotDePasse($userSQL['UTI_MDP'])
+            ->setNom($userSQL['UTI_NOM'])
+            ->setPrenom($userSQL['UTI_PRENOM'])
+            ->setDateInscription($userSQL['UTI_DATE_INSCRIPTION'])
+            ->setEmail($userSQL['UTI_EMAIL'])
+            ->setTitre($userSQL['UTI_TITRE'])
+            ->setDescription($userSQL['UTI_DESCRIPTION'])
+            ->setSexe($userSQL['UTI_SEXE'])
+            ->setVille($userSQL['UTI_VILLE'])
+            ->setTelephone($userSQL['UTI_TEL'])
+            ->setCampus($userSQL['UTI_CAMPUS'])
+            ->setSituation($userSQL['UTI_SITUATION'])
+            ->setAge($userSQL['UTI_AGE'])
+            ->setAttirance($userSQL['UTI_ATTIRANCE'])
+            ->setProfilImgName($userSQL['UTI_IMAGE_NOM'])
+            ->setProfilImgRepo($userSQL['UTI_IMAGE_LIEN'])
+            ->setLatitude($userSQL['UTI_POS_LAT'])
+            ->setLongitude($userSQL['UTI_POS_LONG']);
 
         return $user;
     }
@@ -516,25 +516,25 @@ class Utilisateur implements \JsonSerializable
         $listUser = [];
         foreach ($arrayUser as $userSQL){
             $user = new Utilisateur();
-            $user->setUID($userSQL['ID_UTILISATEUR']);
-            $user->setMotDePasse($userSQL['UTI_MDP']);
-            $user->setNom($userSQL['UTI_NOM']);
-            $user->setPrenom($userSQL['UTI_PRENOM']);
-            $user->setDateInscription($userSQL['UTI_DATE_INSCRIPTION']);
-            $user->setEmail($userSQL['UTI_EMAIL']);
-            $user->setTitre($userSQL['UTI_TITRE']);
-            $user->setDescription($userSQL['UTI_DESCRIPTION']);
-            $user->setSexe($userSQL['UTI_SEXE']);
-            $user->setVille($userSQL['UTI_VILLE']);
-            $user->setTelephone($userSQL['UTI_TEL']);
-            $user->setCampus($userSQL['UTI_CAMPUS']);
-            $user->setSituation($userSQL['UTI_SITUATION']);
-            $user->setAge($userSQL['UTI_AGE']);
-            $user->setAttirance($userSQL['UTI_ATTIRANCE']);
-            $user->setProfilImgName($userSQL['UTI_IMAGE_NOM']);
-            $user->setProfilImgRepo($userSQL['UTI_IMAGE_LIEN']);
-            $user->setLatitude($userSQL['UTI_POS_LAT']);
-            $user->setLongitude($userSQL['UTI_POS_LONG']);
+            $user->setUID($userSQL['ID_UTILISATEUR'])
+                ->setMotDePasse($userSQL['UTI_MDP'])
+                ->setNom($userSQL['UTI_NOM'])
+                ->setPrenom($userSQL['UTI_PRENOM'])
+                ->setDateInscription($userSQL['UTI_DATE_INSCRIPTION'])
+                ->setEmail($userSQL['UTI_EMAIL'])
+                ->setTitre($userSQL['UTI_TITRE'])
+                ->setDescription($userSQL['UTI_DESCRIPTION'])
+                ->setSexe($userSQL['UTI_SEXE'])
+                ->setVille($userSQL['UTI_VILLE'])
+                ->setTelephone($userSQL['UTI_TEL'])
+                ->setCampus($userSQL['UTI_CAMPUS'])
+                ->setSituation($userSQL['UTI_SITUATION'])
+                ->setAge($userSQL['UTI_AGE'])
+                ->setAttirance($userSQL['UTI_ATTIRANCE'])
+                ->setProfilImgName($userSQL['UTI_IMAGE_NOM'])
+                ->setProfilImgRepo($userSQL['UTI_IMAGE_LIEN'])
+                ->setLatitude($userSQL['UTI_POS_LAT'])
+                ->setLongitude($userSQL['UTI_POS_LONG']);
 
             $listUser[] = $user;
         }

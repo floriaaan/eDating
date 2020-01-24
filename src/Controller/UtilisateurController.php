@@ -57,19 +57,23 @@ class UtilisateurController extends AbstractController
             $nomImage = null;
 
             $user = new Utilisateur();
-            $user->setNom($_POST['registerNom'])
+            $user->setMotDePasse(password_hash($_POST['registerMotDePasse'], PASSWORD_BCRYPT))
+                ->setNom($_POST['registerNom'])
                 ->setPrenom($_POST['registerPrenom'])
                 ->setDateInscription($dateNow->format('Y-m-d'))
                 ->setEmail($_POST['registerEmail'])
                 ->setTitre($_POST['registerTitre'])
                 ->setDescription($_POST['registerDescription'])
                 ->setSexe($_POST['registerSexe'])
-                ->setTravail($_POST['registerTravail'])
-                ->setEstConnecte(1)
-                ->setTelephone($_POST['registerTelephone'])
+                ->setVille($_POST['registerVille'])
+                ->setTelephone($_POST['registerNom'])
+                ->setCampus($_POST['registerCampus'])
+                ->setSituation($_POST['registerSituation'])
+                ->setAge($_POST['registerAge'])
+                ->setAttirance($_POST['registerAttirance'])
                 ->setLatitude($_POST['registerLat'])
-                ->setLongitude($_POST['registerLong'])
-                ->setMotDePasse(password_hash($_POST['registerMotDePasse'], PASSWORD_BCRYPT))
+                ->setLongitude($_POST['registerLong']);
+
             ;
             /*if(!empty($_FILES['registerImage']['name']) )
             {
@@ -89,10 +93,13 @@ class UtilisateurController extends AbstractController
             }
             $user->setImgFileName($nomImage);
             $user->setImgRepo($sqlRepository);*/
-            $user->SqlAdd(BDD::getInstance());
-            $_SESSION['USER'] = $user;
-            $_SESSION['connected'] = true;
-            header('Location:/Utilisateur/Me');
+            if($user->SqlAdd(BDD::getInstance())['result']) {
+                $_SESSION['USER'] = $user;
+                header('Location:/Utilisateur/Me');
+            } else {
+                header('Location:/Error/');
+            }
+
         }else{
 
             return $this->twig->render('Utilisateur/register.html.twig');
@@ -112,11 +119,6 @@ class UtilisateurController extends AbstractController
 
 
             if(password_verify($password, $returnSQL['UTI_MDP'])) {
-                $_SESSION['connected'] = true;
-
-                $requete = $bdd->prepare("UPDATE T_UTILISATEUR SET UTI_CONNECTE=1 WHERE UTI_EMAIL =:Email");
-                $requete->execute([
-                    'Email' => $_POST['loginEmail']]);
 
 
                 $user = new Utilisateur();

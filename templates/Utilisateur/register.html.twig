@@ -62,8 +62,8 @@
 
             <div class=" mt-5 d-flex justify-content-between">
                 <div class="col-sm-8 wrap-input100 validate-input">
-                    <input type="text" class="input100" id="registerTravail" name="registerTravail">
-                    <span class="focus-input100" data-placeholder="Votre job"></span>
+                    <input type="text" class="input100" id="registerAffinites" name="registerTravail">
+                    <span class="focus-input100" data-placeholder="Vos affinités"></span>
                 </div>
 
 
@@ -73,7 +73,6 @@
                         <option>Homme</option>
                         <option>Femme</option>
                         <option>Autre</option>
-                        <option>Dauphin</option>
                     </select>
                 </div>
             </div>
@@ -97,19 +96,16 @@
 
 
 
-            <div class="wrap-input100 validate-input mt-4">
-                <input type="text" class="input100" id="registerAdresse" name="registerAdresse">
-                <span class="focus-input100" data-placeholder="Adresse"></span>
-            </div>
+
             <div class=" mt-4 d-flex justify-content-between">
                 <div class="col-sm-8 wrap-input100 validate-input">
-                    <input type="text" class="input100" id="registerVille" name="registerVille">
+                    <input type="text" class="input100" id="registerVille" name="registerVille" required>
                     <span class="focus-input100" data-placeholder="Ville"></span>
                 </div>
 
                 <div class="col-sm-4 wrap-input100 validate-input">
-                    <input type="text" class="input100" id="registerCP" name="registerCP">
-                    <span class="focus-input100" data-placeholder="Code postal"></span>
+                    <input type="text" class="input100" id="registerCP" name="registerCampus">
+                    <span class="focus-input100" data-placeholder="Campus"></span>
                 </div>
             </div>
             <div class="wrap-input100 validate-input mt-4 mb-5">
@@ -148,6 +144,9 @@
                     </a>
                 </li>
             </ul>
+            <input type="hidden" name="registerSituation" value="Célibataire"/>
+            <input type="hidden" name="registerAge" value="18"/>
+            <input type="hidden" name="registerAttirance" value="Bisexuel"/>
             <input type="hidden" name="registerLat" value="0"/>
             <input type="hidden" name="registerLong" value="0"/>
         </form>
