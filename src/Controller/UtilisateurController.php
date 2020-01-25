@@ -66,7 +66,7 @@ class UtilisateurController extends AbstractController
                 ->setDescription($_POST['registerDescription'])
                 ->setSexe($_POST['registerSexe'])
                 ->setVille($_POST['registerVille'])
-                ->setTelephone($_POST['registerNom'])
+                ->setTelephone($_POST['registerTelephone'])
                 ->setCampus($_POST['registerCampus'])
                 ->setSituation($_POST['registerSituation'])
                 ->setAge($_POST['registerAge'])
