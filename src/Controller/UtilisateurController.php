@@ -19,23 +19,31 @@ class UtilisateurController extends AbstractController
     }
 
     public function Map(){
-        $user = new Utilisateur();
-        $listUser = $user->SqlGetAll(Bdd::GetInstance());
-        return $this->twig->render(
-            'map.html.twig', [
+        if(isset($_SESSION['USER'])) {
+            $user = new Utilisateur();
+            $listUser = $user->SqlGetAll(Bdd::GetInstance());
+            return $this->twig->render(
+                'map.html.twig', [
                 'userList' => $listUser
-        ]);
+            ]);
+        } else {
+            header('Location:/Error/NoUser');
+        }
     }
 
     public function Search(){
-        $user = new Utilisateur();
-        $listUser = $user->SqlGetBy(Bdd::GetInstance(),"SELECT * FROM T_UTILISATEUR WHERE UTI_NOM =:Search OR UTI_PRENOM =:Search OR ID_UTILISATEUR =:Search", $_POST['search']);
+        if(isset($_SESSION['USER'])) {
+            $user = new Utilisateur();
+            $listUser = $user->SqlGetBy(Bdd::GetInstance(),"SELECT * FROM T_UTILISATEUR WHERE UTI_NOM =:Search OR UTI_PRENOM =:Search OR ID_UTILISATEUR =:Search", $_POST['search']);
 
-        return $this->twig->render(
-            'search.html.twig', [
-                'listUser' => $listUser,
-            ]
-        );
+            return $this->twig->render(
+                'search.html.twig', [
+                    'listUser' => $listUser,
+                ]
+            );
+        } else {
+            header('Location:/Error/NoUser');
+        }
     }
 
     public function Me(){
@@ -45,7 +53,7 @@ class UtilisateurController extends AbstractController
 
             );
         } else {
-            header('Location:/Utilisateur/Login');
+            header('Location:/Error/NoUser');
         }
 
     }
