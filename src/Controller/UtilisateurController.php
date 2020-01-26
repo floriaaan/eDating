@@ -11,40 +11,14 @@ class UtilisateurController extends AbstractController
 {
     public function Index(){
         if(isset($_SESSION['USER'])) {
-            return $this->Map();
+            return $this->Me();
         } else {
             header('Location:/Utilisateur/Login');
         }
 
     }
 
-    public function Map(){
-        if(isset($_SESSION['USER'])) {
-            $user = new Utilisateur();
-            $listUser = $user->SqlGetAll(Bdd::GetInstance());
-            return $this->twig->render(
-                'map.html.twig', [
-                'userList' => $listUser
-            ]);
-        } else {
-            header('Location:/Error/NoUser');
-        }
-    }
 
-    public function Search(){
-        if(isset($_SESSION['USER'])) {
-            $user = new Utilisateur();
-            $listUser = $user->SqlGetBy(Bdd::GetInstance(),"SELECT * FROM T_UTILISATEUR WHERE UTI_NOM =:Search OR UTI_PRENOM =:Search OR ID_UTILISATEUR =:Search", $_POST['search']);
-
-            return $this->twig->render(
-                'search.html.twig', [
-                    'listUser' => $listUser,
-                ]
-            );
-        } else {
-            header('Location:/Error/NoUser');
-        }
-    }
 
     public function Me(){
         if(isset($_SESSION['USER'])) {

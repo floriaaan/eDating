@@ -374,6 +374,21 @@
     transform: translate(-50%, -50%);
 }
 
+.fontawesome{
+    font-family: 'Roboto', 'Font Awesome 5 Free', serif;
+}
+
+.btn-outline-fmm{
+    color: #730EBD;
+    border-color: #730EBD;
+}
+
+.btn-outline-fmm:hover{
+    color: white;
+    background-color: #730EBD;
+    border-color: #730EBD;
+}
+
 @media (max-width: 576px) {
     .body {
         background: url("../doc/wall-login-small.svg") no-repeat fixed;
