@@ -44,4 +44,9 @@ class Photos
         $this->listPhotosDossier = $listPhotosDossier;
         return $this;
     }
+
+    public function SqlGet(\PDO $bdd, $userID) {
+
+    }
+
 }

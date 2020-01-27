@@ -26,12 +26,24 @@ if (class_exists($className)) {
                   <p class="lead">
                     <a class="btn btn-primary btn-lg" href="/index.php" role="button">Retour à l\'accueil</a>
                   </p>
-                </div>';
+                </div>
+                <hr>';
         var_dump($_POST);
         var_dump($_SESSION);
     }
 } else {
-    echo 'Pas de controller pour cette page';
+    echo '
+                <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+                <div class="jumbotron">
+                  <h1 class="display-4">Débogage</h1>
+                  <p class="lead">Nous sommes désolé du dérangement, veuillez nous excuser de la gêne occasionnée...</p>
+                  <hr class="my-4">
+                  <p>Le controller '. $controller . ' n\'existe pas</p>
+                  <p class="lead">
+                    <a class="btn btn-primary btn-lg" href="/index.php" role="button">Retour à l\'accueil</a>
+                  </p>
+                </div>
+                <hr>';
     var_dump($className);
 }
 

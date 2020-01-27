@@ -53,8 +53,8 @@ class UtilisateurController extends AbstractController
                 ->setSituation($_POST['registerSituation'])
                 ->setAge($_POST['registerAge'])
                 ->setAttirance($_POST['registerAttirance'])
-                ->setLatitude(mt_rand(-90, 90))
-                ->setLongitude(mt_rand(-180, 180));
+                ->setLatitude($_POST['registerLat'])
+                ->setLongitude($_POST['registerLong']);
 
             ;
             /*if(!empty($_FILES['registerImage']['name']) )

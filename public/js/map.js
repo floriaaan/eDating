@@ -15,7 +15,7 @@ function displayMap() {
 
 
 
-function displayUser(pos_x,pos_y, prenom, nom) {
+function displayUser(pos_x,pos_y, prenom, nom, id) {
     var greenIcon = new L.Icon({
         iconUrl: '../doc/fmm.svg',
         shadowUrl: 'https://cdnjs.cloudflare.com/ajax/libs/leaflet/0.7.7/images/marker-shadow.png',
@@ -27,10 +27,15 @@ function displayUser(pos_x,pos_y, prenom, nom) {
 
 
 
-    L.marker([pos_x, pos_y],{icon: greenIcon})
+    /*L.marker([pos_x, pos_y],{icon: greenIcon})
         .bindPopup('<b>'+ prenom + ' ' + nom + '</b>')
-        .addTo(mymap);
+        .addTo(mymap);*/
 
+    L.circle([pos_x + (Math.random() / 666), pos_y + (Math.random() / 666)],{})
+        .setRadius(200)
+        .bindPopup('<b>'+ prenom + ' ' + nom + '</b><br>' +
+            '<a href="/Home/Mate/'+ id +'" class="btn btn-outline-fmm mt-2">Voir son profil</a>')
+        .addTo(mymap);
 
 
 }
