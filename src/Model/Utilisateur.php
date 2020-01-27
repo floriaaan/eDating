@@ -534,7 +534,7 @@ class Utilisateur implements \JsonSerializable
 
             $listUser[] = $user;
         }
-        $listUser == null ? $isEmpty = true : $isEmpty = false;
-        return $listUser = array("list" => $listUser, "isEmpty" => $isEmpty);
+
+        return $listUser;
     }
 }

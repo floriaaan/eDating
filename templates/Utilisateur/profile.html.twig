@@ -6,49 +6,51 @@
 {% block body %}
     <div class="wall-white">
         <div class="nav-flex d-flex justify-content-between pt-2 px-2">
-            <a href="/Home/" class="back"><img class="svg-back"src="/doc/back.png"></a>
+            <a href="/Home/" class="back"><img class="svg-back" src="/doc/back.png"></a>
             <a href="/Utilisateur/Modify/" class="btn btn-primary"><i class="fas fa-pencil-alt"></i></a>
         </div>
         <div class="card cardd item-card" style="width: 30rem;">
             <div class="wrapper-img-profile">
-                <img class="card-img-top img" src="/uploads/images/{{userr.ProfilImgRepo}}/{{userr.ProfilImgName}}" alt="Card image cap">
+                <img class="card-img-top-fmm img"
+                     src="/uploads/images/{{ userr.ProfilImgRepo }}/{{ userr.ProfilImgName }}" alt="Card image cap">
             </div>
         </div>
         <div class="card cardd item-card" style="width: 30rem;">
             <div class="card-body">
                 <h5>{{ userr.Prenom }} {{ userr.Nom }}</h5>
+                <h6 class="text-muted">{{ userr.Age }} ans</h6>
             </div>
-            <div class="card item-card" style="width: 30rem;">
-                <div class="card-body">
-                    <p>{{ userr.Titre }}</p>
-                    <p>{{ userr.Description }}</p>
+            <hr>
+            <div class="card-body">
+                <p>{{ userr.Titre }}</p>
+                <p>{{ userr.Description }}</p>
 
-                </div>
             </div>
         </div>
-        <div class="wrapper-imgs-flex">
-            <div class="card cardd card-imgs" style="width: 50rem;">
-                <div class="wrapper-img-grid">
-                    <img class="card-img-top" src=".../100px180/" alt="Card image cap">
-                </div>
-            </div>
-            <div class="card cardd card-imgs" style="width: 50rem;">
-                <div class="wrapper-img-grid">
-                    <img class="card-img-top" src=".../100px180/" alt="Card image cap">
-                </div>
+    </div>
+    <div class="wrapper-imgs-flex">
+        <div class="card cardd card-imgs" style="width: 50rem;">
+            <div class="wrapper-img-grid">
+                <img class="card-img-top" src=".../100px180/" alt="Card image cap">
             </div>
         </div>
-        <div class="wrapper-imgs-flex">
-            <div class="card cardd card-imgs" style="width: 50rem;">
-                <div class="wrapper-img-grid">
-                    <img class="card-img-top" src=".../100px180/" alt="Card image cap">
-                </div>
-            </div>
-            <div class="card cardd card-imgs" style="width: 50rem;">
-                <div class="wrapper-img-grid">
-                    <img class="card-img-top" src=".../100px180/" alt="Card image cap">
-                </div>
+        <div class="card cardd card-imgs" style="width: 50rem;">
+            <div class="wrapper-img-grid">
+                <img class="card-img-top" src=".../100px180/" alt="Card image cap">
             </div>
         </div>
+    </div>
+    <div class="wrapper-imgs-flex">
+        <div class="card cardd card-imgs" style="width: 50rem;">
+            <div class="wrapper-img-grid">
+                <img class="card-img-top" src=".../100px180/" alt="Card image cap">
+            </div>
+        </div>
+        <div class="card cardd card-imgs" style="width: 50rem;">
+            <div class="wrapper-img-grid">
+                <img class="card-img-top" src=".../100px180/" alt="Card image cap">
+            </div>
+        </div>
+    </div>
     </div>
 {% endblock %}

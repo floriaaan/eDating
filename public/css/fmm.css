@@ -393,7 +393,7 @@
     -o-box-shadow: 0 14px 28px rgba(0, 0, 0, 0.20), 0 20px 20px rgba(0, 0, 0, 0.10);
     box-shadow: 0 14px 28px rgba(0, 0, 0, 0.20), 0 20px 20px rgba(0, 0, 0, 0.10);;*/
 }
-.card-img-top{
+.card-img-top-fmm{
     height: 100%;
     width: auto;
     margin-top: -0px;
