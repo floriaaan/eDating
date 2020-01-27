@@ -1,12 +1,9 @@
 <?php
 
 
-
-
-
 class Messages
 {
-    protected $table = 'T_MESSAGES';
+    protected $table = 'T_MESSAGES'; 
     
     public function getDiscussion($currentUser, $otherUser)
     {
