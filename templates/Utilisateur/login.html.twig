@@ -1,23 +1,10 @@
-<!doctype html>
-<html lang="fr">
-<head>
-    <meta charset="utf-8">
-    <title>{% block title %}Find My Mate - Se connecter{% endblock %}</title>
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
-    <link rel="stylesheet" href="https://ajax.googleapis.com/ajax/libs/jqueryui/1.11.4/themes/pepper-grinder/jquery-ui.css">
-    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.7/css/select2.min.css">
-    <link rel="stylesheet" href="{{ server.document_root }}/css/fmm.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.7.2/animate.css" integrity="sha256-a2tobsqlbgLsWs7ZVUGgP5IvWZsx8bTNQpzsqCSm5mk=" crossorigin="anonymous" />
-    <link rel="stylesheet" type="text/css" href="{{ server.document_root }}/css/util.css">
-    <link rel="stylesheet" type="text/css" href="{{ server.document_root }}/css/login.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animsition/4.0.2/css/animsition.css" integrity="sha256-eacfEFFt07So0i0jcf0GCoJfYEnTpTelDK3/9zN+P0g=" crossorigin="anonymous" />
+{% extends 'Utilisateur/form.html.twig' %}
 
-
-<body>
+{% block title %}{{ parent() }} - Se connecter {% endblock %}
 
 
 
+{% block body %}
         <div class="container-login100 ">
             <div class="wrap-login100 p-3">
                 <form class="login100-form validate-form mt-5" method="post" action="{{ server.document_root }}/Utilisateur/Login">
@@ -32,12 +19,12 @@
 					</div>
 
 
-                    <div class="wrap-input100 validate-input mt-5" data-validate = "Enter username">
+                    <div class="wrap-input100 validate-input mt-5" data-validate = "Email obligatoire">
                         <input class="input100" type="text" name="loginEmail">
                         <span class="focus-input100" data-placeholder="Adresse e-mail"></span>
                     </div>
 
-                    <div class="wrap-input100 validate-input mt-4 mb-5" data-validate="Enter password">
+                    <div class="wrap-input100 validate-input mt-4 mb-5" data-validate="Mot de passe obligatoire">
                         <input class="input100" type="password" name="loginPassword">
                         <span class="focus-input100" data-placeholder="Mot de passe"></span>
                     </div>
@@ -76,16 +63,4 @@
 
 
     <div id="dropDownSelect1"></div>
-
-<script src="https://code.jquery.com/jquery-3.4.0.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
-<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
-<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
-<script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.11.4/i18n/jquery-ui-i18n.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.7/js/select2.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/animsition/4.0.2/js/animsition.js"></script>
-<script src="{{ server.document_root }}/js/login.js"></script>
-
-
-</body>
-</html>
+{% endblock %}

@@ -4,69 +4,68 @@
     <meta charset="utf-8">
     <title>{% block title %}Find My Mate{% endblock %}</title>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
-    <link rel="stylesheet" href="https://ajax.googleapis.com/ajax/libs/jqueryui/1.11.4/themes/pepper-grinder/jquery-ui.css">
+    <link rel="stylesheet"
+          href="https://ajax.googleapis.com/ajax/libs/jqueryui/1.11.4/themes/pepper-grinder/jquery-ui.css">
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.7/css/select2.min.css">
     <link rel="stylesheet" href="{{ server.document_root }}/css/fmm.css">
     {% block css %}{% endblock %}
-
+</head>
 <body>
 
-<nav class="navbar sticky-top nav-pills navbar-expand-lg navbar-light bg-light">
+<nav class="navbar sticky-top nav-pills navbar-light bg-light justify-content-between">
 
 
-    <a class="navbar-brand" href="{{ server.document_root }}/index.php">
-        <img src="{{ server.document_root }}/doc/fmm.svg" width="30" height="30" class="d-inline-block align-top" alt="Find My Mate">
+    <div>
+        <form class="form-inline input-group" method="post" action="/Home/Search">
+            <input class="form-control fa" type="search" placeholder="&#xF002; Rechercher votre Mate" name="search"
+                   required>
+            <div class="input-group-append">
+                <input type="submit" class="btn btn-outline-fmm fa" value="&#xF002;">
+            </div>
+        </form>
+    </div>
+
+    <a class="navbar-brand center" href="{{ server.document_root }}/index.php">
+        <img src="{{ server.document_root }}/doc/fmm.svg" width="30" height="30" class="d-inline-block align-top"
+             alt="Find My Mate">
         Find My Mate
     </a>
-    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarTogglerDemo02" aria-controls="navbarTogglerDemo02" aria-expanded="false" aria-label="Toggle navigation">
+    <!--<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarTogglerDemo02" aria-controls="navbarTogglerDemo02" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
-    </button>
-    <div class="collapse navbar-collapse" id="navbarTogglerDemo02">
-        <!--<div class="row">-->
+    </button>-
+    <div class="collapse navbar-collapse" id="navbarTogglerDemo02">-->
+    <!--<div class="row">-->
 
-        <div class="nav navbar-nav d-flex justify-content-between">
-            <div>
-                <form class="form-inline" method="post" action="/Utilisateur/Search">
-                    <input class="form-control mr-sm-2" type="search" placeholder="Rechercher" name="search">
-                    <input type="submit" class="btn btn-outline-success my-2 my-sm-0" value="Rechercher">
-                    <input type="hidden" name="origin" value="search">
-                </form>
-            </div>
-            <div class="dropdown">
 
-                <a href="#" class="dropdown-toggle no-hover" id="navbarDropdown" data-toggle="dropdown" aria-expanded="false">
-                    <img src="{{ server.document_root }}/doc/user.jpeg" alt="Utilisateur" style="height: 40px; width: 40px" class="img-thumbnail rounded-circle">
-                </a>
+    <div class="dropleft ">
 
-                <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                    {% if userr is defined %}
-                        <a class="dropdown-item" href="/Utilisateur/Me">Votre compte</a>
-                        <a class="dropdown-item" href="/Messages/">Vos Messages</a>
-                        <a class="dropdown-item" href="/Utilisateur/Mates">Vos Mates</a>
-                        <div class="dropdown-divider"></div>
-                        <a class="dropdown-item" href="/Utilisateur/Disconnect">Se déconnecter</a>
-                    {% else %}
+        <a href="#" class="dropdown-toggle no-hover" id="navbarDropdown" data-toggle="dropdown" aria-expanded="false">
+            <img src="{{ server.document_root }}/doc/user.jpeg" alt="Utilisateur" style="height: 40px; width: 40px"
+                 class="img-thumbnail rounded-circle">
+        </a>
 
-                        <a class="dropdown-item" href="/Utilisateur/Register">Se créer un compte</a>
-                        <a class="dropdown-item" href="/Utilisateur/Login">Se connecter</a>
-                    {% endif %}
-                </div>
+        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+            {% if userr is defined %}
+                <a class="dropdown-item" href="/Utilisateur/Me">Votre compte</a>
+                <a class="dropdown-item" href="/Messages/">Vos Messages</a>
+                <a class="dropdown-item" href="/Utilisateur/Mates">Vos Mates</a>
+                <div class="dropdown-divider"></div>
+                <a class="dropdown-item" href="/Utilisateur/Disconnect">Se déconnecter</a>
+            {% else %}
 
-            </div>
+                <a class="dropdown-item" href="/Utilisateur/Register">Se créer un compte</a>
+                <a class="dropdown-item" href="/Utilisateur/Login">Se connecter</a>
+            {% endif %}
         </div>
 
-
-
-
     </div>
+
 
 </nav>
 
 
-
 {% block body %}{% endblock %}
-
 
 
 <script src="https://code.jquery.com/jquery-3.4.0.min.js"></script>
@@ -74,7 +73,7 @@
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
 <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
 <script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.11.4/i18n/jquery-ui-i18n.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.7/js/select2.min.js"></script>
-{% block javascript %}{% endblock %}
+<script src="chttps://cdnjs.cloudflare.com/ajax/libs/select2/4.0.7/js/select2.min.js"></script>
+{% block js %}{% endblock %}
 </body>
 </html>

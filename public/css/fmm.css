@@ -1,3 +1,9 @@
+.body {
+    background: url("../doc/wall-login.svg") no-repeat fixed;
+    background-size: cover;
+}
+
+
 .error {
     color: #5a5c69;
     font-size: 7rem;
@@ -303,28 +309,32 @@
     left: auto;
     right: auto;
 }*/
-.item-card{
+.item-card {
     text-align: center;
     display: flex;
     flex-direction: column;
     margin-left: auto;
     margin-right: auto;
 }
-.card{
+
+.card {
     border: none;
     background-color: gray;
 }
-.card-title{
+
+.card-title {
     margin: 2em;
 }
-.wrapper-imgs-flex{
+
+.wrapper-imgs-flex {
     display: flex;
     justify-content: space-between;
     /*border: 1px solid black;*/
     text-align: center;
     margin: 5em;
 }
-.img{
+
+.img {
     width: 12em;
     height: 12em;
     margin-left: auto;
@@ -332,10 +342,56 @@
     margin-top: 2em;
     /*border: 1px solid black;*/
 }
-.nam{
+
+.nam {
     font-size: 2em;
 }
 
-.no-hover:hover{
+.no-hover:hover {
     text-decoration: none;
+}
+
+.txt1 {
+
+    font-size: 15px;
+    color: #999999;
+    line-height: 1.5;
+}
+
+.txt2 {
+
+    font-size: 15px;
+    color: #730EBD;
+    line-height: 1.5;
+}
+
+.center {
+    margin: 0;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    -ms-transform: translate(-50%, -50%);
+    transform: translate(-50%, -50%);
+}
+
+.fontawesome{
+    font-family: 'Roboto', 'Font Awesome 5 Free', serif;
+}
+
+.btn-outline-fmm{
+    color: #730EBD;
+    border-color: #730EBD;
+}
+
+.btn-outline-fmm:hover{
+    color: white;
+    background-color: #730EBD;
+    border-color: #730EBD;
+}
+
+@media (max-width: 576px) {
+    .body {
+        background: url("../doc/wall-login-small.svg") no-repeat fixed;
+        background-size: cover;
+    }
 }
