@@ -407,15 +407,16 @@
     overflow: hidden;
     /*position: absolute;*/
     background-color: #E7E7E7;
-    -webkit-box-shadow: 0 14px 28px rgba(0, 0, 0, 0.20), 0 20px 20px rgba(0, 0, 0, 0.10);
+    /*-webkit-box-shadow: 0 14px 28px rgba(0, 0, 0, 0.20), 0 20px 20px rgba(0, 0, 0, 0.10);
     -moz-box-shadow: 0 14px 28px rgba(0, 0, 0, 0.20), 0 20px 20px rgba(0, 0, 0, 0.10);
     -ms-box-shadow: 0 14px 28px rgba(0, 0, 0, 0.20), 0 20px 20px rgba(0, 0, 0, 0.10);
     -o-box-shadow: 0 14px 28px rgba(0, 0, 0, 0.20), 0 20px 20px rgba(0, 0, 0, 0.10);
-    box-shadow: 0 14px 28px rgba(0, 0, 0, 0.20), 0 20px 20px rgba(0, 0, 0, 0.10);;
+    box-shadow: 0 14px 28px rgba(0, 0, 0, 0.20), 0 20px 20px rgba(0, 0, 0, 0.10);;*/
 }
 .card-img-top{
     height: 100%;
     width: auto;
+    margin-top: -5px;
 }
 .wall-white {
     background: url("../doc/wall-white.svg") no-repeat fixed;
@@ -454,3 +455,23 @@
   ::-webkit-scrollbar-thumb:hover {
     background: rgb(207, 207, 207); 
   }
+  .card-body{
+      margin-top: 100px;
+  }
+  .btn .btn-primary{
+      text-align: right;
+  }
+  .nav-flex{
+      display: flex;
+      justify-content: space-between;
+      margin: 1em;
+      color: #730EBD;
+  }
+  .btn-primary{
+      background-color: #730EBD;
+      border: #730EBD;
+  }
+  .btn-primary:hover{
+    background-color: rgb(143, 77, 190);
+    border: #730EBD;
+}
