@@ -5,23 +5,23 @@
 
 {% block body %}
     <div class="wall-white">
+        <div class="nav-flex d-flex justify-content-between pt-2 px-2">
+            <a href="/Home/" class="back"><img class="svg-back"src="/doc/back.png"></a>
+        </div>
         <div class="card cardd item-card" style="width: 30rem;">
             <div class="wrapper-img-profile">
-                <img class="card-img-top img" src="/uploads/images/mittie.effertz@example.net/logo-violet.svg" alt="Card image cap">
-            </div>
-            <div class="card-body">
-                <button class="btn btn-primary"><i class="fas fa-pencil-alt"></i></button>
+                <img class="card-img-top img" src="/uploads/images/{{user.ProfilImgRepo}}/{{user.ProfilImgName}}" alt="Card image cap">
             </div>
         </div>
         <div class="card cardd item-card" style="width: 30rem;">
             <div class="card-body">
-                <h5 class="card-title nam">{{ user.Prenom }} {{ user.Nom }}</h5>
+                <h5>{{ user.Prenom }} {{ user.Nom }}</h5>
             </div>
             <div class="card item-card" style="width: 30rem;">
                 <div class="card-body">
-                    <p class="card-title">{{ user.Titre }}</p>
-                    <p class="card-title">{{ user.Description }}</p>
-                    <button class="btn btn-primary"><i class="fas fa-pencil-alt"></i></button>
+                    <p>{{ user.Titre }}</p>
+                    <p>{{ user.Description }}</p>
+
                 </div>
             </div>
         </div>
@@ -30,16 +30,10 @@
                 <div class="wrapper-img-grid">
                     <img class="card-img-top" src=".../100px180/" alt="Card image cap">
                 </div>
-                <div class="card-body">
-                    <button class="btn btn-primary"><i class="fas fa-pencil-alt"></i></button>
-                </div>
             </div>
             <div class="card cardd card-imgs" style="width: 50rem;">
                 <div class="wrapper-img-grid">
                     <img class="card-img-top" src=".../100px180/" alt="Card image cap">
-                </div>
-                <div class="card-body">
-                    <button class="btn btn-primary"><i class="fas fa-pencil-alt"></i></button>
                 </div>
             </div>
         </div>
@@ -48,16 +42,10 @@
                 <div class="wrapper-img-grid">
                     <img class="card-img-top" src=".../100px180/" alt="Card image cap">
                 </div>
-                <div class="card-body">
-                    <button class="btn btn-primary"><i class="fas fa-pencil-alt"></i></button>
-                </div>
             </div>
             <div class="card cardd card-imgs" style="width: 50rem;">
                 <div class="wrapper-img-grid">
                     <img class="card-img-top" src=".../100px180/" alt="Card image cap">
-                </div>
-                <div class="card-body">
-                    <button class="btn btn-primary"><i class="fas fa-pencil-alt"></i></button>
                 </div>
             </div>
         </div>

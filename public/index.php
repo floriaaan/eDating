@@ -43,6 +43,7 @@ if (class_exists($className)) {
                     <a class="btn btn-primary btn-lg" href="/index.php" role="button">Retour à l\'accueil</a>
                   </p>
                 </div>
+                
                 <hr>';
     var_dump($className);
 }

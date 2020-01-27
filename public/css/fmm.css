@@ -384,7 +384,6 @@
     border-radius: 100000px;
     margin-left: auto;
     margin-right: auto;
-    margin-top: 100px;
     overflow: hidden;
     /*position: absolute;*/
     background-color: #E7E7E7;
@@ -397,7 +396,7 @@
 .card-img-top{
     height: 100%;
     width: auto;
-    margin-top: -5px;
+    margin-top: -0px;
 }
 .wall-white {
     background: url("../doc/wall-white.svg") no-repeat fixed;
