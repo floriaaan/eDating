@@ -11,32 +11,14 @@ class UtilisateurController extends AbstractController
 {
     public function Index(){
         if(isset($_SESSION['USER'])) {
-            return $this->Map();
+            return $this->Me();
         } else {
             header('Location:/Utilisateur/Login');
         }
 
     }
 
-    public function Map(){
-        $user = new Utilisateur();
-        $listUser = $user->SqlGetAll(Bdd::GetInstance());
-        return $this->twig->render(
-            'map.html.twig', [
-                'userList' => $listUser
-        ]);
-    }
 
-    public function Search(){
-        $user = new Utilisateur();
-        $listUser = $user->SqlGetBy(Bdd::GetInstance(),"SELECT * FROM T_UTILISATEUR WHERE UTI_NOM =:Search OR UTI_PRENOM =:Search OR ID_UTILISATEUR =:Search", $_POST['search']);
-
-        return $this->twig->render(
-            'search.html.twig', [
-                'listUser' => $listUser,
-            ]
-        );
-    }
 
     public function Me(){
         if(isset($_SESSION['USER'])) {
@@ -45,7 +27,7 @@ class UtilisateurController extends AbstractController
 
             );
         } else {
-            header('Location:/Utilisateur/Login');
+            header('Location:/Error/NoUser');
         }
 
     }
@@ -79,13 +61,13 @@ class UtilisateurController extends AbstractController
                 ->setDescription($_POST['registerDescription'])
                 ->setSexe($_POST['registerSexe'])
                 ->setVille($_POST['registerVille'])
-                ->setTelephone($_POST['registerNom'])
+                ->setTelephone($_POST['registerTelephone'])
                 ->setCampus($_POST['registerCampus'])
                 ->setSituation($_POST['registerSituation'])
                 ->setAge($_POST['registerAge'])
                 ->setAttirance($_POST['registerAttirance'])
-                ->setLatitude(mt_rand(-90, 90))
-                ->setLongitude(mt_rand(-180, 180));
+                ->setLatitude($_POST['registerLat'])
+                ->setLongitude($_POST['registerLong']);
 
             ;
             /*if(!empty($_FILES['registerImage']['name']) )
