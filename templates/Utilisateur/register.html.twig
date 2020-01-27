@@ -55,11 +55,41 @@
                 </div>
 
 
-                <div class="col-sm-4">
+                <div class="col-sm-4 text-muted">
                     <label for="registerSexe">Sexe</label>
                     <select id="registerSexe" name="registerSexe" class="form-control">
                         <option>Homme</option>
                         <option>Femme</option>
+                        <option>Autre</option>
+                    </select>
+                </div>
+            </div>
+
+            <div class=" mt-4 d-flex justify-content-between">
+                <div class="col-sm-4 text-muted">
+                    <label for="registerSituation">Situation</label>
+                    <select id="registerSituation" name="registerSituation" class="form-control">
+                        <option>Célibataire</option>
+                        <option>En couple</option>
+                        <option>Marié</option>
+                        <option>Autre</option>
+                    </select>
+                </div>
+
+                <div class="col-sm-4 text-muted">
+                    <label for="registerAge">Age</label>
+                    <input type="number" id="registerAge" name="registerAge" min="18" max="100" value="18" class="form-control" aria-describedby="warnAge">
+                    <small id="warnAge" class="form-text text-muted">Personnes majeures uniquement. &#128286;</small>
+                </div>
+
+
+
+                <div class="col-sm-4 text-muted">
+                    <label for="registerAttirance">Attirance</label>
+                    <select id="registerAttirance" name="registerAttirance" class="form-control">
+                        <option>Hétérosexuel</option>
+                        <option>Homosexuel</option>
+                        <option>Bisexuel</option>
                         <option>Autre</option>
                     </select>
                 </div>
@@ -92,22 +122,28 @@
                 </div>
 
                 <div class="col-sm-4 wrap-input100 validate-input">
-                    <input type="text" class="input100" id="registerCP" name="registerCampus">
+                    <input type="text" class="input100" id="registerCampus" name="registerCampus">
                     <span class="focus-input100" data-placeholder="Campus"></span>
                 </div>
             </div>
-            <div class="wrap-input100 validate-input mt-4 mb-5">
-                <input type="text" class="input100" id="registerTelephone" name="registerTelephone">
-                <span class="focus-input100" data-placeholder="Téléphone"></span>
+            <div class="mt-4 mb-3 d-flex justify-content-between">
+                <div class="col-sm-7 wrap-input100 validate-input">
+                    <input type="text" class="input100" id="registerTelephone" name="registerTelephone">
+                    <span class="focus-input100" data-placeholder="Téléphone"></span>
+                </div>
+                <div class="col-sm-4">
+                    <input type="button" class="btn btn-outline-fmm" value="Localisation auto." id="locationAutoBtn"/>
+                </div>
+
+                <span id="locationTicked"></span>
             </div>
+
 
 
 
 
             <div class="container-login100-form-btn mt-5 mb-5">
-                <button class="login100-form-btn">
-                    S'inscrire
-                </button>
+                <input type="submit" class="login100-form-btn disabled" id="registerSubmit" value="S'inscrire">
             </div>
 
             <ul class="login-more">
@@ -132,25 +168,17 @@
                     </a>
                 </li>
             </ul>
-            <select id="registerSituation" name="registerSituation" class="form-control">
-                <option>Célibataire</option>
-                <option>En couple</option>
-                <option>Marié</option>
-                <option>Autre</option>
-            </select>
-            <input type="number" id="registerAge" name="registerAge" min="15" max="100">
-            <select id="registerAttirance" name="registerAttirance" class="form-control">
-                <option>Hétérosexuel</option>
-                <option>Homosexuel</option>
-                <option>Bisexuel</option>
-                <option>Autre</option>
-            </select>
-            <input type="hidden" name="registerLat" value="0"/>
-            <input type="hidden" name="registerLong" value="0"/>
+
+            <input type="hidden" name="registerLat" id="registerLat" value="0"/>
+            <input type="hidden" name="registerLong" id="registerLong" value="0"/>
         </form>
     </div>
 </div>
 
 
 <div id="dropDownSelect1"></div>
+{% endblock %}
+
+{% block js %}
+    <script src="{{ server.document_root }}/js/register.js"></script>
 {% endblock %}

@@ -21,7 +21,7 @@
             {% if userr is defined %}
                 displayMap();
                 {% for user in userList %}
-                    displayUser({{ user.Latitude }}, {{ user.Longitude }}, "{{ user.Prenom }}", "{{ user.Nom }}");
+                    displayUser({{ user.Latitude }}, {{ user.Longitude }}, "{{ user.Prenom }}", "{{ user.Nom }}", {{ user.UID }});
                 {% endfor %}
                 {% endif %}
 

@@ -55,5 +55,19 @@ class HomeController extends AbstractController
         }
     }
 
+    public function Mate($id){
+        if(isset($_SESSION['USER'])) {
+            $user = new Utilisateur();
+            $user = $user ->SqlGet(Bdd::GetInstance(), $id);
+            return $this->twig->render('mate.html.twig', [
+                    'user' => $user
+                ]
+            );
+
+        } else {
+            header('Location:/Error/NoUser');
+        }
+    }
+
 
 }

@@ -28,13 +28,6 @@ class Utilisateur implements \JsonSerializable
     private $Longitude;
 
 
-
-
-
-
-
-
-
     /**
      * @return mixed
      */
@@ -52,6 +45,7 @@ class Utilisateur implements \JsonSerializable
         $this->UID = $UID;
         return $this;
     }
+
     /**
      * @return mixed
      */
@@ -159,8 +153,6 @@ class Utilisateur implements \JsonSerializable
         $this->Sexe = $Sexe;
         return $this;
     }
-
-
 
     /**
      * @return mixed
@@ -411,9 +403,9 @@ class Utilisateur implements \JsonSerializable
     }
 
 
-
-    public function SqlAdd(\PDO $bdd) {
-        try{
+    public function SqlAdd(\PDO $bdd)
+    {
+        try {
             $requete = $bdd->prepare('INSERT INTO T_UTILISATEUR 
                 (UTI_NOM, UTI_PRENOM, UTI_DATE_INSCRIPTION, UTI_EMAIL, UTI_TITRE, UTI_DESCRIPTION, UTI_SEXE, UTI_VILLE, UTI_TEL, UTI_MDP, UTI_CAMPUS, UTI_SITUATION, UTI_ATTIRANCE, UTI_IMAGE_NOM, UTI_IMAGE_LIEN, UTI_POS_LAT, UTI_POS_LONG)
                 VALUES(:Nom, :Prenom, :DateInscription, :Email, :Titre, :Description, :Sexe, :Ville, :Telephone, :Mdp, :Campus, :Situation, :Attirance, :ProfilImgName, :ProfilImgRepo, :Latitude, :Longitude)');
@@ -434,23 +426,24 @@ class Utilisateur implements \JsonSerializable
                 'ProfilImgName' => $this->getCampus(),
                 'ProfilImgRepo' => $this->getCampus(),
                 'Latitude' => $this->getLatitude(),
-                'Longitude' => $this->getLatitude(),
+                'Longitude' => $this->getLongitude(),
 
             ]);
-            return array("result"=>true,"message"=>$bdd->lastInsertId());
-        }catch (\Exception $e){
-            return array("result"=>false,"message"=>$e->getMessage());
+            return array("result" => true, "message" => $bdd->lastInsertId());
+        } catch (\Exception $e) {
+            return array("result" => false, "message" => $e->getMessage());
         }
 
     }
 
-    public function SqlGetAll(\PDO $bdd){
+    public function SqlGetAll(\PDO $bdd)
+    {
         $query = $bdd->prepare('SELECT * FROM T_UTILISATEUR');
         $query->execute();
         $arrayUser = $query->fetchAll();
 
         $listUser = [];
-        foreach ($arrayUser as $userSQL){
+        foreach ($arrayUser as $userSQL) {
             $user = new Utilisateur();
             $user->setUID($userSQL['ID_UTILISATEUR'])
                 ->setMotDePasse($userSQL['UTI_MDP'])
@@ -477,7 +470,8 @@ class Utilisateur implements \JsonSerializable
         return $listUser;
     }
 
-    public function SqlGet(\PDO $bdd, $id){
+    public function SqlGet(\PDO $bdd, $id)
+    {
         $query = $bdd->prepare('SELECT * FROM T_UTILISATEUR WHERE ID_UTILISATEUR =:ID');
         $query->execute(['ID' => $id]);
         $userSQL = $query->fetch();
@@ -506,7 +500,8 @@ class Utilisateur implements \JsonSerializable
         return $user;
     }
 
-    public function SqlGetBy(\PDO $bdd, $SQL, $id){
+    public function SqlGetBy(\PDO $bdd, $SQL, $id)
+    {
         $query = $bdd->prepare($SQL);
         $query->execute([
             'Search' => $id
@@ -514,7 +509,7 @@ class Utilisateur implements \JsonSerializable
         $arrayUser = $query->fetchAll();
 
         $listUser = [];
-        foreach ($arrayUser as $userSQL){
+        foreach ($arrayUser as $userSQL) {
             $user = new Utilisateur();
             $user->setUID($userSQL['ID_UTILISATEUR'])
                 ->setMotDePasse($userSQL['UTI_MDP'])
