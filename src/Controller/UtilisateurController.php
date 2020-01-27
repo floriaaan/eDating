@@ -69,25 +69,24 @@ class UtilisateurController extends AbstractController
                 ->setLatitude($_POST['registerLat'])
                 ->setLongitude($_POST['registerLong']);
 
-            ;
-            /*if(!empty($_FILES['registerImage']['name']) )
+            if(!empty($_FILES['registerImg']['name']) )
             {
                 $tabExt = array('jpg','gif','png','jpeg');    // Extensions autorisees
-                $extension  = pathinfo($_FILES['registerImage']['name'], PATHINFO_EXTENSION);
+                $extension  = pathinfo($_FILES['registerImg']['name'], PATHINFO_EXTENSION);
                 if(in_array(strtolower($extension),$tabExt))
                 {
                     $nomImage = md5(uniqid()) .'.'. $extension;
 
-                    $sqlRepository = $dateNow->format('Y/m');
+                    $sqlRepository = $_POST['registerEmail'];
                     $repository = './uploads/images/'.$_POST['registerEmail'];
                     if(!is_dir($repository)){
                         mkdir($repository,0777,true);
                     }
-                    move_uploaded_file($_FILES['registerImage']['tmp_name'], $repository.'/'.$nomImage);
+                    move_uploaded_file($_FILES['registerImg']['tmp_name'], $repository.'/'.$nomImage);
                 }
             }
-            $user->setImgFileName($nomImage);
-            $user->setImgRepo($sqlRepository);*/
+            $user->setProfilImgName($nomImage);
+            $user->setProfilImgRepo($sqlRepository);
             if($user->SqlAdd(BDD::getInstance())['result']) {
                 $_SESSION['USER'] = $user;
                 header('Location:/Utilisateur/Me');
