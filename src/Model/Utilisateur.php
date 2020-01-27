@@ -407,8 +407,8 @@ class Utilisateur implements \JsonSerializable
     {
         try {
             $requete = $bdd->prepare('INSERT INTO T_UTILISATEUR 
-                (UTI_NOM, UTI_PRENOM, UTI_DATE_INSCRIPTION, UTI_EMAIL, UTI_TITRE, UTI_DESCRIPTION, UTI_SEXE, UTI_VILLE, UTI_TEL, UTI_MDP, UTI_CAMPUS, UTI_SITUATION, UTI_ATTIRANCE, UTI_IMAGE_NOM, UTI_IMAGE_LIEN, UTI_POS_LAT, UTI_POS_LONG)
-                VALUES(:Nom, :Prenom, :DateInscription, :Email, :Titre, :Description, :Sexe, :Ville, :Telephone, :Mdp, :Campus, :Situation, :Attirance, :ProfilImgName, :ProfilImgRepo, :Latitude, :Longitude)');
+                (UTI_NOM, UTI_PRENOM, UTI_DATE_INSCRIPTION, UTI_EMAIL, UTI_TITRE, UTI_DESCRIPTION, UTI_SEXE, UTI_VILLE, UTI_TEL, UTI_MDP, UTI_CAMPUS, UTI_SITUATION, UTI_AGE, UTI_ATTIRANCE, UTI_IMAGE_NOM, UTI_IMAGE_LIEN, UTI_POS_LAT, UTI_POS_LONG)
+                VALUES(:Nom, :Prenom, :DateInscription, :Email, :Titre, :Description, :Sexe, :Ville, :Telephone, :Mdp, :Campus, :Situation, :Age, :Attirance, :ProfilImgName, :ProfilImgRepo, :Latitude, :Longitude)');
             $requete->execute([
                 'Nom' => $this->getNom(),
                 'Prenom' => $this->getPrenom(),
@@ -422,9 +422,10 @@ class Utilisateur implements \JsonSerializable
                 'Mdp' => $this->getMotDePasse(),
                 'Campus' => $this->getCampus(),
                 'Situation' => $this->getSituation(),
+                'Age' => $this->getAge(),
                 'Attirance' => $this->getAttirance(),
-                'ProfilImgName' => $this->getCampus(),
-                'ProfilImgRepo' => $this->getCampus(),
+                'ProfilImgName' => $this->getProfilImgName(),
+                'ProfilImgRepo' => $this->getProfilImgRepo(),
                 'Latitude' => $this->getLatitude(),
                 'Longitude' => $this->getLongitude(),
 

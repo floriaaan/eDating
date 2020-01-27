@@ -1,7 +1,7 @@
 var mymap = L.map('mapid').setView([49.42266, 1.066265], 12);
 
 function displayMap() {
-    L.tileLayer('https://api.tiles.mapbox.com/v4/{id}/{z}/{x}/{y}.png?access_token=pk.eyJ1IjoibWFwYm94IiwiYSI6ImNpejY4NXVycTA2emYycXBndHRqcmZ3N3gifQ.rJcFIG214AriISLbB6B5aw',
+    L.tileLayer('http://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}.png?access_token=pk.eyJ1IjoibWFwYm94IiwiYSI6ImNpejY4NXVycTA2emYycXBndHRqcmZ3N3gifQ.rJcFIG214AriISLbB6B5aw',
         {
             maxZoom: 18,
             attribution: 'Map data &2opy; <a href="https://www.openstreetmap.org/">OpenStreetMap</a> contributors, ' +

@@ -26,4 +26,9 @@ $(document).ready(function() {
 
 
     });
+
+    $('#registerImg').on('change',function(){
+        let fileName = document.getElementById("registerImg").files[0].name;
+        $('#registerImgName').addClass("selected").html(fileName);
+    })
 });
