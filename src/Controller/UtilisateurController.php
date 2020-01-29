@@ -164,10 +164,11 @@ class UtilisateurController extends AbstractController
         }
     }
 
-    public function ChangePassword($id) {
+    public function ChangePassword($id)
+    {
         $user = new Utilisateur();
-        $userEmail = $user->SqlGetEmail(Bdd::GetInstance(),$id);
-        if($_GET && $_POST){
+        $userEmail = $user->SqlGetEmail(Bdd::GetInstance(), $id);
+        if ($_GET && $_POST) {
             var_dump($userEmail);
             $user->SqlResetPassFromMail(Bdd::GetInstance(), $userEmail, $_POST['changePass'], $id);
             header('Location:/');
@@ -175,14 +176,16 @@ class UtilisateurController extends AbstractController
             if ($id == '' && isset($_SESSION['USER'])) {
                 //Depuis le profil
 
-            } elseif (!is_null($id)) {
+            } elseif ($id != '') {
                 //Depuis le mail
-                return $this->twig->render('Utilisateur/confidentials/changepassword.html.twig', [
-                    'userEmail' => $userEmail
-                ]);
-            } else {
-                header('Location:/Error/NoUser');
+                if ($userEmail != null) {
+                    return $this->twig->render('Utilisateur/confidentials/changepassword.html.twig', [
+                        'userEmail' => $userEmail
+                    ]);
+                }
             }
+            header('Location:/Error/NoToken');
+
         }
 
     }
