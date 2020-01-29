@@ -538,7 +538,8 @@ class Utilisateur implements \JsonSerializable
         return $listUser;
     }
 
-    public function SqlResetPass(\PDO $bdd, $email, $pass ) {
+    public function SqlResetPass(\PDO $bdd, $email, $pass)
+    {
         $query = $bdd->prepare('UPDATE T_UTILISATEUR SET UTI_MDP =:param2 WHERE UTI_EMAIL =:param1');
         return $query->execute([
             'param1' => $email,
@@ -546,18 +547,19 @@ class Utilisateur implements \JsonSerializable
         ]);
     }
 
-    public function SqlResetPassFromMail(\PDO $bdd, $email, $pass, $id) {
-        var_dump($email);
+    public function SqlResetPassFromMail(\PDO $bdd, $email, $pass, $id)
+    {
         $query = $bdd->prepare('SELECT UTI_MDP FROM T_UTILISATEUR WHERE UTI_EMAIL=:email');
         $query->execute(['email' => $email]);
         $mdp = $query->fetch();
-        var_dump($mdp);
-        if(password_verify($id, $mdp)){
+        if ($id == $mdp['UTI_MDP']) {
             $query = $bdd->prepare('UPDATE T_UTILISATEUR SET UTI_MDP =:param2 WHERE UTI_EMAIL =:param1');
             return $query->execute([
                 'param1' => $email,
-                'param2' => $pass
+                'param2' => password_hash($pass, PASSWORD_BCRYPT)
             ]);
+
+
         } else {
             return false;
         }
@@ -565,7 +567,8 @@ class Utilisateur implements \JsonSerializable
 
     }
 
-    public function SqlGetEmail(\PDO $bdd, $id) {
+    public function SqlGetEmail(\PDO $bdd, $id)
+    {
         $query = $bdd->prepare('SELECT UTI_EMAIL FROM T_UTILISATEUR WHERE UTI_MDP=:param1');
         $query->execute(['param1' => $id]);
         $userEmail = $query->fetch();

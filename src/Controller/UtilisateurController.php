@@ -169,8 +169,7 @@ class UtilisateurController extends AbstractController
         $user = new Utilisateur();
         $userEmail = $user->SqlGetEmail(Bdd::GetInstance(), $id);
         if ($_GET && $_POST) {
-            var_dump($userEmail);
-            $user->SqlResetPassFromMail(Bdd::GetInstance(), $userEmail, $_POST['changePass'], $id);
+            $user->SqlResetPassFromMail(Bdd::GetInstance(), $_POST['changeEmail'], $_POST['changePass'], $_POST['changeToken']);
             header('Location:/');
         } else {
             if ($id == '' && isset($_SESSION['USER'])) {
@@ -180,7 +179,8 @@ class UtilisateurController extends AbstractController
                 //Depuis le mail
                 if ($userEmail != null) {
                     return $this->twig->render('Utilisateur/confidentials/changepassword.html.twig', [
-                        'userEmail' => $userEmail
+                        'userEmail' => $userEmail,
+                        'token' => $id
                     ]);
                 }
             }
