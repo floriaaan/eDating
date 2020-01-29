@@ -38,8 +38,8 @@ class HomeController extends AbstractController
                 $listUser = $user->SqlGetAll(Bdd::GetInstance());
             } else {
                 $listUser = $user->SqlGetBy(Bdd::GetInstance(),"SELECT * FROM T_UTILISATEUR 
-                WHERE UTI_NOM =:Search OR UTI_PRENOM =:Search OR ID_UTILISATEUR =:Search
-                   OR UTI_SEXE =:Search OR UTI_ATTIRANCE=:Search OR UTI_CAMPUS=:Search", $_POST['search']);
+                WHERE UTI_NOM =:param OR UTI_PRENOM =:param OR ID_UTILISATEUR =:param
+                   OR UTI_SEXE =:param OR UTI_ATTIRANCE=:param OR UTI_CAMPUS=:param", $_POST['search']);
             }
 
 

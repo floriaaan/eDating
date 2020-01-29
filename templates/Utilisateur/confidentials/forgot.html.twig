@@ -1,0 +1,65 @@
+{% extends 'Utilisateur/confidentials/form.html.twig' %}
+
+{% block title %}{{ parent() }} - Mot de passe oublié {% endblock %}
+
+
+
+{% block body %}
+    <div class="container-login100 ">
+        <div class="wrap-login100 p-3">
+            <form class="login100-form validate-form mt-5" method="post"
+                  action="{{ server.document_root }}/Utilisateur/ForgotPass">
+                    <span class="login100-form-avatar">
+						<img src="{{ server.document_root }}/doc/fmm.svg" alt="Find My Mate">
+					</span>
+                <span class="login100-form-title pb-2">
+						Find My Mate
+					</span>
+                <div class="display-4 pb-1 text-center">
+                    Mot de passe oublié ? &#129300;
+                </div>
+
+
+                <div class="wrap-input100 validate-input mt-5 mb-5" data-validate="Email obligatoire">
+                    <input class="input100" type="text" name="forgotEmail" required>
+                    <span class="focus-input100" data-placeholder="Adresse e-mail"></span>
+                </div>
+
+
+
+                <div class="container-login100-form-btn mb-5">
+                    <button class="login100-form-btn">
+                        Envoyer un mail
+                    </button>
+                </div>
+
+                <ul class="login-more">
+                    <li class="mb-2">
+                            <span class="txt1">
+								J'ai déjà un compte,
+							</span>
+
+                        <a href="{{ server.document_root }}/Utilisateur/Login" class="txt2">
+                            je me connecte!
+                        </a>
+
+
+                    </li>
+
+                    <li>
+							<span class="txt1">
+								Je n'ai pas de compte,
+							</span>
+
+                        <a href="{{ server.document_root }}/Utilisateur/Register" class="txt2">
+                            je m'inscris !
+                        </a>
+                    </li>
+                </ul>
+            </form>
+        </div>
+    </div>
+
+
+    <div id="dropDownSelect1"></div>
+{% endblock %}
