@@ -4,25 +4,15 @@
 
 
 {% block body %}
-<div class="wall-white">
-    <div class="nav-flex">
-        <a href="" class="back"><img class="svg-back"src="/doc/back.png"></a>
-        <a href="" class="btn btn-primary">Modifier</a>
-    </div>
-    <div class="card item-card" style="width: 30rem;">
-     <div class="wrapper-img-profile">
-            <img class="card-img-top img" src="/doc/profile.jpg" alt="Card image cap">
-     </div>
-    </div>
-    <div class="card item-card" style="width: 30rem;">
-        <div class="card-body">
-            <h5 class="card-title nam">{{ userr.Prenom }} {{ userr.Nom }}</h5>
-           
+    <div class="wall-white">
+        <div class="nav-flex d-flex justify-content-between pt-2 px-2">
+            <a href="/Home/" class="back"><img class="svg-back" src="/doc/back.png"></a>
+            <a href="/Utilisateur/Settings/" class="btn btn-primary"><i class="fas fa-pencil-alt"></i></a>
         </div>
-        <div class="card item-card" style="width: 30rem;">
-            <div class="card-body">
-                <p class="card-title">{{ userr.Titre }}</p>
-                
+        <div class="card cardd item-card" style="width: 30rem;">
+            <div class="wrapper-img-profile">
+                <img class="card-img-top-fmm img"
+                     src="/uploads/images/{{ userr.ProfilImgRepo }}/{{ userr.ProfilImgName }}" alt="Card image cap">
             </div>
         </div>
     </div>
@@ -32,35 +22,40 @@
                 <img class="card-img-top" src="/doc/wall-test.jpg" alt="Card image cap">
             </div>
             <div class="card-body">
-                
+                <h5>{{ userr.Prenom }} {{ userr.Nom }}</h5>
+                <h6 class="text-muted">{{ userr.Age }} ans</h6>
             </div>
-        </div>
-       <div class="card card-imgs" style="width: 50rem;">
-            <div class="wrapper-img-grid">
-                <img class="card-img-top" src=".../100px180/" alt="Card image cap">
-            </div>
+            <hr>
             <div class="card-body">
-                
+                <p>{{ userr.Titre }}</p>
+                <p>{{ userr.Description }}</p>
+
             </div>
         </div>
     </div>
     <div class="wrapper-imgs-flex">
-        <div class="card card-imgs" style="width: 50rem;">
+        <div class="card cardd card-imgs" style="width: 50rem;">
             <div class="wrapper-img-grid">
                 <img class="card-img-top" src=".../100px180/" alt="Card image cap">
-            </div>
-            <div class="card-body">
-               
             </div>
         </div>
-       <div class="card card-imgs" style="width: 50rem;">
+        <div class="card cardd card-imgs" style="width: 50rem;">
             <div class="wrapper-img-grid">
                 <img class="card-img-top" src=".../100px180/" alt="Card image cap">
-            </div>
-            <div class="card-body">
-                
             </div>
         </div>
     </div>
-</div>
+    <div class="wrapper-imgs-flex">
+        <div class="card cardd card-imgs" style="width: 50rem;">
+            <div class="wrapper-img-grid">
+                <img class="card-img-top" src=".../100px180/" alt="Card image cap">
+            </div>
+        </div>
+        <div class="card cardd card-imgs" style="width: 50rem;">
+            <div class="wrapper-img-grid">
+                <img class="card-img-top" src=".../100px180/" alt="Card image cap">
+            </div>
+        </div>
+    </div>
+    </div>
 {% endblock %}

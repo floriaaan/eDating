@@ -7,7 +7,7 @@ class Bdd {
     public static function InitInstance(){
         $hostname="mysql-floriaaan.alwaysdata.net";
         $username="floriaaan_fym";
-        $password="6Ug@G59W5WfjSci";
+        $password=file_get_contents('../db_pw.txt');
         $dbname="floriaaan_fym";
 
         try

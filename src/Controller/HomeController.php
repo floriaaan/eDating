@@ -34,12 +34,19 @@ class HomeController extends AbstractController
     public function Search(){
         if(isset($_SESSION['USER'])) {
             $user = new Utilisateur();
-            $listUser = $user->SqlGetBy(Bdd::GetInstance(),"SELECT * FROM T_UTILISATEUR WHERE UTI_NOM =:Search OR UTI_PRENOM =:Search OR ID_UTILISATEUR =:Search", $_POST['search']);
+            if($_POST['search'] == "*" || $_POST['search'] == "Tous") {
+                $listUser = $user->SqlGetAll(Bdd::GetInstance());
+            } else {
+                $listUser = $user->SqlGetBy(Bdd::GetInstance(),"SELECT * FROM T_UTILISATEUR 
+                WHERE UTI_NOM =:param OR UTI_PRENOM =:param OR ID_UTILISATEUR =:param
+                   OR UTI_SEXE =:param OR UTI_ATTIRANCE=:param OR UTI_CAMPUS=:param", $_POST['search']);
+            }
 
-            if ($listUser['isEmpty'] == false) {
+
+            if ($listUser != null) {
                 return $this->twig->render(
                     'search.html.twig', [
-                        'listUser' => $listUser['list'],
+                        'listUser' => $listUser,
                     ]
                 );
             } else {

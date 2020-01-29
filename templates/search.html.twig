@@ -2,26 +2,39 @@
 {% block title %}{{ parent() }} - Recherche{% endblock %}
 
 {% block body %}
+    <div class="container-fluid p-3 mx-2 wall-white">
+        <div class="card-columns">
+            {% for user in listUser %}
 
-    {% for user in listUser %}
-    <div class="card" style="width: 18rem;">
-        <img class="card-img-top" src="/uploads/images/{{user.ProfilImgRepo}}/{{user.ProfilImgName}}" alt="{{ user.Prenom }}">
-        <div class="card-body">
-            <h5 class="card-title">{{ user.Prenom }} {{ user.Nom }} - {{ user.Age }} ans</h5>
-            <p class="card-text">{{ user.Titre }}</p>
-        </div>
-        <ul class="list-group">
-            <li class="list-group-item">{{ user.Campus }}</li>
-            <li class="list-group-item">{{ user.Situation }}</li>
-            <li class="list-group-item">{{ user.Attirance }}</li>
-        </ul>
-        <div class="card-body">
+                <div class="card mx-1">
+                    <img class="img-fluid" src="/uploads/images/{{ user.ProfilImgRepo }}/{{ user.ProfilImgName }}"
+                         alt="{{ user.Prenom }}">
+                    <div class="card-body">
+                        <h5 class="card-title">{{ user.Prenom }} {{ user.Nom }} - {{ user.Age }} ans</h5>
+                        <p class="card-text">{{ user.Titre }}</p>
+                        <p class="card-text"><small class="text-muted">Inscrit au Campus de {{ user.Campus }}
+                                <br> {{ user.Situation }} - est {{ user.Attirance }}</small></p>
 
-            <a href="/Home/Mate/{{ user.UID }}" class="card-link btn btn-outline-fmm">Voir son profil</a>
+                        <hr>
+                        <div class="d-flex justify-content-start">
+                            <a href="/Home/Mate/{{ user.UID }}" class="card-link btn btn-outline-fmm mt-2">Voir son
+                                profil</a>
+                            <a href="/Utilisateur/Like/{{ user.UID }}" class="card-link btn btn-outline-danger mt-2">
+                                <i class="fas fa-heart"></i> Liker</a>
+                            <a href="/Messages/{{ user.UID }}" class="card-link btn btn-outline-primary mt-2">
+                                <i class="fas fa-comment-dots"></i> Messages</a>
+
+                        </div>
+                    </div>
+                    <div class="card-footer">
+                        <p class="card-text"><small class="text-muted">Inscrit
+                                le {{ user.DateInscription | date("d.m.y") }}</small></p>
+                    </div>
+                </div>
+
+            {% endfor %}
         </div>
     </div>
-    {% endfor %}
-
 
 
 {% endblock %}

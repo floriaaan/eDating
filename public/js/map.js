@@ -32,7 +32,7 @@ function displayUser(pos_x,pos_y, prenom, nom, id) {
         .addTo(mymap);*/
 
     L.circle([pos_x + (Math.random() / 666), pos_y + (Math.random() / 666)],{})
-        .setRadius(200)
+        .setRadius(100)
         .bindPopup('<b>'+ prenom + ' ' + nom + '</b><br>' +
             '<a href="/Home/Mate/'+ id +'" class="btn btn-outline-fmm mt-2">Voir son profil</a>')
         .addTo(mymap);

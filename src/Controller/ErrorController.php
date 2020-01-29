@@ -23,4 +23,10 @@ class ErrorController extends AbstractController
             'Error/nouser.html.twig'
         );
     }
+
+    public function NoToken() {
+        return $this->twig->render(
+            'Error/notoken.html.twig'
+        );
+    }
 }

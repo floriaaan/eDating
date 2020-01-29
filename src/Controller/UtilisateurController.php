@@ -6,11 +6,15 @@ namespace src\Controller;
 use src\Model\Utilisateur;
 use src\Model\Bdd;
 use DateTime;
+use Swift_Mailer;
+use Swift_Message;
+use Swift_SmtpTransport;
 
 class UtilisateurController extends AbstractController
 {
-    public function Index(){
-        if(isset($_SESSION['USER'])) {
+    public function Index()
+    {
+        if (isset($_SESSION['USER'])) {
             return $this->Me();
         } else {
             header('Location:/Utilisateur/Login');
@@ -18,10 +22,9 @@ class UtilisateurController extends AbstractController
 
     }
 
-
-
-    public function Me(){
-        if(isset($_SESSION['USER'])) {
+    public function Me()
+    {
+        if (isset($_SESSION['USER'])) {
             return $this->twig->render(
                 'Utilisateur/profile.html.twig'
 
@@ -35,10 +38,7 @@ class UtilisateurController extends AbstractController
     public function message(){
         if(isset($_SESSION['USER'])) {
             return $this->twig->render(
-                'messages.html.twig', [
-                    'user' => $_SESSION['USER'],
-                    'session' => $_SESSION
-                ]
+                'messages.html.twig'
             );
         } else {
             header('Location:/Error');
@@ -69,40 +69,39 @@ class UtilisateurController extends AbstractController
                 ->setLatitude($_POST['registerLat'])
                 ->setLongitude($_POST['registerLong']);
 
-            if(!empty($_FILES['registerImg']['name']) )
-            {
-                $tabExt = array('jpg','gif','png','jpeg');    // Extensions autorisees
-                $extension  = pathinfo($_FILES['registerImg']['name'], PATHINFO_EXTENSION);
-                if(in_array(strtolower($extension),$tabExt))
-                {
-                    $nomImage = md5(uniqid()) .'.'. $extension;
+            if (!empty($_FILES['registerImg']['name'])) {
+                $tabExt = array('jpg', 'gif', 'png', 'jpeg');    // Extensions autorisees
+                $extension = pathinfo($_FILES['registerImg']['name'], PATHINFO_EXTENSION);
+                if (in_array(strtolower($extension), $tabExt)) {
+                    $nomImage = md5(uniqid()) . '.' . $extension;
 
                     $sqlRepository = $_POST['registerEmail'];
-                    $repository = './uploads/images/'.$_POST['registerEmail'];
-                    if(!is_dir($repository)){
-                        mkdir($repository,0777,true);
+                    $repository = './uploads/images/' . $_POST['registerEmail'];
+                    if (!is_dir($repository)) {
+                        mkdir($repository, 0777, true);
                     }
-                    move_uploaded_file($_FILES['registerImg']['tmp_name'], $repository.'/'.$nomImage);
+                    move_uploaded_file($_FILES['registerImg']['tmp_name'], $repository . '/' . $nomImage);
                 }
             }
             $user->setProfilImgName($nomImage);
             $user->setProfilImgRepo($sqlRepository);
-            if($user->SqlAdd(BDD::getInstance())['result']) {
+            if ($user->SqlAdd(BDD::getInstance())['result']) {
                 $_SESSION['USER'] = $user;
                 header('Location:/Utilisateur/Me');
             } else {
                 header('Location:/Error/');
             }
 
-        }else{
+        } else {
 
-            return $this->twig->render('Utilisateur/register.html.twig');
+            return $this->twig->render('Utilisateur/confidentials/register.html.twig');
         }
     }
 
-    public function Login(){
+    public function Login()
+    {
 
-        if($_POST) {
+        if ($_POST) {
             $bdd = Bdd::GetInstance();
             $password = $_POST['loginPassword'];
 
@@ -112,7 +111,7 @@ class UtilisateurController extends AbstractController
             $returnSQL = $requete->fetch();
 
 
-            if(password_verify($password, $returnSQL['UTI_MDP'])) {
+            if (password_verify($password, $returnSQL['UTI_MDP'])) {
 
 
                 $user = new Utilisateur();
@@ -127,14 +126,77 @@ class UtilisateurController extends AbstractController
             }
         } else {
 
-            return $this->twig->render('Utilisateur/login.html.twig');
+            return $this->twig->render('Utilisateur/confidentials/login.html.twig');
         }
     }
 
-    public function Disconnect(){
+    public function Disconnect()
+    {
         session_unset();
         header('Location:/Utilisateur/Login');
     }
 
+    public function ForgotPass()
+    {
+
+        if ($_POST) {
+            $user = new Utilisateur();
+
+
+            $chars = '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ!_-.?';
+            $passwd = '';
+            for ($i = 0; $i < 24; $i++) {
+                $passwd .= $chars[rand(0, strlen($chars) - 1)];
+            }
+            $passwd = md5($passwd);
+
+            /*$transport = (new Swift_SmtpTransport('smtp-floriaaan.alwaysdata.net', 25))
+                ->setUsername('florian.leroux@viacesi.fr')
+                ->setPassword(file_get_contents('../smtp_pw.txt'));
+
+
+            $mailer = new Swift_Mailer($transport);
+
+            $message = (new Swift_Message('Réinitialisation de mot de passe'))
+                ->setFrom(['reinitialisation@findmymate.fr' => 'Find My Mate'])
+                ->setTo([$_POST['forgotEmail']])
+                ->setBody("Votre mot de passe est : " . $passwd);
+
+
+            $result = $mailer->send($message);*/
+            file_put_contents('../md5_pass.txt', 'http://www.edating.local/Utilisateur/ChangePassword/' . $passwd);
+            $user->SqlResetPass(Bdd::GetInstance(), $_POST['forgotEmail'], $passwd);
+
+            return $this->twig->render('Utilisateur/confidentials/forgotsend.html.twig');
+        } else {
+            return $this->twig->render('Utilisateur/confidentials/forgot.html.twig');
+        }
+    }
+
+    public function ChangePassword($id)
+    {
+        $user = new Utilisateur();
+        $userEmail = $user->SqlGetEmail(Bdd::GetInstance(), $id);
+        if ($_GET && $_POST) {
+            $user->SqlResetPassFromMail(Bdd::GetInstance(), $_POST['changeEmail'], $_POST['changePass'], $_POST['changeToken']);
+            header('Location:/');
+        } else {
+            if ($id == '' && isset($_SESSION['USER'])) {
+                //Depuis le profil
+
+            } elseif ($id != '') {
+                //Depuis le mail
+                if ($userEmail != null) {
+                    return $this->twig->render('Utilisateur/confidentials/changepassword.html.twig', [
+                        'userEmail' => $userEmail,
+                        'token' => $id
+                    ]);
+                }
+            }
+            header('Location:/Error/NoToken');
+
+        }
+
+    }
 
 }

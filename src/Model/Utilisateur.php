@@ -501,11 +501,11 @@ class Utilisateur implements \JsonSerializable
         return $user;
     }
 
-    public function SqlGetBy(\PDO $bdd, $SQL, $id)
+    public function SqlGetBy(\PDO $bdd, $SQL, $param)
     {
         $query = $bdd->prepare($SQL);
         $query->execute([
-            'Search' => $id
+            'param' => $param
         ]);
         $arrayUser = $query->fetchAll();
 
@@ -534,7 +534,44 @@ class Utilisateur implements \JsonSerializable
 
             $listUser[] = $user;
         }
-        $listUser == null ? $isEmpty = true : $isEmpty = false;
-        return $listUser = array("list" => $listUser, "isEmpty" => $isEmpty);
+
+        return $listUser;
+    }
+
+    public function SqlResetPass(\PDO $bdd, $email, $pass)
+    {
+        $query = $bdd->prepare('UPDATE T_UTILISATEUR SET UTI_MDP =:param2 WHERE UTI_EMAIL =:param1');
+        return $query->execute([
+            'param1' => $email,
+            'param2' => $pass
+        ]);
+    }
+
+    public function SqlResetPassFromMail(\PDO $bdd, $email, $pass, $id)
+    {
+        $query = $bdd->prepare('SELECT UTI_MDP FROM T_UTILISATEUR WHERE UTI_EMAIL=:email');
+        $query->execute(['email' => $email]);
+        $mdp = $query->fetch();
+        if ($id == $mdp['UTI_MDP']) {
+            $query = $bdd->prepare('UPDATE T_UTILISATEUR SET UTI_MDP =:param2 WHERE UTI_EMAIL =:param1');
+            return $query->execute([
+                'param1' => $email,
+                'param2' => password_hash($pass, PASSWORD_BCRYPT)
+            ]);
+
+
+        } else {
+            return false;
+        }
+
+
+    }
+
+    public function SqlGetEmail(\PDO $bdd, $id)
+    {
+        $query = $bdd->prepare('SELECT UTI_EMAIL FROM T_UTILISATEUR WHERE UTI_MDP=:param1');
+        $query->execute(['param1' => $id]);
+        $userEmail = $query->fetch();
+        return $userEmail['UTI_EMAIL'];
     }
 }

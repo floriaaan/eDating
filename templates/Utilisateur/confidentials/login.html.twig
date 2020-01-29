@@ -1,4 +1,4 @@
-{% extends 'Utilisateur/form.html.twig' %}
+{% extends 'Utilisateur/confidentials/form.html.twig' %}
 
 {% block title %}{{ parent() }} - Se connecter {% endblock %}
 
@@ -20,12 +20,12 @@
 
 
                     <div class="wrap-input100 validate-input mt-5" data-validate = "Email obligatoire">
-                        <input class="input100" type="text" name="loginEmail">
+                        <input class="input100" type="text" name="loginEmail" required>
                         <span class="focus-input100" data-placeholder="Adresse e-mail"></span>
                     </div>
 
                     <div class="wrap-input100 validate-input mt-4 mb-5" data-validate="Mot de passe obligatoire">
-                        <input class="input100" type="password" name="loginPassword">
+                        <input class="input100" type="password" name="loginPassword" required>
                         <span class="focus-input100" data-placeholder="Mot de passe"></span>
                     </div>
 
@@ -37,7 +37,7 @@
 
                     <ul class="login-more">
                         <li class="mb-2">
-                            <a href="#" class="txt2">
+                            <a href="{{ server.document_root }}/Utilisateur/ForgotPass" class="txt2">
                                 Identifiants
                             </a>
 							<span class="txt1">

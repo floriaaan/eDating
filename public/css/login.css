@@ -203,9 +203,20 @@ iframe {
     margin: 0 auto;
 }
 
+.login100-form-logo {
+    display: block;
+    overflow: hidden;
+    margin: 0 auto;
+}
+
 .login100-form-avatar img {
     width: 100%;
 }
+
+.login100-form-logo img {
+    width: 100%;
+}
+
 
 /*------------------------------------------------------------------
 [ Input ]*/
