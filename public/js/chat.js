@@ -1,5 +1,6 @@
-$(document).ready(function(){
-    $('#action_menu_btn').click(function(){
-        $('.action_menu').toggle();
-    });
-        });
+$( '.friend-drawer--onhover' ).on( 'click',  function() {
+  
+    $( '.chat-bubble' ).hide('slow').show('slow');
+    
+  });
+  
