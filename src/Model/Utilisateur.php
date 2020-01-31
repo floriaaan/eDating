@@ -95,7 +95,7 @@ class Utilisateur implements \JsonSerializable
                 ->setProfilImgRepo($userSQL['UTI_IMAGE_LIEN'])
                 ->setLatitude($userSQL['UTI_POS_LAT'])
                 ->setLongitude($userSQL['UTI_POS_LONG'])
-                ->setPhotos((new Photos)->SqlGetAll($bdd, $this->getUID()));
+                ->setPhotos((new Photos)->SqlGetAll($bdd, $userSQL['ID_UTILISATEUR']));
 
             $listUser[] = $user;
         }
@@ -127,9 +127,8 @@ class Utilisateur implements \JsonSerializable
             ->setProfilImgName($userSQL['UTI_IMAGE_NOM'])
             ->setProfilImgRepo($userSQL['UTI_IMAGE_LIEN'])
             ->setLatitude($userSQL['UTI_POS_LAT'])
-            ->setLongitude($userSQL['UTI_POS_LONG'])
-            ->setPhotos((new Photos)->SqlGetAll($bdd, $this->getUID()));
-
+            ->setLongitude($userSQL['UTI_POS_LONG']);
+        $user->setPhotos((new Photos)->SqlGetAll($bdd, $userSQL['ID_UTILISATEUR']));
         return $user;
     }
 
@@ -163,7 +162,7 @@ class Utilisateur implements \JsonSerializable
                 ->setProfilImgRepo($userSQL['UTI_IMAGE_LIEN'])
                 ->setLatitude($userSQL['UTI_POS_LAT'])
                 ->setLongitude($userSQL['UTI_POS_LONG'])
-                ->setPhotos((new Photos)->SqlGetAll($bdd, $this->getUID()));
+                ->setPhotos((new Photos)->SqlGetAll($bdd, $userSQL['ID_UTILISATEUR']));
 
             $listUser[] = $user;
         }
