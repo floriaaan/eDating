@@ -29,15 +29,17 @@
         </div>
     </div>
 
-    {% if userr.Photos is not null %}
+
+    {% if userr.Photos is not null and userr.Photos is not empty %}
         {% for photo in userr.Photos %}
 
             {% if loop.index is divisible by(2) %}
-            <div class="wrapper-imgs-flex">
+                <div class="wrapper-imgs-flex">
             {% endif %}
             <div class="card cardd card-imgs" style="width: 50rem;">
                 <div class="wrapper-img-grid">
-                    <img class="card-img-top" src="/uploads/images/{{ photo.PhotoDossier }}/{{ photo.PhotoName }}" alt="Photo de {{ userr.Prenom }}">
+                    <img class="card-img-top" src="/uploads/images/{{ photo.PhotoDossier }}/{{ photo.PhotoName }}"
+                         alt="Photo de {{ userr.Prenom }}">
                 </div>
             </div>
             {% if loop.index is divisible by(2) %}
