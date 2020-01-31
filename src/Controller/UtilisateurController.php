@@ -105,7 +105,7 @@ class UtilisateurController extends AbstractController
             $bdd = Bdd::GetInstance();
             $password = $_POST['loginPassword'];
 
-            $requete = $bdd->prepare("SELECT ID_UTILISATEUR, UTI_MDP FROM T_UTILISATEUR WHERE UTI_EMAIL =:Email");
+            $requete = $bdd->prepare("SELECT ID_UTILISATEUR, UTI_MDP FROM UTILISATEUR WHERE UTI_EMAIL =:Email");
             $requete->execute([
                 'Email' => $_POST['loginEmail']]);
             $returnSQL = $requete->fetch();

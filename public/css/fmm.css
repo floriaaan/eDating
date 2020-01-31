@@ -449,6 +449,23 @@
     border-color: #730EBD;
 }
 
+.btn-fmm {
+    color: #fff;
+    background-color: #730EBD;
+    border-color: #730EBD;
+}
+
+.btn-fmm:hover {
+    color: #fff;
+    background-color: #8325bd;
+    border-color: #6706bd;
+}
+
+.btn-fmm:focus, .btn-primary.focus {
+    box-shadow: 0 0 0 0.2rem rgba(115, 14, 189, 0.5);
+}
+
+
 @media (max-width: 576px) {
     .body {
         background: url("../doc/wall-login-small.svg") no-repeat fixed;

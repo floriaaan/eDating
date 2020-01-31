@@ -1,4 +1,13 @@
 <?php
+session_start();
+// on vérifie toujours qu'il s'agit d'un membre qui est connecté
+if (!isset($_SESSION['login'])) {
+	// si ce n'est pas le cas, on le redirige vers l'accueil
+	header ('Location: index.php');
+	exit();
+}
+
+
 
 
 class Messages
@@ -39,3 +48,11 @@ class Messages
         ]);
     }
 }
+
+session_start();
+$bdd = new PDO('mysql:host=127.0.0.1;dbname=espace_membre', 'root', '');
+if(isset($_SESSION['id']) AND !empty($_SESSION['id'])) {
+$msg = $bdd->prepare('SELECT * FROM messages WHERE id_destinataire = ? ORDER BY id DESC');
+$msg->execute(array($_SESSION['id']));
+$msg_nbr = $msg->rowCount();
+?>

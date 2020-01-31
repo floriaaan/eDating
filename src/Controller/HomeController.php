@@ -37,7 +37,7 @@ class HomeController extends AbstractController
             if($_POST['search'] == "*" || $_POST['search'] == "Tous") {
                 $listUser = $user->SqlGetAll(Bdd::GetInstance());
             } else {
-                $listUser = $user->SqlGetBy(Bdd::GetInstance(),"SELECT * FROM T_UTILISATEUR 
+                $listUser = $user->SqlGetBy(Bdd::GetInstance(),"SELECT * FROM UTILISATEUR 
                 WHERE UTI_NOM =:param OR UTI_PRENOM =:param OR ID_UTILISATEUR =:param
                    OR UTI_SEXE =:param OR UTI_ATTIRANCE=:param OR UTI_CAMPUS=:param", $_POST['search']);
             }

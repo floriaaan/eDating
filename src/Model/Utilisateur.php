@@ -27,6 +27,259 @@ class Utilisateur implements \JsonSerializable
     private $Latitude;
     private $Longitude;
 
+    private $Photos;
+    private $Affinites;
+    private $Likes;
+
+
+    public function SqlAdd(\PDO $bdd)
+    {
+        try {
+            $requete = $bdd->prepare('INSERT INTO UTILISATEUR 
+                (UTI_NOM, UTI_PRENOM, UTI_DATE_INSCRIPTION, UTI_EMAIL, UTI_TITRE, UTI_DESCRIPTION, UTI_SEXE, UTI_VILLE, UTI_TEL, UTI_MDP, UTI_CAMPUS, UTI_SITUATION, UTI_AGE, UTI_ATTIRANCE, UTI_IMAGE_NOM, UTI_IMAGE_LIEN, UTI_POS_LAT, UTI_POS_LONG)
+                VALUES(:Nom, :Prenom, :DateInscription, :Email, :Titre, :Description, :Sexe, :Ville, :Telephone, :Mdp, :Campus, :Situation, :Age, :Attirance, :ProfilImgName, :ProfilImgRepo, :Latitude, :Longitude)');
+            $requete->execute([
+                'Nom' => $this->getNom(),
+                'Prenom' => $this->getPrenom(),
+                'DateInscription' => $this->getDateInscription(),
+                'Email' => $this->getEmail(),
+                'Titre' => $this->getTitre(),
+                'Description' => $this->getDescription(),
+                'Sexe' => $this->getSexe(),
+                'Ville' => $this->getVille(),
+                'Telephone' => $this->getTelephone(),
+                'Mdp' => $this->getMotDePasse(),
+                'Campus' => $this->getCampus(),
+                'Situation' => $this->getSituation(),
+                'Age' => $this->getAge(),
+                'Attirance' => $this->getAttirance(),
+                'ProfilImgName' => $this->getProfilImgName(),
+                'ProfilImgRepo' => $this->getProfilImgRepo(),
+                'Latitude' => $this->getLatitude(),
+                'Longitude' => $this->getLongitude(),
+
+            ]);
+            $return = array("result" => true, "message" => $bdd->lastInsertId());
+        } catch (\Exception $e) {
+            $return = array("result" => false, "message" => $e->getMessage());
+        }
+        return $return;
+
+    }
+
+    public function SqlGetAll(\PDO $bdd)
+    {
+        $query = $bdd->prepare('SELECT * FROM UTILISATEUR');
+        $query->execute();
+        $arrayUser = $query->fetchAll();
+
+        $listUser = [];
+        foreach ($arrayUser as $userSQL) {
+            $user = new Utilisateur();
+            $user->setUID($userSQL['ID_UTILISATEUR'])
+                ->setMotDePasse($userSQL['UTI_MDP'])
+                ->setNom($userSQL['UTI_NOM'])
+                ->setPrenom($userSQL['UTI_PRENOM'])
+                ->setDateInscription($userSQL['UTI_DATE_INSCRIPTION'])
+                ->setEmail($userSQL['UTI_EMAIL'])
+                ->setTitre($userSQL['UTI_TITRE'])
+                ->setDescription($userSQL['UTI_DESCRIPTION'])
+                ->setSexe($userSQL['UTI_SEXE'])
+                ->setVille($userSQL['UTI_VILLE'])
+                ->setTelephone($userSQL['UTI_TEL'])
+                ->setCampus($userSQL['UTI_CAMPUS'])
+                ->setSituation($userSQL['UTI_SITUATION'])
+                ->setAge($userSQL['UTI_AGE'])
+                ->setAttirance($userSQL['UTI_ATTIRANCE'])
+                ->setProfilImgName($userSQL['UTI_IMAGE_NOM'])
+                ->setProfilImgRepo($userSQL['UTI_IMAGE_LIEN'])
+                ->setLatitude($userSQL['UTI_POS_LAT'])
+                ->setLongitude($userSQL['UTI_POS_LONG'])
+                ->setPhotos((new Photos)->SqlGetAll($bdd, $this->getUID()));
+
+            $listUser[] = $user;
+        }
+        return $listUser;
+    }
+
+    public function SqlGet(\PDO $bdd, $id)
+    {
+        $query = $bdd->prepare('SELECT * FROM UTILISATEUR WHERE ID_UTILISATEUR =:ID');
+        $query->execute(['ID' => $id]);
+        $userSQL = $query->fetch();
+
+        $user = new Utilisateur();
+        $user->setUID($userSQL['ID_UTILISATEUR'])
+            ->setMotDePasse($userSQL['UTI_MDP'])
+            ->setNom($userSQL['UTI_NOM'])
+            ->setPrenom($userSQL['UTI_PRENOM'])
+            ->setDateInscription($userSQL['UTI_DATE_INSCRIPTION'])
+            ->setEmail($userSQL['UTI_EMAIL'])
+            ->setTitre($userSQL['UTI_TITRE'])
+            ->setDescription($userSQL['UTI_DESCRIPTION'])
+            ->setSexe($userSQL['UTI_SEXE'])
+            ->setVille($userSQL['UTI_VILLE'])
+            ->setTelephone($userSQL['UTI_TEL'])
+            ->setCampus($userSQL['UTI_CAMPUS'])
+            ->setSituation($userSQL['UTI_SITUATION'])
+            ->setAge($userSQL['UTI_AGE'])
+            ->setAttirance($userSQL['UTI_ATTIRANCE'])
+            ->setProfilImgName($userSQL['UTI_IMAGE_NOM'])
+            ->setProfilImgRepo($userSQL['UTI_IMAGE_LIEN'])
+            ->setLatitude($userSQL['UTI_POS_LAT'])
+            ->setLongitude($userSQL['UTI_POS_LONG'])
+            ->setPhotos((new Photos)->SqlGetAll($bdd, $this->getUID()));
+
+        return $user;
+    }
+
+    public function SqlGetBy(\PDO $bdd, $SQL, $param)
+    {
+        $query = $bdd->prepare($SQL);
+        $query->execute([
+            'param' => $param
+        ]);
+        $arrayUser = $query->fetchAll();
+
+        $listUser = [];
+        foreach ($arrayUser as $userSQL) {
+            $user = new Utilisateur();
+            $user->setUID($userSQL['ID_UTILISATEUR'])
+                ->setMotDePasse($userSQL['UTI_MDP'])
+                ->setNom($userSQL['UTI_NOM'])
+                ->setPrenom($userSQL['UTI_PRENOM'])
+                ->setDateInscription($userSQL['UTI_DATE_INSCRIPTION'])
+                ->setEmail($userSQL['UTI_EMAIL'])
+                ->setTitre($userSQL['UTI_TITRE'])
+                ->setDescription($userSQL['UTI_DESCRIPTION'])
+                ->setSexe($userSQL['UTI_SEXE'])
+                ->setVille($userSQL['UTI_VILLE'])
+                ->setTelephone($userSQL['UTI_TEL'])
+                ->setCampus($userSQL['UTI_CAMPUS'])
+                ->setSituation($userSQL['UTI_SITUATION'])
+                ->setAge($userSQL['UTI_AGE'])
+                ->setAttirance($userSQL['UTI_ATTIRANCE'])
+                ->setProfilImgName($userSQL['UTI_IMAGE_NOM'])
+                ->setProfilImgRepo($userSQL['UTI_IMAGE_LIEN'])
+                ->setLatitude($userSQL['UTI_POS_LAT'])
+                ->setLongitude($userSQL['UTI_POS_LONG'])
+                ->setPhotos((new Photos)->SqlGetAll($bdd, $this->getUID()));
+
+            $listUser[] = $user;
+        }
+
+        return $listUser;
+    }
+
+    public function SqlResetPass(\PDO $bdd, $email, $pass)
+    {
+        $query = $bdd->prepare('UPDATE UTILISATEUR SET UTI_MDP =:param2 WHERE UTI_EMAIL =:param1');
+        return $query->execute([
+            'param1' => $email,
+            'param2' => $pass
+        ]);
+    }
+
+    public function SqlResetPassFromMail(\PDO $bdd, $email, $pass, $id)
+    {
+        $query = $bdd->prepare('SELECT UTI_MDP FROM UTILISATEUR WHERE UTI_EMAIL=:email');
+        $query->execute(['email' => $email]);
+        $mdp = $query->fetch();
+        if ($id == $mdp['UTI_MDP']) {
+            $query = $bdd->prepare('UPDATE UTILISATEUR SET UTI_MDP =:param2 WHERE UTI_EMAIL =:param1');
+            return $query->execute([
+                'param1' => $email,
+                'param2' => password_hash($pass, PASSWORD_BCRYPT)
+            ]);
+
+
+        } else {
+            return false;
+        }
+
+
+    }
+
+    public function SqlGetEmail(\PDO $bdd, $id)
+    {
+        $query = $bdd->prepare('SELECT UTI_EMAIL FROM UTILISATEUR WHERE UTI_MDP=:param1');
+        $query->execute(['param1' => $id]);
+        $userEmail = $query->fetch();
+        return $userEmail['UTI_EMAIL'];
+    }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    /**
+     * @return mixed
+     */
+    public function getLikes()
+    {
+        return $this->Likes;
+    }
+
+    /**
+     * @param mixed $Likes
+     * @return Utilisateur
+     */
+    public function setLikes($Likes)
+    {
+        $this->Likes = $Likes;
+        return $this;
+    }
+
+
+    /**
+     * @return mixed
+     */
+    public function getAffinites()
+    {
+        return $this->Affinites;
+    }
+
+    /**
+     * @param mixed $Affinites
+     * @return Utilisateur
+     */
+    public function setAffinites($Affinites)
+    {
+        $this->Affinites = $Affinites;
+        return $this;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getPhotos()
+    {
+        return $this->Photos;
+    }
+
+    /**
+     * @param mixed $Photos
+     * @return Utilisateur
+     */
+    public function setPhotos($Photos)
+    {
+        $this->Photos = $Photos;
+        return $this;
+    }
+
 
     /**
      * @return mixed
@@ -398,180 +651,11 @@ class Utilisateur implements \JsonSerializable
             'ProfilImgName' => $this->getProfilImgName(),
             'ProfilImgRepo' => $this->getProfilImgRepo(),
             'Latitude' => $this->getLatitude(),
-            'Longitude' => $this->getLatitude()
+            'Longitude' => $this->getLatitude(),
+            'Photos' => $this->getPhotos(),
+            'Affinites' => $this->getAffinites(),
+            'Likes' => $this->getLikes()
         ];
     }
 
-
-    public function SqlAdd(\PDO $bdd)
-    {
-        try {
-            $requete = $bdd->prepare('INSERT INTO T_UTILISATEUR 
-                (UTI_NOM, UTI_PRENOM, UTI_DATE_INSCRIPTION, UTI_EMAIL, UTI_TITRE, UTI_DESCRIPTION, UTI_SEXE, UTI_VILLE, UTI_TEL, UTI_MDP, UTI_CAMPUS, UTI_SITUATION, UTI_AGE, UTI_ATTIRANCE, UTI_IMAGE_NOM, UTI_IMAGE_LIEN, UTI_POS_LAT, UTI_POS_LONG)
-                VALUES(:Nom, :Prenom, :DateInscription, :Email, :Titre, :Description, :Sexe, :Ville, :Telephone, :Mdp, :Campus, :Situation, :Age, :Attirance, :ProfilImgName, :ProfilImgRepo, :Latitude, :Longitude)');
-            $requete->execute([
-                'Nom' => $this->getNom(),
-                'Prenom' => $this->getPrenom(),
-                'DateInscription' => $this->getDateInscription(),
-                'Email' => $this->getEmail(),
-                'Titre' => $this->getTitre(),
-                'Description' => $this->getDescription(),
-                'Sexe' => $this->getSexe(),
-                'Ville' => $this->getVille(),
-                'Telephone' => $this->getTelephone(),
-                'Mdp' => $this->getMotDePasse(),
-                'Campus' => $this->getCampus(),
-                'Situation' => $this->getSituation(),
-                'Age' => $this->getAge(),
-                'Attirance' => $this->getAttirance(),
-                'ProfilImgName' => $this->getProfilImgName(),
-                'ProfilImgRepo' => $this->getProfilImgRepo(),
-                'Latitude' => $this->getLatitude(),
-                'Longitude' => $this->getLongitude(),
-
-            ]);
-            return array("result" => true, "message" => $bdd->lastInsertId());
-        } catch (\Exception $e) {
-            return array("result" => false, "message" => $e->getMessage());
-        }
-
-    }
-
-    public function SqlGetAll(\PDO $bdd)
-    {
-        $query = $bdd->prepare('SELECT * FROM T_UTILISATEUR');
-        $query->execute();
-        $arrayUser = $query->fetchAll();
-
-        $listUser = [];
-        foreach ($arrayUser as $userSQL) {
-            $user = new Utilisateur();
-            $user->setUID($userSQL['ID_UTILISATEUR'])
-                ->setMotDePasse($userSQL['UTI_MDP'])
-                ->setNom($userSQL['UTI_NOM'])
-                ->setPrenom($userSQL['UTI_PRENOM'])
-                ->setDateInscription($userSQL['UTI_DATE_INSCRIPTION'])
-                ->setEmail($userSQL['UTI_EMAIL'])
-                ->setTitre($userSQL['UTI_TITRE'])
-                ->setDescription($userSQL['UTI_DESCRIPTION'])
-                ->setSexe($userSQL['UTI_SEXE'])
-                ->setVille($userSQL['UTI_VILLE'])
-                ->setTelephone($userSQL['UTI_TEL'])
-                ->setCampus($userSQL['UTI_CAMPUS'])
-                ->setSituation($userSQL['UTI_SITUATION'])
-                ->setAge($userSQL['UTI_AGE'])
-                ->setAttirance($userSQL['UTI_ATTIRANCE'])
-                ->setProfilImgName($userSQL['UTI_IMAGE_NOM'])
-                ->setProfilImgRepo($userSQL['UTI_IMAGE_LIEN'])
-                ->setLatitude($userSQL['UTI_POS_LAT'])
-                ->setLongitude($userSQL['UTI_POS_LONG']);
-
-            $listUser[] = $user;
-        }
-        return $listUser;
-    }
-
-    public function SqlGet(\PDO $bdd, $id)
-    {
-        $query = $bdd->prepare('SELECT * FROM T_UTILISATEUR WHERE ID_UTILISATEUR =:ID');
-        $query->execute(['ID' => $id]);
-        $userSQL = $query->fetch();
-
-        $user = new Utilisateur();
-        $user->setUID($userSQL['ID_UTILISATEUR'])
-            ->setMotDePasse($userSQL['UTI_MDP'])
-            ->setNom($userSQL['UTI_NOM'])
-            ->setPrenom($userSQL['UTI_PRENOM'])
-            ->setDateInscription($userSQL['UTI_DATE_INSCRIPTION'])
-            ->setEmail($userSQL['UTI_EMAIL'])
-            ->setTitre($userSQL['UTI_TITRE'])
-            ->setDescription($userSQL['UTI_DESCRIPTION'])
-            ->setSexe($userSQL['UTI_SEXE'])
-            ->setVille($userSQL['UTI_VILLE'])
-            ->setTelephone($userSQL['UTI_TEL'])
-            ->setCampus($userSQL['UTI_CAMPUS'])
-            ->setSituation($userSQL['UTI_SITUATION'])
-            ->setAge($userSQL['UTI_AGE'])
-            ->setAttirance($userSQL['UTI_ATTIRANCE'])
-            ->setProfilImgName($userSQL['UTI_IMAGE_NOM'])
-            ->setProfilImgRepo($userSQL['UTI_IMAGE_LIEN'])
-            ->setLatitude($userSQL['UTI_POS_LAT'])
-            ->setLongitude($userSQL['UTI_POS_LONG']);
-
-        return $user;
-    }
-
-    public function SqlGetBy(\PDO $bdd, $SQL, $param)
-    {
-        $query = $bdd->prepare($SQL);
-        $query->execute([
-            'param' => $param
-        ]);
-        $arrayUser = $query->fetchAll();
-
-        $listUser = [];
-        foreach ($arrayUser as $userSQL) {
-            $user = new Utilisateur();
-            $user->setUID($userSQL['ID_UTILISATEUR'])
-                ->setMotDePasse($userSQL['UTI_MDP'])
-                ->setNom($userSQL['UTI_NOM'])
-                ->setPrenom($userSQL['UTI_PRENOM'])
-                ->setDateInscription($userSQL['UTI_DATE_INSCRIPTION'])
-                ->setEmail($userSQL['UTI_EMAIL'])
-                ->setTitre($userSQL['UTI_TITRE'])
-                ->setDescription($userSQL['UTI_DESCRIPTION'])
-                ->setSexe($userSQL['UTI_SEXE'])
-                ->setVille($userSQL['UTI_VILLE'])
-                ->setTelephone($userSQL['UTI_TEL'])
-                ->setCampus($userSQL['UTI_CAMPUS'])
-                ->setSituation($userSQL['UTI_SITUATION'])
-                ->setAge($userSQL['UTI_AGE'])
-                ->setAttirance($userSQL['UTI_ATTIRANCE'])
-                ->setProfilImgName($userSQL['UTI_IMAGE_NOM'])
-                ->setProfilImgRepo($userSQL['UTI_IMAGE_LIEN'])
-                ->setLatitude($userSQL['UTI_POS_LAT'])
-                ->setLongitude($userSQL['UTI_POS_LONG']);
-
-            $listUser[] = $user;
-        }
-
-        return $listUser;
-    }
-
-    public function SqlResetPass(\PDO $bdd, $email, $pass)
-    {
-        $query = $bdd->prepare('UPDATE T_UTILISATEUR SET UTI_MDP =:param2 WHERE UTI_EMAIL =:param1');
-        return $query->execute([
-            'param1' => $email,
-            'param2' => $pass
-        ]);
-    }
-
-    public function SqlResetPassFromMail(\PDO $bdd, $email, $pass, $id)
-    {
-        $query = $bdd->prepare('SELECT UTI_MDP FROM T_UTILISATEUR WHERE UTI_EMAIL=:email');
-        $query->execute(['email' => $email]);
-        $mdp = $query->fetch();
-        if ($id == $mdp['UTI_MDP']) {
-            $query = $bdd->prepare('UPDATE T_UTILISATEUR SET UTI_MDP =:param2 WHERE UTI_EMAIL =:param1');
-            return $query->execute([
-                'param1' => $email,
-                'param2' => password_hash($pass, PASSWORD_BCRYPT)
-            ]);
-
-
-        } else {
-            return false;
-        }
-
-
-    }
-
-    public function SqlGetEmail(\PDO $bdd, $id)
-    {
-        $query = $bdd->prepare('SELECT UTI_EMAIL FROM T_UTILISATEUR WHERE UTI_MDP=:param1');
-        $query->execute(['param1' => $id]);
-        $userEmail = $query->fetch();
-        return $userEmail['UTI_EMAIL'];
-    }
 }

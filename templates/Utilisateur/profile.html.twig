@@ -7,7 +7,7 @@
     <div class="wall-white">
         <div class="nav-flex d-flex justify-content-between pt-2 px-2">
             <a href="/Home/" class="back"><img class="svg-back" src="/doc/back.png"></a>
-            <a href="/Utilisateur/Settings/" class="btn btn-primary"><i class="fas fa-pencil-alt"></i></a>
+            <a href="/Utilisateur/Settings/" class="btn btn-fmm"><i class="fas fa-pencil-alt"></i></a>
         </div>
         <div class="card cardd item-card" style="width: 30rem;">
             <div class="wrapper-img-profile">
@@ -28,12 +28,36 @@
             <hr>
             <div class="card-body">
                 <p>{{ userr.Titre }}</p>
-                <p>{{ userr.Description }}</p>
+                <p>{{ userr.Description }} </p>
 
             </div>
         </div>
     </div>
-    <div class="wrapper-imgs-flex">
+
+
+    {% if userr.Photos is not null and userr.Photos is not empty %}
+        {% for photo in userr.Photos %}
+
+            {% if loop.index is divisible by(2) %}
+                <div class="wrapper-imgs-flex">
+            {% endif %}
+            <div class="card cardd card-imgs" style="width: 50rem;">
+                <div class="wrapper-img-grid">
+                    <img class="card-img-top" src="/uploads/images/{{ photo.PhotoDossier }}/{{ photo.PhotoName }}"
+                         alt="Photo de {{ userr.Prenom }}">
+                </div>
+            </div>
+            {% if loop.index is divisible by(2) %}
+                </div>
+            {% endif %}
+
+        {% endfor %}
+    {% else %}
+        <div class="display-4">Tu n'as pas de photos.</div>
+    {% endif %}
+
+
+    <!--<div class="wrapper-imgs-flex">
         <div class="card cardd card-imgs" style="width: 50rem;">
             <div class="wrapper-img-grid">
                 <img class="card-img-top" src=".../100px180/" alt="Card image cap">
@@ -57,5 +81,5 @@
             </div>
         </div>
     </div>
-    </div>
+    </div>-->
 {% endblock %}

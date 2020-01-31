@@ -26,29 +26,51 @@
 
             </div>
         </div>
-        <div class="wrapper-imgs-flex">
+    {% if user.Photos is not null and user.Photos is not empty %}
+        {% for photo in user.Photos %}
+
+            {% if loop.index is divisible by(2) %}
+                <div class="wrapper-imgs-flex">
+            {% endif %}
             <div class="card cardd card-imgs" style="width: 50rem;">
                 <div class="wrapper-img-grid">
-                    <img class="card-img-top" src=".../100px180/" alt="Card image cap">
+                    <img class="card-img-top" src="/uploads/images/{{ photo.PhotoDossier }}/{{ photo.PhotoName }}"
+                         alt="Photo de {{ user.Prenom }}">
                 </div>
             </div>
-            <div class="card cardd card-imgs" style="width: 50rem;">
-                <div class="wrapper-img-grid">
-                    <img class="card-img-top" src=".../100px180/" alt="Card image cap">
+            {% if loop.index is divisible by(2) %}
                 </div>
+            {% endif %}
+
+        {% endfor %}
+    {% else %}
+        <div class="display-4">{{ user.Prenom }} {{ user.Nom }} n'a pas de photos.</div>
+    {% endif %}
+
+
+    <!--<div class="wrapper-imgs-flex">
+        <div class="card cardd card-imgs" style="width: 50rem;">
+            <div class="wrapper-img-grid">
+                <img class="card-img-top" src=".../100px180/" alt="Card image cap">
             </div>
         </div>
-        <div class="wrapper-imgs-flex">
-            <div class="card cardd card-imgs" style="width: 50rem;">
-                <div class="wrapper-img-grid">
-                    <img class="card-img-top" src=".../100px180/" alt="Card image cap">
-                </div>
-            </div>
-            <div class="card cardd card-imgs" style="width: 50rem;">
-                <div class="wrapper-img-grid">
-                    <img class="card-img-top" src=".../100px180/" alt="Card image cap">
-                </div>
+        <div class="card cardd card-imgs" style="width: 50rem;">
+            <div class="wrapper-img-grid">
+                <img class="card-img-top" src=".../100px180/" alt="Card image cap">
             </div>
         </div>
     </div>
+    <div class="wrapper-imgs-flex">
+        <div class="card cardd card-imgs" style="width: 50rem;">
+            <div class="wrapper-img-grid">
+                <img class="card-img-top" src=".../100px180/" alt="Card image cap">
+            </div>
+        </div>
+        <div class="card cardd card-imgs" style="width: 50rem;">
+            <div class="wrapper-img-grid">
+                <img class="card-img-top" src=".../100px180/" alt="Card image cap">
+            </div>
+        </div>
+    </div>
+    </div>-->
 {% endblock %}

@@ -17,13 +17,19 @@
 
                         <hr>
                         <div class="d-flex justify-content-start">
-                            <a href="/Home/Mate/{{ user.UID }}" class="card-link btn btn-outline-fmm mt-2">Voir son
-                                profil</a>
-                            <a href="/Utilisateur/Like/{{ user.UID }}" class="card-link btn btn-outline-danger mt-2">
-                                <i class="fas fa-heart"></i> Liker</a>
-                            <a href="/Messages/{{ user.UID }}" class="card-link btn btn-outline-primary mt-2">
-                                <i class="fas fa-comment-dots"></i> Messages</a>
 
+                            {% if user != userr %}
+                                <a href="/Home/Mate/{{ user.UID }}" class="card-link btn btn-outline-fmm mt-2">Voir son
+                                    profil</a>
+                                <a href="/Utilisateur/Like/{{ user.UID }}"
+                                   class="card-link btn btn-outline-danger mt-2">
+                                    <i class="fas fa-heart"></i> Liker</a>
+                                <a href="/Messages/{{ user.UID }}" class="card-link btn btn-outline-primary mt-2">
+                                    <i class="fas fa-comment-dots"></i> Messages</a>
+                            {% else %}
+                                <a href="/Utilisateur/Me" class="card-link btn btn-outline-fmm mt-2">Voir mon
+                                    profil</a>
+                            {% endif %}
                         </div>
                     </div>
                     <div class="card-footer">
