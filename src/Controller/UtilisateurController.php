@@ -3,6 +3,7 @@
 
 namespace src\Controller;
 
+use src\Model\Like;
 use src\Model\Utilisateur;
 use src\Model\Bdd;
 use DateTime;
@@ -188,6 +189,60 @@ class UtilisateurController extends AbstractController
 
         }
 
+    }
+
+    public function Like($id)
+    {
+        if (isset($_SESSION['USER'])) {
+            $listLikes = (new Like())->SqlGetAll(Bdd::GetInstance(), $_SESSION['USER']->getUID());
+            if (!in_array($id, $listLikes)) {
+                $L = new Like();
+                $L->setUserLiked($id);
+                $L->SqlAdd(Bdd::GetInstance(), $_SESSION['USER']->getUID());
+                header('Location:/');
+            } else {
+                $L = new Like();
+                $L->SqlDelete(Bdd::GetInstance(), $_SESSION['USER']->getUID(), $id);
+                header('Location:/');
+            }
+        } else {
+            header('Location:/Utilisateur/Login');
+        }
+    }
+
+    public function Mates()
+    {
+        if (isset($_SESSION['USER'])) {
+            $listLikedByMe = $_SESSION['USER']->getLikes();
+            $listLikedMe = (new Like)->SqlGetLikedMe(Bdd::GetInstance(), $_SESSION['USER']->getUID());
+
+            $user = new Utilisateur();
+            $listUser = [];
+
+            foreach($listLikedByMe as $userInList) {
+                $listUser[] = $user->SqlGet(Bdd::GetInstance(), $userInList);
+            }
+            foreach($listLikedMe as $userInList) {
+                $listUser[] = $user->SqlGet(Bdd::GetInstance(), $userInList);
+            }
+
+            if ($listUser != null) {
+                return $this->twig->render(
+                    'search.html.twig', [
+                        'listUser' => $listUser,
+
+                    ]
+                );
+            } else {
+                return $this->twig->render(
+                    'Error/searchempty.html.twig', [
+                        'search' => "Vos Likes"
+                    ]
+                );
+            }
+        } else {
+            header('Location:/Error/NoUser');
+        }
     }
 
 }

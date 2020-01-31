@@ -95,7 +95,8 @@ class Utilisateur implements \JsonSerializable
                 ->setProfilImgRepo($userSQL['UTI_IMAGE_LIEN'])
                 ->setLatitude($userSQL['UTI_POS_LAT'])
                 ->setLongitude($userSQL['UTI_POS_LONG'])
-                ->setPhotos((new Photos)->SqlGetAll($bdd, $userSQL['ID_UTILISATEUR']));
+                ->setPhotos((new Photos)->SqlGetAll($bdd, $userSQL['ID_UTILISATEUR']))
+                ->setLikes((new Like)->SqlGetAll($bdd, $userSQL['ID_UTILISATEUR']));
 
             $listUser[] = $user;
         }
@@ -109,7 +110,7 @@ class Utilisateur implements \JsonSerializable
         $userSQL = $query->fetch();
 
         $user = new Utilisateur();
-        $user->setUID($userSQL['ID_UTILISATEUR'])
+        $user->setUID($id)
             ->setMotDePasse($userSQL['UTI_MDP'])
             ->setNom($userSQL['UTI_NOM'])
             ->setPrenom($userSQL['UTI_PRENOM'])
@@ -127,8 +128,9 @@ class Utilisateur implements \JsonSerializable
             ->setProfilImgName($userSQL['UTI_IMAGE_NOM'])
             ->setProfilImgRepo($userSQL['UTI_IMAGE_LIEN'])
             ->setLatitude($userSQL['UTI_POS_LAT'])
-            ->setLongitude($userSQL['UTI_POS_LONG']);
-        $user->setPhotos((new Photos)->SqlGetAll($bdd, $userSQL['ID_UTILISATEUR']));
+            ->setLongitude($userSQL['UTI_POS_LONG'])
+            ->setPhotos((new Photos)->SqlGetAll($bdd, $userSQL['ID_UTILISATEUR']))
+            ->setLikes((new Like)->SqlGetAll($bdd, $userSQL['ID_UTILISATEUR']));
         return $user;
     }
 
@@ -162,7 +164,8 @@ class Utilisateur implements \JsonSerializable
                 ->setProfilImgRepo($userSQL['UTI_IMAGE_LIEN'])
                 ->setLatitude($userSQL['UTI_POS_LAT'])
                 ->setLongitude($userSQL['UTI_POS_LONG'])
-                ->setPhotos((new Photos)->SqlGetAll($bdd, $userSQL['ID_UTILISATEUR']));
+                ->setPhotos((new Photos)->SqlGetAll($bdd, $userSQL['ID_UTILISATEUR']))
+                ->setLikes((new Like)->SqlGetAll($bdd, $userSQL['ID_UTILISATEUR']));
 
             $listUser[] = $user;
         }
@@ -206,22 +209,6 @@ class Utilisateur implements \JsonSerializable
         $userEmail = $query->fetch();
         return $userEmail['UTI_EMAIL'];
     }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
     /**

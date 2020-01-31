@@ -26,7 +26,7 @@ class Affinites
 
     public function SqlDelete(\PDO $bdd, $userID, $affID)
     {
-        $query = $bdd->prepare('DELETE FROM AFFINITE WHERE ID_AFFINITE =:affID AND $userID =:userID');
+        $query = $bdd->prepare('DELETE FROM AFFINITE WHERE ID_AFFINITE =:affID AND ID_UTILISATEUR =:userID');
         return $query->execute([
             'affID' => $affID,
             'userID' => $userID]);
@@ -35,7 +35,7 @@ class Affinites
     public function SqlAdd(\PDO $bdd, $userID)
     {
         try {
-            $query = $bdd->prepare('INSERT INTO AFFINITE (ID_UTILISATEUR, AFF_AFFINITE) VALUES (:userID, :$aff)');
+            $query = $bdd->prepare('INSERT INTO AFFINITE (ID_UTILISATEUR, AFF_AFFINITE) VALUES (:userID, :aff)');
             $query->execute([
                 'userID' => $userID,
                 'aff' => $this->getAffinites()]);

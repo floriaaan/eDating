@@ -3,6 +3,7 @@
 
 {% block body %}
     <div class="container-fluid p-3 mx-2 wall-white">
+
         <div class="card-columns">
             {% for user in listUser %}
 
@@ -18,12 +19,15 @@
                         <hr>
                         <div class="d-flex justify-content-start">
 
-                            {% if user != userr %}
+                            {% if user.UID != userr.UID %}
                                 <a href="/Home/Mate/{{ user.UID }}" class="card-link btn btn-outline-fmm mt-2">Voir son
                                     profil</a>
-                                <a href="/Utilisateur/Like/{{ user.UID }}"
-                                   class="card-link btn btn-outline-danger mt-2">
-                                    <i class="fas fa-heart"></i> Liker</a>
+                                <a href="/Utilisateur/Like/{{ user.UID }}" class="card-link btn mt-2
+                                    {% if user.UID in likes %} btn-danger">
+                                        <i class="fas fa-heart"></i> est Liké</a>
+                                    {% else %} btn-outline-danger">
+                                        <i class="fas fa-heart"></i> Liker</a>
+                                    {% endif %}
                                 <a href="/Messages/{{ user.UID }}" class="card-link btn btn-outline-primary mt-2">
                                     <i class="fas fa-comment-dots"></i> Messages</a>
                             {% else %}

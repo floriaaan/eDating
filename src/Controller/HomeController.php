@@ -4,7 +4,9 @@
 namespace src\Controller;
 
 
+use src\Model\Affinites;
 use src\Model\Bdd;
+use src\Model\Like;
 use src\Model\Utilisateur;
 
 class HomeController extends AbstractController
@@ -47,6 +49,7 @@ class HomeController extends AbstractController
                 return $this->twig->render(
                     'search.html.twig', [
                         'listUser' => $listUser,
+
                     ]
                 );
             } else {
@@ -67,7 +70,8 @@ class HomeController extends AbstractController
             $user = new Utilisateur();
             $user = $user ->SqlGet(Bdd::GetInstance(), $id);
             return $this->twig->render('mate.html.twig', [
-                    'user' => $user
+                    'user' => $user,
+                    'affinites' => (new Affinites)->SqlGetAll(Bdd::GetInstance(), $id),
                 ]
             );
 
