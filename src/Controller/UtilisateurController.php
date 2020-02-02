@@ -3,6 +3,7 @@
 
 namespace src\Controller;
 
+use src\Model\Affinites;
 use src\Model\Like;
 use src\Model\Utilisateur;
 use src\Model\Bdd;
@@ -77,7 +78,21 @@ class UtilisateurController extends AbstractController
             }
             $user->setProfilImgName($nomImage);
             $user->setProfilImgRepo($sqlRepository);
-            if ($user->SqlAdd(BDD::getInstance())['result']) {
+
+
+            $listAffinites = explode(',', $_POST['registerAffinites']);
+
+
+            $returnAdd = $user->SqlAdd(BDD::getInstance());
+            if ($returnAdd['result']) {
+                foreach( $listAffinites as $aff) {
+                    $affinites = new Affinites();
+                    $affinites->setAffinites($aff);
+                    $affinites->SqlAdd(Bdd::GetInstance(),$returnAdd['message']);
+                }
+
+
+                $user->setAffinites((new Affinites)->SqlGetAll(Bdd::GetInstance(), $returnAdd['message']));
                 $_SESSION['USER'] = $user;
                 header('Location:/Utilisateur/Me');
             } else {
@@ -219,12 +234,18 @@ class UtilisateurController extends AbstractController
             $user = new Utilisateur();
             $listUser = [];
 
-            foreach($listLikedByMe as $userInList) {
-                $listUser[] = $user->SqlGet(Bdd::GetInstance(), $userInList);
+            if($listLikedByMe != null) {
+                foreach($listLikedByMe as $userInList) {
+                    $listUser[] = $user->SqlGet(Bdd::GetInstance(), $userInList);
+                }
             }
-            foreach($listLikedMe as $userInList) {
-                $listUser[] = $user->SqlGet(Bdd::GetInstance(), $userInList);
+
+            if ($listLikedMe != null){
+                foreach($listLikedMe as $userInList) {
+                    $listUser[] = $user->SqlGet(Bdd::GetInstance(), $userInList);
+                }
             }
+
 
             if ($listUser != null) {
                 return $this->twig->render(
@@ -235,9 +256,8 @@ class UtilisateurController extends AbstractController
                 );
             } else {
                 return $this->twig->render(
-                    'Error/searchempty.html.twig', [
-                        'search' => "Vos Likes"
-                    ]
+                    'Error/nolikes.html.twig'
+
                 );
             }
         } else {
