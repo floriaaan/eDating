@@ -229,6 +229,7 @@ class UtilisateurController extends AbstractController
     public function Mates()
     {
         if (isset($_SESSION['USER'])) {
+            $_SESSION['USER'] = (new Utilisateur)->SqlGet(Bdd::GetInstance(), $_SESSION['USER']->getUID());
             $listLikedByMe = $_SESSION['USER']->getLikes();
             $listLikedMe = (new Like)->SqlGetLikedMe(Bdd::GetInstance(), $_SESSION['USER']->getUID());
 

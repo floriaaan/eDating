@@ -317,6 +317,10 @@
     margin-right: auto;
 }
 
+.card{
+    background-color: rgba(0,0,0,0);
+}
+
 .cardd {
     border: 0px !important;
 }
