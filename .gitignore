@@ -3,3 +3,4 @@ vendor/
 var/
 smtp_pw.txt
 db_pw.txt
+public/uploads
