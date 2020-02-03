@@ -4,6 +4,9 @@
 namespace src\Model;
 
 
+use DateInterval;
+use DateTime;
+
 class Utilisateur implements \JsonSerializable
 {
     private $UID;
@@ -175,25 +178,65 @@ class Utilisateur implements \JsonSerializable
 
     public function SqlResetPass(\PDO $bdd, $email, $pass)
     {
-        $query = $bdd->prepare('UPDATE UTILISATEUR SET UTI_MDP =:param2 WHERE UTI_EMAIL =:param1');
+        /*$query = $bdd->prepare('UPDATE UTILISATEUR SET UTI_MDP =:param2 WHERE UTI_EMAIL =:param1');
         return $query->execute([
             'param1' => $email,
             'param2' => $pass
-        ]);
+        ]);*/
+
+        $emailToUID = $bdd->prepare('SELECT ID_UTILISATEUR FROM UTILISATEUR WHERE UTI_EMAIL =:email');
+        $emailToUID->execute(['email'=>$email]);
+        $UID = $emailToUID->fetch();
+
+        $testIfEmpty = $bdd->prepare('SELECT * FROM TOKEN WHERE ID_TOK_EMAIL =:email');
+        $testIfEmpty->execute(['email'=>$email]);
+        $testIfEmpty = $testIfEmpty->fetchAll();
+
+        if(empty($testIfEmpty)) {
+            $query = $bdd->prepare('INSERT INTO TOKEN (TOK_DATE_VALID, TOK_CLEF, ID_TOK_EMAIL, ID_UTILISATEUR) VALUES (:DateValid, :Token, :Email, :UID)');
+            return $query->execute([
+                'DateValid' => (new DateTime)->modify('+14 day')->format('Y-m-d'),
+                'Token' => $pass,
+                'Email' => $email,
+                'UID' => $UID['ID_UTILISATEUR']
+            ]);
+        } else {
+            $query = $bdd->prepare('UPDATE TOKEN SET TOK_DATE_VALID =:DateValid, TOK_CLEF =:Token WHERE ID_TOK_EMAIL=:Email AND ID_UTILISATEUR =:UID');
+            return $query->execute([
+                'DateValid' => (new DateTime)->modify('+14 day')->format('Y-m-d'),
+                'Token' => $pass,
+                'Email' => $email,
+                'UID' => $UID['ID_UTILISATEUR']
+            ]);
+        }
+
+
     }
 
     public function SqlResetPassFromMail(\PDO $bdd, $email, $pass, $id)
     {
-        $query = $bdd->prepare('SELECT UTI_MDP FROM UTILISATEUR WHERE UTI_EMAIL=:email');
+        $query = $bdd->prepare('SELECT * FROM TOKEN WHERE ID_TOK_EMAIL=:email');
         $query->execute(['email' => $email]);
-        $mdp = $query->fetch();
-        if ($id == $mdp['UTI_MDP']) {
+        $tok = $query->fetch();
+
+        $dateNow = new DateTime();
+        $dateNow =$dateNow->format('Y-m-d');
+        $dateValid = date('Y-m-d' ,strtotime($tok['TOK_DATE_VALID']));
+
+
+        if ($id == $tok['TOK_CLEF'] && $dateNow <= $dateValid) {
             $query = $bdd->prepare('UPDATE UTILISATEUR SET UTI_MDP =:param2 WHERE UTI_EMAIL =:param1');
-            return $query->execute([
+            $rSQL = $query->execute([
                 'param1' => $email,
                 'param2' => password_hash($pass, PASSWORD_BCRYPT)
             ]);
+            if ($rSQL) {
+                $query = $bdd->prepare('DELETE FROM TOKEN WHERE ID_TOK_EMAIL =:Email');
+                return $query->execute(['Email' => $email]);
 
+            } else {
+                return false;
+            }
 
         } else {
             return false;
@@ -202,12 +245,12 @@ class Utilisateur implements \JsonSerializable
 
     }
 
-    public function SqlGetEmail(\PDO $bdd, $id)
+    public function SqlGetEmailFromToken(\PDO $bdd, $id)
     {
-        $query = $bdd->prepare('SELECT UTI_EMAIL FROM UTILISATEUR WHERE UTI_MDP=:param1');
+        $query = $bdd->prepare('SELECT ID_TOK_EMAIL FROM TOKEN WHERE TOK_CLEF=:param1');
         $query->execute(['param1' => $id]);
         $userEmail = $query->fetch();
-        return $userEmail['UTI_EMAIL'];
+        return $userEmail['ID_TOK_EMAIL'];
     }
 
 

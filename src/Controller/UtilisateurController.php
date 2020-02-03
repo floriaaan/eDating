@@ -157,9 +157,9 @@ class UtilisateurController extends AbstractController
             }
             $passwd = md5($passwd);
 
-            /*$transport = (new Swift_SmtpTransport('smtp-floriaaan.alwaysdata.net', 25))
-                ->setUsername('florian.leroux@viacesi.fr')
-                ->setPassword(file_get_contents('../smtp_pw.txt'));
+            $transport = (new Swift_SmtpTransport('smtp.mailtrap.io', 465))
+                ->setUsername('2e681f72979a38')
+                ->setPassword('b36efe9206d692');
 
 
             $mailer = new Swift_Mailer($transport);
@@ -167,11 +167,11 @@ class UtilisateurController extends AbstractController
             $message = (new Swift_Message('Réinitialisation de mot de passe'))
                 ->setFrom(['reinitialisation@findmymate.fr' => 'Find My Mate'])
                 ->setTo([$_POST['forgotEmail']])
-                ->setBody("Votre mot de passe est : " . $passwd);
+                ->setBody('http://www.edating.local/Utilisateur/ChangePassword/' . $passwd, 'text/plain');
 
 
-            $result = $mailer->send($message);*/
-            file_put_contents('../md5_pass.txt', 'http://www.edating.local/Utilisateur/ChangePassword/' . $passwd);
+            $mailer->send($message);
+            //file_put_contents('../md5_pass.txt', 'http://www.edating.local/Utilisateur/ChangePassword/' . $passwd);
             $user->SqlResetPass(Bdd::GetInstance(), $_POST['forgotEmail'], $passwd);
 
             return $this->twig->render('Utilisateur/confidentials/forgotsend.html.twig');
@@ -183,7 +183,7 @@ class UtilisateurController extends AbstractController
     public function ChangePassword($id)
     {
         $user = new Utilisateur();
-        $userEmail = $user->SqlGetEmail(Bdd::GetInstance(), $id);
+        $userEmail = $user->SqlGetEmailFromToken(Bdd::GetInstance(), $id);
         if ($_GET && $_POST) {
             $user->SqlResetPassFromMail(Bdd::GetInstance(), $_POST['changeEmail'], $_POST['changePass'], $_POST['changeToken']);
             header('Location:/');
@@ -192,6 +192,7 @@ class UtilisateurController extends AbstractController
                 //Depuis le profil
 
             } elseif ($id != '') {
+
                 //Depuis le mail
                 if ($userEmail != null) {
                     return $this->twig->render('Utilisateur/confidentials/changepassword.html.twig', [
@@ -214,11 +215,11 @@ class UtilisateurController extends AbstractController
                 $L = new Like();
                 $L->setUserLiked($id);
                 $L->SqlAdd(Bdd::GetInstance(), $_SESSION['USER']->getUID());
-                header('Location:/');
+                header("location:/Utilisateur/Mates");
             } else {
                 $L = new Like();
                 $L->SqlDelete(Bdd::GetInstance(), $_SESSION['USER']->getUID(), $id);
-                header('Location:/');
+                header("location:/Utilisateur/Mates");
             }
         } else {
             header('Location:/Utilisateur/Login');
