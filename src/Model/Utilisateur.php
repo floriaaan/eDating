@@ -176,6 +176,45 @@ class Utilisateur implements \JsonSerializable
         return $listUser;
     }
 
+    public function SqlGetLike(\PDO $bdd, $SQL, $param)
+    {
+        $query = $bdd->prepare($SQL);
+        $query->execute([
+            'param' => "%$param%"
+        ]);
+        $arrayUser = $query->fetchAll();
+
+        $listUser = [];
+        foreach ($arrayUser as $userSQL) {
+            $user = new Utilisateur();
+            $user->setUID($userSQL['ID_UTILISATEUR'])
+                ->setMotDePasse($userSQL['UTI_MDP'])
+                ->setNom($userSQL['UTI_NOM'])
+                ->setPrenom($userSQL['UTI_PRENOM'])
+                ->setDateInscription($userSQL['UTI_DATE_INSCRIPTION'])
+                ->setEmail($userSQL['UTI_EMAIL'])
+                ->setTitre($userSQL['UTI_TITRE'])
+                ->setDescription($userSQL['UTI_DESCRIPTION'])
+                ->setSexe($userSQL['UTI_SEXE'])
+                ->setVille($userSQL['UTI_VILLE'])
+                ->setTelephone($userSQL['UTI_TEL'])
+                ->setCampus($userSQL['UTI_CAMPUS'])
+                ->setSituation($userSQL['UTI_SITUATION'])
+                ->setAge($userSQL['UTI_AGE'])
+                ->setAttirance($userSQL['UTI_ATTIRANCE'])
+                ->setProfilImgName($userSQL['UTI_IMAGE_NOM'])
+                ->setProfilImgRepo($userSQL['UTI_IMAGE_LIEN'])
+                ->setLatitude($userSQL['UTI_POS_LAT'])
+                ->setLongitude($userSQL['UTI_POS_LONG'])
+                ->setPhotos((new Photos)->SqlGetAll($bdd, $userSQL['ID_UTILISATEUR']))
+                ->setLikes((new Like)->SqlGetAll($bdd, $userSQL['ID_UTILISATEUR']));
+
+            $listUser[] = $user;
+        }
+
+        return $listUser;
+    }
+
     public function SqlResetPass(\PDO $bdd, $email, $pass)
     {
         /*$query = $bdd->prepare('UPDATE UTILISATEUR SET UTI_MDP =:param2 WHERE UTI_EMAIL =:param1');

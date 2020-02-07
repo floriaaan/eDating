@@ -44,16 +44,16 @@ class HomeController extends AbstractController
                 $listUser = $user->SqlGetAll(Bdd::GetInstance());
             } else {
                 if ($_POST['origin'] == "affinites") {
-                    $listUser = $user->SqlGetBy(Bdd::GetInstance(), "SELECT * FROM UTILISATEUR INNER JOIN AFFINITE
-                        WHERE AFFINITE.AFF_AFFINITE =:param AND AFFINITE.ID_UTILISATEUR=UTILISATEUR.ID_UTILISATEUR",
+                    $listUser = $user->SqlGetLike(Bdd::GetInstance(), "SELECT * FROM UTILISATEUR INNER JOIN AFFINITE
+                        WHERE AFFINITE.AFF_AFFINITE  LIKE :param AND AFFINITE.ID_UTILISATEUR=UTILISATEUR.ID_UTILISATEUR",
                         $_POST['search']);
                 } else {
-                    $listUser = $user->SqlGetBy(Bdd::GetInstance(), "SELECT * FROM UTILISATEUR
-                        WHERE UTI_NOM =:param OR UTI_PRENOM =:param OR UTILISATEUR.ID_UTILISATEUR =:param
-                            OR UTI_SEXE =:param OR UTI_ATTIRANCE=:param OR UTI_CAMPUS=:param",
+                    $listUser = $user->SqlGetLike(Bdd::GetInstance(), "SELECT * FROM UTILISATEUR
+                        WHERE UTI_NOM LIKE :param OR UTI_PRENOM LIKE :param OR UTILISATEUR.ID_UTILISATEUR LIKE :param
+                            OR UTI_SEXE LIKE :param OR UTI_ATTIRANCE LIKE :param OR UTI_CAMPUS LIKE :param",
                         $_POST['search']);
-                    $listUser += $user->SqlGetBy(Bdd::GetInstance(), "SELECT * FROM UTILISATEUR INNER JOIN AFFINITE
-                        WHERE AFFINITE.AFF_AFFINITE =:param AND AFFINITE.ID_UTILISATEUR=UTILISATEUR.ID_UTILISATEUR",
+                    $listUser += $user->SqlGetLike(Bdd::GetInstance(), "SELECT * FROM UTILISATEUR INNER JOIN AFFINITE
+                        WHERE AFFINITE.AFF_AFFINITE LIKE :param AND AFFINITE.ID_UTILISATEUR=UTILISATEUR.ID_UTILISATEUR",
                         $_POST['search']);
                 }
             }
