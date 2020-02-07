@@ -212,11 +212,11 @@ class UtilisateurController extends AbstractController
         $user = new Utilisateur();
         $userEmail = $user->SqlGetEmailFromToken(Bdd::GetInstance(), $id);
         if ($_GET && $_POST) {
-            if($_POST['tokenCRSF'] == $_SESSION['token']) {
+
                 $user->SqlResetPassFromMail(Bdd::GetInstance(), $_POST['changeEmail'], $_POST['changePass'], $_POST['changeToken']);
                 header('Location:/');
-            }
-            header('Location:/Error/NoToken');
+
+
         } else {
             $token = bin2hex(random_bytes(32));
             $_SESSION['token'] = $token;

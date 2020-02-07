@@ -4,48 +4,36 @@ include "config.php";
 require '../vendor/autoload.php';
 
 
-//http://www.git.local/?controller=Article&action=Add
+$router = new \src\Router\Router($_GET['url']);
 
-$controller = (!empty($_GET['controller']) ? $_GET['controller'] : 'Home');
-$action = (!empty($_GET['action']) ? $_GET['action'] : 'Index');
-$param = (!empty($_GET['id']) ? $_GET['id'] : '');
+//Home Routes
+$router->get('/', "Home#Index");
+$router->get('/Home/', "Home#Index");
+$router->get('/Home/Map', "Home#Map");
+$router->post('/Home/Search', "Home#Search");
+$router->get('/Home/Mate/:id', "Home#Mate#id");
 
-$className = 'src\Controller\\' . $controller . 'Controller';
-if (class_exists($className)) {
-    $classController = new $className;
-    if (method_exists($className, $action)) {
-        echo $classController->$action($param);
-    } else {
-        echo '
-                <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
-                <div class="jumbotron">
-                  <h1 class="display-4">Débogage</h1>
-                  <p class="lead">Nous sommes désolé du dérangement, veuillez nous excuser de la gêne occasionnée...</p>
-                  <hr class="my-4">
-                  <p>L\'action '. $action . ' n\'existe pas</p>
-                  <p class="lead">
-                    <a class="btn btn-primary btn-lg" href="/index.php" role="button">Retour à l\'accueil</a>
-                  </p>
-                </div>
-                <hr>';
-        var_dump($_POST);
-        var_dump($_SESSION);
-    }
-} else {
-    echo '
-                <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
-                <div class="jumbotron">
-                  <h1 class="display-4">Débogage</h1>
-                  <p class="lead">Nous sommes désolé du dérangement, veuillez nous excuser de la gêne occasionnée...</p>
-                  <hr class="my-4">
-                  <p>Le controller '. $controller . ' n\'existe pas</p>
-                  <p class="lead">
-                    <a class="btn btn-primary btn-lg" href="/index.php" role="button">Retour à l\'accueil</a>
-                  </p>
-                </div>
-                
-                <hr>';
-    var_dump($className);
-}
+//Error Routes
+$router->get('/Error/', 'Error#Index');
+$router->get('/Error/BadLogin', 'Error#BadLogin');
+$router->get('/Error/NoUser', 'Error#NoUser');
+$router->get('/Error/NoToken', 'Error#NoToken');
+
+//Utilisateur Routes
+
+$router->get('/Utilisateur/', 'Utilisateur#Index');
+$router->get('/Utilisateur/Me', 'Utilisateur#Me');
+$router->get('/Utilisateur/Register', 'Utilisateur#Register');
+$router->post('/Utilisateur/Register', 'Utilisateur#Register');
+$router->get('/Utilisateur/Login', 'Utilisateur#Login');
+$router->post('/Utilisateur/Login', 'Utilisateur#Login');
+$router->get('/Utilisateur/Disconnect', 'Utilisateur#Disconnect');
+$router->get('/Utilisateur/ForgotPass', 'Utilisateur#ForgotPass');
+$router->post('/Utilisateur/ForgotPass', 'Utilisateur#ForgotPass');
+$router->get('/Utilisateur/ChangePassword/:id', 'Utilisateur#ChangePassword#id');
+$router->post('/Utilisateur/ChangePassword/', 'Utilisateur#ChangePassword');
+$router->get('/Utilisateur/Like/:id', 'Utilisateur#Like#id');
+$router->get('/Utilisateur/Mates/', 'Utilisateur#Mates');
 
 
+echo $router->run();
