@@ -207,11 +207,11 @@ class UtilisateurController extends AbstractController
         }
     }
 
-    public function ChangePassword($id)
+    public function ChangePassword($id = '')
     {
         $user = new Utilisateur();
         $userEmail = $user->SqlGetEmailFromToken(Bdd::GetInstance(), $id);
-        if ($_GET && $_POST) {
+        if ($_POST) {
 
                 $user->SqlResetPassFromMail(Bdd::GetInstance(), $_POST['changeEmail'], $_POST['changePass'], $_POST['changeToken']);
                 header('Location:/');

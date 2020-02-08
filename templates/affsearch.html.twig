@@ -22,7 +22,7 @@
                         <div class="d-flex justify-content-start">
 
                             {% if user.UID != userr.UID %}
-                                <a href="/Mate//{{ user.UID }}" class="card-link btn btn-outline-fmm mt-2">Voir son
+                                <a href="/Mate/Profile/{{ user.UID }}" class="card-link btn btn-outline-fmm mt-2">Voir son
                                     profil</a>
                                 <a href="/Mate/Like/{{ user.UID }}" class="card-link btn mt-2
                                     {% if user.UID in likes %} btn-danger">
