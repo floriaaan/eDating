@@ -22,9 +22,9 @@
                         <div class="d-flex justify-content-start">
 
                             {% if user.UID != userr.UID %}
-                                <a href="/Home/Mate/{{ user.UID }}" class="card-link btn btn-outline-fmm mt-2">Voir son
+                                <a href="/Mate//{{ user.UID }}" class="card-link btn btn-outline-fmm mt-2">Voir son
                                     profil</a>
-                                <a href="/Utilisateur/Like/{{ user.UID }}" class="card-link btn mt-2
+                                <a href="/Mate/Like/{{ user.UID }}" class="card-link btn mt-2
                                     {% if user.UID in likes %} btn-danger">
                                         <i class="fas fa-heart"></i> est Liké</a>
                                     {% else %} btn-outline-danger">
@@ -33,7 +33,7 @@
                                 <a href="/Messages/{{ user.UID }}" class="card-link btn btn-outline-primary mt-2">
                                     <i class="fas fa-comment-dots"></i> Messages</a>
                             {% else %}
-                                <a href="/Utilisateur/Me" class="card-link btn btn-outline-fmm mt-2">Voir mon
+                                <a href="/Utilisateur/Profile" class="card-link btn btn-outline-fmm mt-2">Voir mon
                                     profil</a>
                             {% endif %}
                         </div>

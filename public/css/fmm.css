@@ -378,7 +378,7 @@
 }
 
 .fontawesome{
-    font-family: 'Roboto', 'Font Awesome 5 Free', serif;
+    font-family:'Font Awesome 5 Free', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
 }
 
 .wrapper-img-profile{
@@ -407,7 +407,7 @@
     background-size: cover;
 }
 .wall-white-nav {
-    background: url("../doc/wall-white-nav.png") no-repeat fixed;
+    background: url("../doc/wall-white-nav.svg") no-repeat fixed;
     background-size: cover;
 }
 .wrapper-img-grid{

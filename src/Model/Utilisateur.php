@@ -234,7 +234,7 @@ class Utilisateur implements \JsonSerializable
         if(empty($testIfEmpty)) {
             $query = $bdd->prepare('INSERT INTO TOKEN (TOK_DATE_VALID, TOK_CLEF, ID_TOK_EMAIL, ID_UTILISATEUR) VALUES (:DateValid, :Token, :Email, :UID)');
             return $query->execute([
-                'DateValid' => (new DateTime)->modify('+14 day')->format('Y-m-d'),
+                'DateValid' => (new DateTime)->modify('+1 day')->format('Y-m-d'),
                 'Token' => $pass,
                 'Email' => $email,
                 'UID' => $UID['ID_UTILISATEUR']
@@ -242,7 +242,7 @@ class Utilisateur implements \JsonSerializable
         } else {
             $query = $bdd->prepare('UPDATE TOKEN SET TOK_DATE_VALID =:DateValid, TOK_CLEF =:Token WHERE ID_TOK_EMAIL=:Email AND ID_UTILISATEUR =:UID');
             return $query->execute([
-                'DateValid' => (new DateTime)->modify('+14 day')->format('Y-m-d'),
+                'DateValid' => (new DateTime)->modify('+1 day')->format('Y-m-d'),
                 'Token' => $pass,
                 'Email' => $email,
                 'UID' => $UID['ID_UTILISATEUR']

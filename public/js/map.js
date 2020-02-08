@@ -13,10 +13,8 @@ function displayMap() {
 }
 
 
-
-
-function displayUser(pos_x,pos_y, prenom, nom, id) {
-    var greenIcon = new L.Icon({
+function displayUser(pos_x, pos_y, prenom, nom, age, campus, dateInscription, id) {
+    /*var greenIcon = new L.Icon({
         iconUrl: '../doc/fmm.svg',
         shadowUrl: 'https://cdnjs.cloudflare.com/ajax/libs/leaflet/0.7.7/images/marker-shadow.png',
         iconSize: [25, 41],
@@ -27,14 +25,17 @@ function displayUser(pos_x,pos_y, prenom, nom, id) {
 
 
 
-    /*L.marker([pos_x, pos_y],{icon: greenIcon})
+    L.marker([pos_x, pos_y],{icon: greenIcon})
         .bindPopup('<b>'+ prenom + ' ' + nom + '</b>')
         .addTo(mymap);*/
 
-    L.circle([pos_x + (Math.random() / 666), pos_y + (Math.random() / 666)],{})
+    L.circle([pos_x + (Math.random() / 666), pos_y + (Math.random() / 666)], {})
         .setRadius(100)
-        .bindPopup('<b>'+ prenom + ' ' + nom + '</b><br>' +
-            '<a href="/Home/Mate/'+ id +'" class="btn btn-outline-fmm mt-2">Voir son profil</a>')
+        .bindPopup('<h3>' + prenom + ' ' + nom + '</h3><br>' + age + ' ans<br>' +
+            'Inscrit au campus de <b>' + campus + '</b> <br>' +
+            'Membre depuis le <b>' + dateInscription + '</b><br>' +
+
+            '<a href="/Mate/Profile/' + id + '" class="btn btn-outline-fmm mt-2 mx-auto">Voir son profil</a>')
         .addTo(mymap);
 
 
