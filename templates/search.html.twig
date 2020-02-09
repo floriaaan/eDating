@@ -2,7 +2,7 @@
 {% block title %}{{ parent() }} - Recherche{% endblock %}
 
 {% block body %}
-    <div class="display-3 wall-white ml-5">Vous cherchez : {{ search }}</div>
+    <div class="display-3 wall-white ml-5 mt-5 wall-white">{% block search %}Vous cherchez : {{ search }}{% endblock %}</div>
     <hr class="ml-4 wall-white">
     <div class="container-fluid p-3 mx-2 wall-white">
         <div class="card-columns">
@@ -25,10 +25,10 @@
                                     son profil</a>
                                 <a href="/Mate/Like/{{ user.UID }}" class="card-link btn mt-2
                                     {% if user.UID in likes %} btn-danger">
-                                <i class="fas fa-heart"></i> est Liké</a>
-                            {% else %} btn-outline-danger">
-                                <i class="fas fa-heart"></i> Liker</a>
-                            {% endif %}
+                                        <i class="fas fa-heart"></i> est Liké</a>
+                                    {% else %} btn-outline-danger">
+                                        <i class="fas fa-heart"></i> Liker</a>
+                                    {% endif %}
                                 <a href="/Messages/{{ user.UID }}" class="card-link btn btn-outline-primary mt-2">
                                     <i class="fas fa-comment-dots"></i> Messages</a>
                             {% else %}
