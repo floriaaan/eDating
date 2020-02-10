@@ -35,15 +35,7 @@ class UtilisateurController extends AbstractController
 
     }
 
-    public function message(){
-        if(isset($_SESSION['USER'])) {
-            return $this->twig->render(
-                'messages.html.twig'
-            );
-        } else {
-            header('Location:/Error');
-        }
-    }
+    
 
     public function Register(){
         if($_POST){
