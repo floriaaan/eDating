@@ -1,0 +1,44 @@
+{% extends "index.html.twig" %}
+{% block title %}{{ parent() }} - Messages {% endblock %}
+
+
+{% block css %}
+    <link rel="stylesheet" href="/css/stylechat.css"> {% endblock %}
+{% block body %}
+
+
+
+    <div class="row rounded-lg overflow-hidden shadow">
+    <!-- Users box-->
+    <div class="col-5 px-0">
+        <div class="bg-white">
+
+            <div class="bg-gray px-4 py-2 bg-light">
+                <p class="h5 mb-0 py-1">Recent</p>
+            </div>
+
+            <div class="messages-box">
+                <div class="list-group rounded-0">
+
+                    {% for contact in allContact %}
+                        <a class="list-group-item list-group-item-action active text-white rounded-0"
+                           href='/messages/contact/{{ contact.UID }}'>
+                            <div class="media"><img
+                                        src="/uploads/images/{{ contact.ProfilImgRepo }}/{{ contact.ProfilImgName }}"
+                                        alt="user" width="50" class="rounded-circle">
+                                <div class="media-body ml-4">
+                                    <div class="d-flex align-items-center justify-content-between mb-1">
+                                        <h6 class="mb-0">{{ contact.Prenom }} </h6><small
+                                                class="small font-weight-bold">25 Dec</small>
+                                    </div>
+                                    <p class="font-italic mb-0 text-small">liens a mettre du dernier msg </p>
+                                </div>
+                            </div>
+                        </a>
+                    {% endfor %}
+
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}
