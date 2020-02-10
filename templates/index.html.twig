@@ -28,8 +28,8 @@
         </form>
     </div>
 
-    <a class="navbar-brand center" href="/">
-        <img src="{{ server.document_root }}/doc/fmm.svg" width="30" height="30" class="d-inline-block align-top"
+    <a class="navbar-brand center responsive-dnone brand-fmm" href="/">
+        <img src="/doc/fmm.svg" width="30" height="30" class="d-inline-block align-top"
              alt="Find My Mate">
         Find My Mate
     </a>
@@ -43,7 +43,7 @@
     <div class="dropleft ">
 
         <a href="#" class="dropdown-toggle no-hover" id="navbarDropdown" data-toggle="dropdown" aria-expanded="false">
-            <img src="{{ server.document_root }}/uploads/images/{{userr.ProfilImgRepo}}/{{userr.ProfilImgName}}" alt="Utilisateur" style="height: 40px; width: 40px"
+            <img src="/uploads/images/{{userr.ProfilImgRepo}}/{{userr.ProfilImgName}}" alt="Utilisateur" style="height: 40px; width: 40px"
                  class="img-thumbnail rounded-circle">
         </a>
 
@@ -67,17 +67,17 @@
 
 </nav>
 
-<!-- Footer -->
-<footer class="fixed-bottom-custom font-small wall-white-nav">
+<!-- Footer
+<footer class="fixed-bottom-custom responsive-dnone font-small wall-white-nav">
 
-    <!-- Copyright -->
-    <div class="footer-copyright text-center py-3">© 2020 Find My Mate:
+
+    <div class="footer-copyright wall-white-nav text-center py-3">© 2020 Find My Mate:
         <a href="/"> FindMyMate.fr</a>
     </div>
-    <!-- Copyright -->
+
 
 </footer>
-<!-- Footer -->
+Footer -->
 
 {% block body %}{% endblock %}
 

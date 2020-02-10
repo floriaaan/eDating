@@ -65,7 +65,10 @@
                     <h5 class="card-title">{{ aff.Affinites }}</h5>
                     <h6 class="card-subtitle mb-2 text-muted">Affinité</h6>
                     <p class="card-text">Tu peux rencontrer des gens qui aime les mêmes choses</p>
-                    <a href="/Home/Search/{{ aff.Affinites }}" class="card-link">Ils aiment {{ aff.Affinites }}</a>
+                    <form action="/Home/Search/" method="post">
+                        <input type="submit" class="btn btn-outline-fmm" value="{{ aff.Affinites }}" name="search">
+                        <input type="hidden" name="origin" value="affinites">
+                    </form>
 
                 </div>
             </div>
