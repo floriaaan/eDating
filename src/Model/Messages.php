@@ -17,16 +17,10 @@ Class Messages{
     public function afficherContact($campus){
 
 
-        $bdd = Bdd::GetInstance();
+        $listUser = (new Utilisateur)->SqlGetBy(Bdd::GetInstance(),
+        'SELECT * FROM UTILISATEUR WHERE UTI_CAMPUS =:param', $campus);
 
-        $sth = $bdd->prepare("SELECT *
-        FROM UTILISATEUR
-        limit 100");
-        $sth->execute();
-        $datas = $sth->fetchAll();
-        $sth->closeCursor();
-
-        return $datas;
+        return $listUser;
 
     }
 

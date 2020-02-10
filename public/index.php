@@ -43,7 +43,9 @@ $router->get('/Mate/Profile/:id', "Mate#Mate#id");
 $router->get('/Mate/Like/:id', 'Mate#Like#id');
 
 //Message Routes
-$router->get('/Messages', 'Messages#index');
+$router->get('/Messages/', 'Messages#index');
+$router->get('/Messages/List', 'Messages#index');
+$router->get('/Messages/Contact/:id', 'Messages#ContactForm#id');
 $router->post('/Messages', 'Messages#envoyerMsg');
 
 

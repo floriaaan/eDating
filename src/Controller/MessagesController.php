@@ -13,7 +13,7 @@ class MessagesController extends AbstractController{
         public function Index()
         {
             if (isset($_SESSION['USER'])) {
-                    return $this->pageMessagerie();
+                    return $this->list();
 
             } else {
                 header('Location:/Utilisateur/Login');
@@ -21,37 +21,44 @@ class MessagesController extends AbstractController{
 
         }
 
-        public function pageMessagerie(){
+        public function list(){
             if(isset($_SESSION['USER'])) {
 
-                $modelMsg = new Messages();
-
                 //contact
-                $campus = '';
-                $AllContact = $modelMsg->afficherContact($campus);
+                $campus = $_SESSION['USER']->getCampus();
+                $AllContact = (new Messages)->afficherContact($campus);
 
-                //les ID
-                $userid = $_SESSION['USER']->getUID();
-                $contactid = 1;
 
-                //messages
-                $allMsg = $modelMsg->afficherAncienMsg($userid, $contactid);
-
-                $token = bin2hex(random_bytes(32));
-                $_SESSION['token'] = $token;
                 return $this->twig->render(
-                    'messages.html.twig',[
-                    'AllContact' => $AllContact,
-                    'allMsg'=> $allMsg,
-                    'sendToUser' => $contactid,
-                    'token' => $token
+                    'Utilisateur.html.twig',[
+                    'allContact' => $AllContact
                     ]);
-
 
 
             } else {
                 header('Location:/Error');
             }
+        }
+
+        public function contactForm($id){
+            if(isset($_SESSION['USER'])) {
+                //messages
+                $modelMsg =new Messages();
+                $allMsg = $modelMsg->afficherAncienMsg($_SESSION['USER']->getUID(), $id);
+
+                $token = bin2hex(random_bytes(32));
+                $_SESSION['token'] = $token;
+                return $this->twig->render(
+                    'messages.html.twig',[
+                    'allMsg'=> $allMsg,
+                    'sendToUser' => $id,
+                    'token' => $token
+                    ]);
+            } else {
+                header('Location:/Error');
+            }
+            
+
         }
 
 
@@ -90,7 +97,7 @@ class MessagesController extends AbstractController{
         }
         
 
-        header('Location:/Messages');
+        header('Location:/Messages/Contact/'.$_POST['sendToUser']);
 
 
 
