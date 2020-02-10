@@ -256,5 +256,10 @@ class UtilisateurController extends AbstractController
 
     }
 
+    public function Modify(){
+        return $this->twig->render('Utilisateur/modify.html.twig');
+    }
+
+
 
 }
