@@ -256,8 +256,12 @@ class UtilisateurController extends AbstractController
 
     }
 
-    public function Modify(){
-        return $this->twig->render('Utilisateur/modify.html.twig');
+    public function ModifyGet(){
+        $token = bin2hex(random_bytes(32));
+        $_SESSION['token'] = $token;
+        return $this->twig->render('Utilisateur/modify.html.twig', [
+            'crsf' => $token
+        ]);
     }
 
 
