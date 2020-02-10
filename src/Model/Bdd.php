@@ -5,9 +5,10 @@ class Bdd {
     private static $_instance = null;
 
     public static function InitInstance(){
-        $hostname="mysql-floriaaan.alwaysdata.net";
-        $username="floriaaan_fym";
-        $password=file_get_contents('../db_pw.txt');
+        $hostname="localhost";
+        $username="root";
+        //$password=file_get_contents('../db_pw.txt');
+        $password="";
         $dbname="floriaaan_fym";
 
         try

@@ -29,4 +29,5 @@ class ErrorController extends AbstractController
             'Error/notoken.html.twig'
         );
     }
+
 }

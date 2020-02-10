@@ -18,17 +18,8 @@ spl_autoload_register('chargerClasse');
 
 session_start();
 
-$hostname="mysql-floriaaan.alwaysdata.net";
+/*$hostname="mysql-floriaaan.alwaysdata.net";
 $username="floriaaan_fym";
 $password=file_get_contents('../db_pw.txt');
-$dbname="floriaaan_fym";
+$dbname="floriaaan_fym";*/
 
-try
-{
-    $bdd = new PDO('mysql:host='.$hostname.';dbname='.$dbname.';charset=utf8', $username, $password);
-    $bdd->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-}
-catch (Exception $e)
-{
-    die('Erreur : ' . $e->getMessage());
-}

@@ -8,8 +8,8 @@
           href="https://ajax.googleapis.com/ajax/libs/jqueryui/1.11.4/themes/pepper-grinder/jquery-ui.css">
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.7/css/select2.min.css">
-    <link rel="stylesheet" href="{{ server.document_root }}/css/fmm.css">
     <script src="/js/stylechat.js"></script>
+    <link rel="stylesheet" href="/css/fmm.css">
     {% block css %}{% endblock %}
 </head>
 <body>
@@ -19,16 +19,18 @@
 
     <div>
         <form class="form-inline input-group" method="post" action="/Home/Search">
-            <input class="form-control fa" type="search" placeholder="&#xF002; Rechercher votre Mate" name="search"
+            <input class="form-control fontawesome" type="search" placeholder="Rechercher votre Mate" name="search"
                    required>
+            <input type="hidden" name="origin" value="index">
+            <input type="hidden" name="tokencsrf" value="{{ tokenCRSF }}">
             <div class="input-group-append">
                 <input type="submit" class="btn btn-outline-fmm fa" value="&#xF002;">
             </div>
         </form>
     </div>
 
-    <a class="navbar-brand center" href="{{ server.document_root }}/index.php">
-        <img src="{{ server.document_root }}/doc/fmm.svg" width="30" height="30" class="d-inline-block align-top"
+    <a class="navbar-brand center responsive-dnone brand-fmm" href="/">
+        <img src="/doc/fmm.svg" width="30" height="30" class="d-inline-block align-top"
              alt="Find My Mate">
         Find My Mate
     </a>
@@ -42,15 +44,16 @@
     <div class="dropleft ">
 
         <a href="#" class="dropdown-toggle no-hover" id="navbarDropdown" data-toggle="dropdown" aria-expanded="false">
-            <img src="{{ server.document_root }}/uploads/images/{{userr.ProfilImgRepo}}/{{userr.ProfilImgName}}" alt="Utilisateur" style="height: 40px; width: 40px"
+            <img src="/uploads/images/{{userr.ProfilImgRepo}}/{{userr.ProfilImgName}}" alt="Utilisateur" style="height: 40px; width: 40px"
                  class="img-thumbnail rounded-circle">
         </a>
 
         <div class="dropdown-menu" aria-labelledby="navbarDropdown">
             {% if userr is defined %}
-                <a class="dropdown-item" href="/Utilisateur/Me">Votre compte</a>
                 <a class="dropdown-item" href="/Messages/">Vos Messages</a>
-                <a class="dropdown-item" href="/Utilisateur/Mates">Vos Mates</a>
+                <a class="dropdown-item" href="/Mate/List">Vos Mates</a>
+                <a class="dropdown-item" href="/Utilisateur/Profile">Votre compte</a>
+                <a class="dropdown-item" href="/Utilisateur/Settings">Vos paramètres</a>
                 <div class="dropdown-divider"></div>
                 <a class="dropdown-item" href="/Utilisateur/Disconnect">Se déconnecter</a>
             {% else %}
@@ -65,6 +68,17 @@
 
 </nav>
 
+<!-- Footer
+<footer class="fixed-bottom-custom responsive-dnone font-small wall-white-nav">
+
+
+    <div class="footer-copyright wall-white-nav text-center py-3">© 2020 Find My Mate:
+        <a href="/"> FindMyMate.fr</a>
+    </div>
+
+
+</footer>
+Footer -->
 
 {% block body %}{% endblock %}
 

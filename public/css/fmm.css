@@ -318,9 +318,11 @@
 }
 
 .card {
-    border: none;
-    /*background-color: gray;*/
-    text-align: center;
+    background-color: rgba(0, 0, 0, 0);
+}
+
+.cardd {
+    border: 0px !important;
 }
 
 .card-title {
@@ -376,7 +378,7 @@
 }
 
 .fontawesome{
-    font-family: 'Roboto', 'Font Awesome 5 Free', serif;
+    font-family:'Font Awesome 5 Free', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
 }
 
 .wrapper-img-profile{
@@ -400,15 +402,18 @@
     width: auto;
     margin-top: -0px;
 }
+
 .wall-white {
     background: url("../doc/wall-white.svg") no-repeat fixed;
     background-size: cover;
 }
+
 .wall-white-nav {
-    background: url("../doc/wall-white-nav.png") no-repeat fixed;
+    background: url("../doc/wall-white-nav.svg") no-repeat fixed;
     background-size: cover;
 }
-.wrapper-img-grid{
+
+.wrapper-img-grid {
     background-color: #E7E7E7;
     /*border: 1px solid rgba(121, 121, 121, 0.418);*/
     width: 640px;
@@ -417,6 +422,7 @@
     margin-left: auto;
     margin-right: auto;
 }
+
 /* width */
 ::-webkit-scrollbar {
     width: 12px;
@@ -438,12 +444,12 @@
     background: rgb(207, 207, 207);
 }
 
-.btn-outline-fmm{
+.btn-outline-fmm {
     color: #730EBD;
     border-color: #730EBD;
 }
 
-.btn-outline-fmm:hover{
+.btn-outline-fmm:hover {
     color: white;
     background-color: #730EBD;
     border-color: #730EBD;
@@ -465,89 +471,42 @@
     box-shadow: 0 0 0 0.2rem rgba(115, 14, 189, 0.5);
 }
 
+.fixed-bottom-custom {
+    background-color: white;
+    display: block;
+    bottom: 0;
+    position: fixed;
+    left: 0;
+    right: 0;
+    z-index: 1020;
+}
 
 @media (max-width: 576px) {
     .body {
         background: url("../doc/wall-login-small.svg") no-repeat fixed;
         background-size: cover;
     }
+
+    .sticky-top {
+        top: initial;
+        position: fixed;
+        right: 0;
+        bottom: 0;
+        left: 0;
+        z-index: 1030;
+    }
+    .fixed-bottom-custom {
+
+    }
+
+    .responsive-dnone {
+        display: none;
+    }
 }
-.wrapper-img-profile{
-    /*border: 1px solid rgba(121, 121, 121, 0.418);*/
-    width: 300px;
-    height: 300px;
-    border-radius: 100000px;
-    margin-left: auto;
-    margin-right: auto;
-    margin-top: 100px;
-    overflow: hidden;
-    /*position: absolute;*/
-    background-color: #E7E7E7;
-    /*-webkit-box-shadow: 0 14px 28px rgba(0, 0, 0, 0.20), 0 20px 20px rgba(0, 0, 0, 0.10);
-    -moz-box-shadow: 0 14px 28px rgba(0, 0, 0, 0.20), 0 20px 20px rgba(0, 0, 0, 0.10);
-    -ms-box-shadow: 0 14px 28px rgba(0, 0, 0, 0.20), 0 20px 20px rgba(0, 0, 0, 0.10);
-    -o-box-shadow: 0 14px 28px rgba(0, 0, 0, 0.20), 0 20px 20px rgba(0, 0, 0, 0.10);
-    box-shadow: 0 14px 28px rgba(0, 0, 0, 0.20), 0 20px 20px rgba(0, 0, 0, 0.10);;*/
-}
-.card-img-top{
-    height: 100%;
-    width: auto;
-    margin-top: -5px;
-}
-.wall-white {
-    background: url("../doc/wall-white.svg") no-repeat fixed;
-    background-size: cover;
-}
-.wall-white-nav {
-    background: url("../doc/wall-white-nav.png") no-repeat fixed;
-    background-size: cover;
-}
-.wrapper-img-grid{
-    background-color: #E7E7E7;
-    /*border: 1px solid rgba(121, 121, 121, 0.418);*/
-    width: 640px;
-    height: 360px;
-    border-radius: 5px;
-    margin-left: auto;
-    margin-right: auto;
-}
-/* width */
-::-webkit-scrollbar {
-    width: 12px;
-  }
-  
-  /* Track */
-  ::-webkit-scrollbar-track { 
-    border-radius: 10000px;
-  }
-   
-  /* Handle */
-  ::-webkit-scrollbar-thumb {
-    background: #E7E7E7; 
-    border-radius: 10px;
-  }
-  
-  /* Handle on hover */
-  ::-webkit-scrollbar-thumb:hover {
-    background: rgb(207, 207, 207); 
-  }
-  .card-body{
-      margin-top: 100px;
-  }
-  .btn .btn-primary{
-      text-align: right;
-  }
-  .nav-flex{
-      display: flex;
-      justify-content: space-between;
-      margin: 1em;
-      color: #730EBD;
-  }
-  .btn-primary{
-      background-color: #730EBD;
-      border: #730EBD;
-  }
-  .btn-primary:hover{
-    background-color: rgb(143, 77, 190);
-    border: #730EBD;
+
+@media (max-width: 740px) {
+    .brand-fmm {
+        display: none;
+    }
+
 }

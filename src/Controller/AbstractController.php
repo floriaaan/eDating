@@ -1,6 +1,9 @@
 <?php
 namespace src\Controller;
 
+use src\Model\Bdd;
+use src\Model\Like;
+
 class AbstractController {
     protected $loader;
     protected $twig;
@@ -19,6 +22,7 @@ class AbstractController {
         $this->twig->addExtension(new \Twig\Extension\DebugExtension());
         if(isset($_SESSION['USER'])) {
             $this->twig->addGlobal('userr', $_SESSION['USER']);
+            $this->twig->addGlobal('likes', (new Like)->SqlGetAll(Bdd::GetInstance(), $_SESSION['USER']->getUID()));
         }
 
 
