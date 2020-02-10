@@ -151,7 +151,7 @@
     text-shadow: -1px 0 #e74a3b;
     top: 0;
     color: #5a5c69;
-    background: #f8f9fc;
+    background: #ffffff;
     overflow: hidden;
     clip: rect(0, 900px, 0, 0);
     animation: noise-anim 2s infinite linear alternate-reverse;
@@ -296,7 +296,7 @@
     text-shadow: 1px 0 #4e73df;
     top: 0;
     color: #5a5c69;
-    background: #f8f9fc;
+    background: #ffffff;
     overflow: hidden;
     clip: rect(0, 900px, 0, 0);
     animation: noise-anim-2 3s infinite linear alternate-reverse;
@@ -412,7 +412,8 @@
     background: url("../doc/wall-white-nav.svg") no-repeat fixed;
     background-size: cover;
 }
-.wrapper-img-grid{
+
+.wrapper-img-grid {
     background-color: #E7E7E7;
     /*border: 1px solid rgba(121, 121, 121, 0.418);*/
     width: 640px;

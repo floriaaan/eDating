@@ -8,6 +8,7 @@ class Bdd {
         $hostname="mysql-floriaaan.alwaysdata.net";
         $username="floriaaan_fym";
         $password=file_get_contents('../db_pw.txt');
+
         $dbname="floriaaan_fym";
 
         try
