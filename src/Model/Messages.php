@@ -55,20 +55,18 @@ Class Messages{
         return $msg;
     }
 
-    public function envoyerMsg($userid, $contactid){
+    public function envoyerMsg($userid, $contactid, $msg){
 
         $bdd = Bdd::GetInstance();
-        $envoyer = $bdd->prepare("INSERT INTO `floriaaan_fym`.`MESSAGE` (`ID_UTILISATEUR`, `UTI_ID_UTILISATEUR`, `MES_DATE`, `MES_CONTENU`) 
-        VALUES ('userid', 'contactid', 'date', 'contenu');");
-        $envoyer->execute([
+        $envoyer = $bdd->prepare("INSERT INTO `MESSAGE` (`ID_UTILISATEUR`, `UTI_ID_UTILISATEUR`, `MES_CONTENU`) 
+        VALUES (:userid, :contactid, :contenu);");
+        $rSql = $envoyer->execute([
             'userid' => $userid,
-            'contactid' => $contactid
-            
+            'contactid' => $contactid,
+            'contenu' => $msg
             ]);
-        $envoyer->execute(array($userid,$contactid,$contactid,$userid));
-        $msg = $envoyer->fetchAll();
+        return $rSql;
 
-        return $msg;
 
 
     }

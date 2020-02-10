@@ -86,13 +86,15 @@
     
 
       <!-- Typing area -->
-      <form action="#" class="bg-light">
+      <form action="" method="post" class="bg-light">
         <div class="input-group">
-          <input type="text" placeholder="Type a message" aria-describedby="button-addon2" class="form-control rounded-0 border-0 py-4 bg-light">
+          <input value="" type="text" name="msg" placeholder="Envoyer un message" aria-describedby="button-addon2" class="form-control rounded-0 border-0 py-4 bg-light">
           <div class="input-group-append">
-            <button id="button-addon2" type="submit" class="btn btn-link"> <i class="fa fa-paper-plane"></i></button>
+            <button id="button-addon2" type="submit" class="btn btn-link"><i class="fa fa-paper-plane"></i></button>
           </div>
         </div>
+        <input type="hidden" name="sendToUser" value="{{ sendToUser }}">
+        <input type="hidden" name="crsf" value="{{ token }}">
       </form>
 
     </div>
@@ -103,4 +105,19 @@
 
 
 
+{% endblock %}
+
+{% block js %}
+<script>
+  function refresh() {
+      location.refresh();
+      setTimeout(refresh,100000);
+  }
+
+    $(document).ready(function() {
+
+   refresh();
+
+
+  });</script>
 {% endblock %}

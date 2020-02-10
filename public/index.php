@@ -44,6 +44,7 @@ $router->get('/Mate/Like/:id', 'Mate#Like#id');
 
 //Message Routes
 $router->get('/Messages', 'Messages#index');
+$router->post('/Messages', 'Messages#envoyerMsg');
 
 
 echo $router->run();

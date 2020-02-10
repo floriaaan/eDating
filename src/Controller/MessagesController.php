@@ -13,7 +13,8 @@ class MessagesController extends AbstractController{
         public function Index()
         {
             if (isset($_SESSION['USER'])) {
-                return $this->pageMessagerie();
+                    return $this->pageMessagerie();
+
             } else {
                 header('Location:/Utilisateur/Login');
             }
@@ -30,16 +31,20 @@ class MessagesController extends AbstractController{
                 $AllContact = $modelMsg->afficherContact($campus);
 
                 //les ID
-                $userid = 1;
-                $contactid = 2;
+                $userid = $_SESSION['USER']->getUID();
+                $contactid = 1;
 
                 //messages
                 $allMsg = $modelMsg->afficherAncienMsg($userid, $contactid);
 
+                $token = bin2hex(random_bytes(32));
+                $_SESSION['token'] = $token;
                 return $this->twig->render(
                     'messages.html.twig',[
                     'AllContact' => $AllContact,
-                    'allMsg'=> $allMsg
+                    'allMsg'=> $allMsg,
+                    'sendToUser' => $contactid,
+                    'token' => $token
                     ]);
 
 
@@ -73,22 +78,21 @@ class MessagesController extends AbstractController{
 
             }
         }
+    
+
+    public function EnvoyerMsg(){
+
+        if($_POST && $_POST['crsf'] == $_SESSION['token']) {
+            $userid = $_SESSION['USER']->getUID();
+            $contactid = $_POST['sendToUser'];
+    
+            $message = (new Messages)->envoyerMsg($userid, $contactid, $_POST['msg']);
+        }
+        
+
+        header('Location:/Messages');
 
 
-
-    public function effacerMessages(){
-     
-        $mail = $_SESSION['email'];
-        $otherId = 2;
-        $user = new Utilisateur();
-        $datas = $user->getUserData($mail);
-        $ownId = $datas['ID_UTILISATEUR'];
-
-        $ownChat = new Messages();
-        $ownChat->effacerMessages($ownId, $otherId, $otherId, $ownId);
-
-        $redirectprofil = "/chat";
-        header("Location: " . $redirectprofil );
 
     }
 }
