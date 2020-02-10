@@ -480,6 +480,18 @@
     z-index: 1020;
 }
 
+.wrapper-toast-fmm {
+    position: relative;
+    min-height: 200px;
+}
+
+.toast-fmm {
+    position: absolute;
+
+    bottom: 0;
+    right: 0;
+}
+
 @media (max-width: 576px) {
     .body {
         background: url("../doc/wall-login-small.svg") no-repeat fixed;
@@ -500,6 +512,11 @@
 
     .responsive-dnone {
         display: none;
+    }
+
+    .toast-fmm {
+        bottom: initial;
+        top: 0;
     }
 }
 
