@@ -42,5 +42,8 @@ $router->get('/Mate/List/', 'Mate#Mates');
 $router->get('/Mate/Profile/:id', "Mate#Mate#id");
 $router->get('/Mate/Like/:id', 'Mate#Like#id');
 
+//Message Routes
+$router->get('/Messages', 'Messages#index');
+
 
 echo $router->run();
