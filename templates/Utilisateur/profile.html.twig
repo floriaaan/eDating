@@ -60,8 +60,8 @@
             {% if loop.index0 is divisible by(3) %}
                 <div class="row mx-2 mb-4">
             {% endif %}
-            <div class="card col mx-2">
-                <div class="card-body">
+            <div class=" col-lg-4 p-2 mb-2">
+                <div class="card card-body">
                     <h5 class="card-title">{{ aff.Affinites }}</h5>
                     <h6 class="card-subtitle mb-2 text-muted">Affinité</h6>
                     <p class="card-text">Tu peux rencontrer des gens qui aime les mêmes choses</p>
@@ -69,6 +69,7 @@
                         <input type="submit" class="btn btn-outline-fmm" value="{{ aff.Affinites }}" name="search">
                         <input type="hidden" name="origin" value="affinites">
                     </form>
+
 
                 </div>
             </div>

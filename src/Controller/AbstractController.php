@@ -1,6 +1,7 @@
 <?php
 namespace src\Controller;
 
+use http\Message;
 use src\Model\Bdd;
 use src\Model\Like;
 
@@ -23,6 +24,21 @@ class AbstractController {
         if(isset($_SESSION['USER'])) {
             $this->twig->addGlobal('userr', $_SESSION['USER']);
             $this->twig->addGlobal('likes', (new Like)->SqlGetAll(Bdd::GetInstance(), $_SESSION['USER']->getUID()));
+
+            /*$notifications = (new Messages)->SqlGetUnreadByUser(Bdd::GetInstance(), $_SESSION['USER']->getUID());
+            $notifsWithUser = [];
+            if(!empty($notifications)) {
+
+                foreach ($notifications as $notification) {
+                    $notifsWithUser[] = [
+                        'transmitterUser' => (new User)->SqlGet(Bdd::GetInstance(), $notification->getUTI_ID_UTILISATEUR()),
+                        'message' => $notification
+                    ];
+                }
+                $this->twig->addGlobal('notifications', $notifsWithUser);
+            }*/
+
+
         }
 
 
