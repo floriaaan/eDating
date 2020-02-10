@@ -49,13 +49,14 @@ class MessagesController extends AbstractController
             //messages
             $modelMsg = new Messages();
             $allMsg = $modelMsg->afficherAncienMsg($_SESSION['USER']->getUID(), $id);
+            $user = (new Utilisateur)->SqlGet(Bdd::GetInstance(), $id);
 
             $token = bin2hex(random_bytes(32));
             $_SESSION['token'] = $token;
             return $this->twig->render(
                 'Messages/messages.html.twig', [
                 'allMsg' => $allMsg,
-                'sendToUser' => $id,
+                'user' => $user,
                 'token' => $token
             ]);
         } else {

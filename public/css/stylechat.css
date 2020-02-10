@@ -1,18 +1,4 @@
-/*
-*
-* ==========================================
-* FOR DEMO PURPOSES
-* ==========================================
-*
-*/
-body {
-	/*background-color: #74EBD5;
-	background-image: linear-gradient(90deg, #74EBD5 0%, #9FACE6 100%);*/
-	background-image: url(/doc/wall-white.svg);
-  }
-  .bg-white{
-	background-image: url(/doc/wall-white.svg);
-  }
+
   ::-webkit-scrollbar {
 	width: 5px;
   }
@@ -46,13 +32,4 @@ body {
   input::placeholder {
 	font-size: 0.9rem;
 	color: #999;
-  }
-
-  .row {
-	width: 95vw;
-    margin-left: auto;
-    margin-right: auto;
-    margin-top: 10em;
-    margin-bottom: auto;
-}
   }

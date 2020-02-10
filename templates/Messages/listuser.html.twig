@@ -8,7 +8,7 @@
 
 
 
-    <div class="row rounded-lg overflow-hidden shadow">
+    <div class="rounded-lg overflow-hidden shadow">
     <!-- Users box-->
     <div class="col-5 px-0">
         <div class="bg-white">
@@ -22,10 +22,10 @@
 
                     {% for contact in allContact %}
                         <a class="list-group-item list-group-item-action active text-white rounded-0"
-                           href='/messages/contact/{{ contact.UID }}'>
+                           href='/Messages/Contact/{{ contact.UID }}'>
                             <div class="media"><img
                                         src="/uploads/images/{{ contact.ProfilImgRepo }}/{{ contact.ProfilImgName }}"
-                                        alt="user" width="50" class="rounded-circle">
+                                        alt="{{contact.Prenom}} {{contact.Nom}}" width="50" class="rounded-circle">
                                 <div class="media-body ml-4">
                                     <div class="d-flex align-items-center justify-content-between mb-1">
                                         <h6 class="mb-0">{{ contact.Prenom }} </h6><small
