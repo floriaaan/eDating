@@ -10,8 +10,10 @@
             {% for user in listUser %}
 
                 <div class="card mx-1">
-                    <img class="img-fluid" src="/uploads/images/{{ user.ProfilImgRepo }}/{{ user.ProfilImgName }}"
-                         alt="{{ user.Prenom }}">
+                    <div class="wrapper-img-profile mt-4">
+                        <img class="card-img-top-fmm img" src="/uploads/images/{{ user.ProfilImgRepo }}/{{ user.ProfilImgName }}"
+                             alt="{{ user.Prenom }}">
+                    </div>
                     <div class="card-body">
                         <h5 class="card-title">{{ user.Prenom }} {{ user.Nom }} - {{ user.Age }} ans</h5>
                         <p class="card-text">{{ user.Titre }}</p>
@@ -22,14 +24,15 @@
                         <div class="d-flex justify-content-start">
 
                             {% if user.UID != userr.UID %}
-                                <a href="/Mate/Profile/{{ user.UID }}" class="card-link btn btn-outline-fmm mt-2">Voir son
+                                <a href="/Mate/Profile/{{ user.UID }}" class="card-link btn btn-outline-fmm mt-2">Voir
+                                    son
                                     profil</a>
                                 <a href="/Mate/Like/{{ user.UID }}" class="card-link btn mt-2
                                     {% if user.UID in likes %} btn-danger">
-                                        <i class="fas fa-heart"></i> est Liké</a>
-                                    {% else %} btn-outline-danger">
-                                        <i class="fas fa-heart"></i> Liker</a>
-                                    {% endif %}
+                                <i class="fas fa-heart"></i> est Liké</a>
+                            {% else %} btn-outline-danger">
+                                <i class="fas fa-heart"></i> Liker</a>
+                            {% endif %}
                                 <a href="/Messages/{{ user.UID }}" class="card-link btn btn-outline-primary mt-2">
                                     <i class="fas fa-comment-dots"></i> Messages</a>
                             {% else %}

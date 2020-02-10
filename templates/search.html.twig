@@ -9,8 +9,10 @@
             {% for user in listUser %}
 
                 <div class="card mx-1">
-                    <img class="img-fluid" src="/uploads/images/{{ user.ProfilImgRepo }}/{{ user.ProfilImgName }}"
-                         alt="{{ user.Prenom }}">
+                    <div class="wrapper-img-profile mt-4">
+                        <img class="card-img-top-fmm img" src="/uploads/images/{{ user.ProfilImgRepo }}/{{ user.ProfilImgName }}"
+                             alt="{{ user.Prenom }}">
+                    </div>
                     <div class="card-body">
                         <h5 class="card-title">{{ user.Prenom }} {{ user.Nom }} - {{ user.Age }} ans</h5>
                         <p class="card-text">{{ user.Titre }}</p>
