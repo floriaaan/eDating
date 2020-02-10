@@ -13,30 +13,44 @@ class MessagesController extends AbstractController{
         public function Index()
         {
             if (isset($_SESSION['USER'])) {
-                return $this->message();
+                return $this->pageMessagerie();
             } else {
                 header('Location:/Utilisateur/Login');
             }
 
         }
 
-        public function message(){
+        public function pageMessagerie(){
             if(isset($_SESSION['USER'])) {
+
                 $modelMsg = new Messages();
+
+                //contact
                 $campus = '';
                 $AllContact = $modelMsg->afficherContact($campus);
+
+                //les ID
+                $userid = 1;
+                $contactid = 2;
+
+                //messages
+                $allMsg = $modelMsg->afficherAncienMsg($userid, $contactid);
+
                 return $this->twig->render(
                     'messages.html.twig',[
-                    'AllContact' => $AllContact
-
+                    'AllContact' => $AllContact,
+                    'allMsg'=> $allMsg
                     ]);
+
+
+
             } else {
                 header('Location:/Error');
             }
         }
 
 
-        public function AfficherNbMsg($msg, $contactselect){
+        public function AfficherMsg($msg, $contactselect){
 
             if($msg != ''){
 
@@ -77,40 +91,4 @@ class MessagesController extends AbstractController{
         header("Location: " . $redirectprofil );
 
     }
-
-
-
-    public function getOldMsg($userPseudo){
-        session_start();
-        $mail = $_SESSION['email'];
-
-            
-
-            $user = new Utilisateur();
-            $datas = $user->getUserData($mail);
-            $ownId = $datas['ID_UTI'];
-            $ownChat = new GlobalMessages();
-
-            //avoir l'id du correspondant
-            $idArrayOtherUser = $ownChat->getIdOtherUser($userPseudo, $ownId);
-            $otherId = $idArrayOtherUser['T_U_ID_UTI'];
-
-
-            $AllrecevedAndSendMsged = $ownChat->getAllMsg($ownId, $otherId, $otherId, $ownId);
-
-            foreach ($AllrecevedAndSendMsged as $values){
-                if($values['ID_UTI'] == $ownId){
-                    echo '<div class="d-flex justify-content-end mb-4"><div class="msg_cotainer_send">'.$values['CHA_TEXTE'].'</div><div class="img_cont_msg"><img src="doc/img/photo.jpg" class="rounded-circle user_img_msg"></div></div>';
-                }else{
-                    echo '<div class="d-flex justify-content-start mb-4"><div class="img_cont_msg"><img src="doc/img/photo.jpg" class="rounded-circle user_img_msg"></div><div class="msg_cotainer">'.$values['CHA_TEXTE'].'</div></div>';
-                }
-            }   
-        
-    }
-
-
-
-
-
-
 }

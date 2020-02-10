@@ -41,20 +41,37 @@ Class Messages{
         return $reponse;
     }
     
-    public function afficherAncienMsg($idMsg,$idcontact,$contenu){
+    public function afficherAncienMsg($userid, $contactid){
 
         $bdd = Bdd::GetInstance();
-        $afficher = $bdd->prepare("SELECT  MES_CONTENU
-        FROM MESSAGE
-        WHERE '?'';");
-        $afficher->execute();
-        $datas = $afficher->fetchAll();
+        $afficher = $bdd->prepare("SELECT * FROM MESSAGE
+        WHERE ID_UTILISATEUR LIKE ? OR ID_UTILISATEUR LIKE  ?
+        AND UTI_ID_UTILISATEUR LIKE ? OR UTI_ID_UTILISATEUR LIKE ?
+        ORDER BY MES_DATE LIMIT 50;");
+        $afficher->execute(array($userid,$contactid,$contactid,$userid));
+        $msg = $afficher->fetchAll();
         $afficher->closeCursor();
 
-        return $datas;
+        return $msg;
     }
 
+    public function envoyerMsg($userid, $contactid){
 
+        $bdd = Bdd::GetInstance();
+        $envoyer = $bdd->prepare("INSERT INTO `floriaaan_fym`.`MESSAGE` (`ID_UTILISATEUR`, `UTI_ID_UTILISATEUR`, `MES_DATE`, `MES_CONTENU`) 
+        VALUES ('userid', 'contactid', 'date', 'contenu');");
+        $envoyer->execute([
+            'userid' => $userid,
+            'contactid' => $contactid
+            
+            ]);
+        $envoyer->execute(array($userid,$contactid,$contactid,$userid));
+        $msg = $envoyer->fetchAll();
+
+        return $msg;
+
+
+    }
 
 
 
