@@ -28,8 +28,24 @@ class UtilisateurController extends AbstractController
     {
         if (isset($_SESSION['USER'])) {
             return $this->twig->render(
-                'Utilisateur/profile.html.twig'
+                'Utilisateur/profile.html.twig', [
+                    'affinites' => (new Affinites)->SqlGetAll(Bdd::GetInstance(), $_SESSION['USER']->getUID())
+                ]
 
+            );
+        } else {
+            header('Location:/Error/NoUser');
+        }
+
+    }
+
+    public function MeAlt()
+    {
+        if (isset($_SESSION['USER'])) {
+            return $this->twig->render(
+                'Utilisateur/profile-alt.html.twig', [
+                    'affinites' => (new Affinites)->SqlGetAll(Bdd::GetInstance(), $_SESSION['USER']->getUID())
+                ]
             );
         } else {
             header('Location:/Error/NoUser');
@@ -40,7 +56,7 @@ class UtilisateurController extends AbstractController
     public function Register()
     {
         if ($_POST) {
-            if($_POST['tokenCRSF'] == $_SESSION['token']) {
+            if ($_POST['tokenCRSF'] == $_SESSION['token']) {
                 $dateNow = new DateTime();
                 $sqlRepository = null;
                 $nomImage = null;
@@ -86,10 +102,10 @@ class UtilisateurController extends AbstractController
 
                 $returnAdd = $user->SqlAdd(BDD::getInstance());
                 if ($returnAdd['result']) {
-                    foreach( $listAffinites as $aff) {
+                    foreach ($listAffinites as $aff) {
                         $affinites = new Affinites();
                         $affinites->setAffinites($aff);
-                        $affinites->SqlAdd(Bdd::GetInstance(),$returnAdd['message']);
+                        $affinites->SqlAdd(Bdd::GetInstance(), $returnAdd['message']);
                     }
 
 
@@ -117,7 +133,7 @@ class UtilisateurController extends AbstractController
     {
 
         if ($_POST) {
-            if($_POST['tokenCRSF'] == $_SESSION['token']) {
+            if ($_POST['tokenCRSF'] == $_SESSION['token']) {
                 $bdd = Bdd::GetInstance();
                 $password = $_POST['loginPassword'];
 
@@ -213,8 +229,8 @@ class UtilisateurController extends AbstractController
         $userEmail = $user->SqlGetEmailFromToken(Bdd::GetInstance(), $id);
         if ($_POST) {
 
-                $user->SqlResetPassFromMail(Bdd::GetInstance(), $_POST['changeEmail'], $_POST['changePass'], $_POST['changeToken']);
-                header('Location:/');
+            $user->SqlResetPassFromMail(Bdd::GetInstance(), $_POST['changeEmail'], $_POST['changePass'], $_POST['changeToken']);
+            header('Location:/');
 
 
         } else {
@@ -239,7 +255,6 @@ class UtilisateurController extends AbstractController
         }
 
     }
-
 
 
 }

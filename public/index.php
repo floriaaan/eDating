@@ -24,6 +24,7 @@ $router->get('/Error/NoToken', 'Error#NoToken');
 
 $router->get('/Utilisateur/', 'Utilisateur#Index');
 $router->get('/Utilisateur/Profile', 'Utilisateur#Me');
+$router->get('/Utilisateur/Profile/Alt', 'Utilisateur#MeAlt');
 $router->get('/Utilisateur/Register', 'Utilisateur#Register');
 $router->post('/Utilisateur/Register', 'Utilisateur#Register');
 $router->get('/Utilisateur/Login', 'Utilisateur#Login');
