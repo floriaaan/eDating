@@ -14,24 +14,25 @@
         <div class="bg-white">
 
             <div class="bg-gray px-4 py-2 bg-light">
-                <p class="h5 mb-0 py-1">Recent</p>
+                <p class="h5 mb-0 py-1">Messages</p>
             </div>
 
             <div class="messages-box">
                 <div class="list-group rounded-0">
 
-                    {% for contact in allContact %}
+                    {% for conversation in conversations %}
+
                         <a class="list-group-item list-group-item-action active text-white rounded-0"
-                           href='/Messages/Contact/{{ contact.UID }}'>
+                           href='/Messages/Contact/{{ conversation.contact.UID }}'>
                             <div class="media"><img
-                                        src="/uploads/images/{{ contact.ProfilImgRepo }}/{{ contact.ProfilImgName }}"
-                                        alt="{{contact.Prenom}} {{contact.Nom}}" width="50" class="rounded-circle">
+                                        src="/uploads/images/{{ conversation.contact.ProfilImgRepo }}/{{ conversation.contact.ProfilImgName }}"
+                                        alt="{{conversation.contact.Prenom}} {{conversation.contact.Nom}}" width="50" class="rounded-circle">
                                 <div class="media-body ml-4">
                                     <div class="d-flex align-items-center justify-content-between mb-1">
-                                        <h6 class="mb-0">{{ contact.Prenom }} </h6><small
-                                                class="small font-weight-bold">25 Dec</small>
+                                        <h6 class="mb-0">{{ conversation.contact.Prenom }} </h6><small
+                                                class="small font-weight-bold">{{ conversation.messageDate| date('H:m - d M Y') }}</small>
                                     </div>
-                                    <p class="font-italic mb-0 text-small">liens a mettre du dernier msg </p>
+                                    <p class="font-italic mb-0 text-small">{{ conversation.messageContent }}</p>
                                 </div>
                             </div>
                         </a>

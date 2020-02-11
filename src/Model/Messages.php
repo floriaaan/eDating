@@ -16,17 +16,6 @@ Class Messages
     private $MES_LU;
 
 
-    public function afficherContact($campus)
-    {
-
-
-        $listUser = (new Utilisateur)->SqlGetBy(Bdd::GetInstance(),
-            'SELECT * FROM UTILISATEUR WHERE UTI_CAMPUS =:param', $campus);
-
-        return $listUser;
-
-    }
-
     public function selectMesParId($idMessage)
     {
 
@@ -67,7 +56,50 @@ Class Messages
         ]);
         return $rSql;
 
+    }
 
+    public function getLastMsg(\PDO $bdd, $transmitterUserID, $meUserID)
+    {
+        $query = $bdd->prepare('SELECT * FROM MESSAGE WHERE (ID_UTILISATEUR =:MUID AND UTI_ID_UTILISATEUR =:TUID)
+                         OR (ID_UTILISATEUR =:TUID AND UTI_ID_UTILISATEUR =:MUID) ORDER BY MES_DATE DESC LIMIT 1');
+        $query->execute([
+            'MUID' => $meUserID,
+            'TUID' => $transmitterUserID
+        ]);
+        $rSql = $query->fetch();
+        return $rSql;
+    }
+
+    public function SqlGetUnreadByUser(\PDO $bdd, $UserID)
+    {
+        $query = $bdd->prepare('SELECT * FROM MESSAGE 
+                        WHERE UTI_ID_UTILISATEUR =:MUID AND MES_LU = 0 ORDER BY MES_DATE DESC');
+        $query->execute([
+            'MUID' => $UserID
+        ]);
+        $rSql = $query->fetchAll();
+        return $rSql;
+    }
+
+    public function SqlSetToReadMsg(\PDO $bdd, $transmitterUserID, $meUserID)
+    {
+        $query = $bdd->prepare('SELECT * FROM MESSAGE 
+                        WHERE (ID_UTILISATEUR =:TUID AND UTI_ID_UTILISATEUR =:MUID) AND MES_LU = 0');
+        $query->execute([
+            'MUID' => $meUserID,
+            'TUID' => $transmitterUserID
+        ]);
+        $ListMessage = $query->fetchAll();
+        $rValue = true;
+        foreach ($ListMessage as $message) {
+
+            $updateQuery = $bdd->prepare('UPDATE MESSAGE SET MES_LU = 1 WHERE ID_MESSAGE =:ID');
+            $rSql = $updateQuery->execute(['ID' => $message['ID_MESSAGE']]);
+
+            $rValue = ($rSql != false);
+        }
+
+        return $rValue;
     }
 
 

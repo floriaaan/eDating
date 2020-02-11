@@ -69,14 +69,14 @@
 
     {% if notifications is defined and notifications is not null %}
 
-    <div class="position-absolute d-flex flex-column justify-content-end w-100 align-items-end p-2" style="z-index: 5000">
+    <div class="position-fixed d-flex flex-column justify-content-end w-100 align-items-end p-2" style="z-index: 5000">
 
         {% for notif in notifications %}
         <div class="toast" role="alert" aria-live="assertive" aria-atomic="true" data-autohide="false">
             <div class="toast-header">
                 <img src="/doc/fmm.svg" class="rounded mr-2" height="20px" alt="...">
                 <strong class="mr-auto">Nouveau message</strong>
-                <small class="text-muted">{{ notif.message.MES_DATE|date('D d.m.Y') }}</small>
+                <small class="text-muted">{{ notif.messageDate | date('H:m d/m/y') }}</small>
                 <button type="button" class="ml-2 mb-1 close" data-dismiss="toast" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>
@@ -84,7 +84,7 @@
             <div class="toast-body">
                 {{ notif.transmitterUser.Prenom }} {{ notif.transmitterUser.Nom }} vous a envoyé un message
                 <hr>
-                {{ notif.message.MES_CONTENU }}
+                {{ notif.messageContent }}
             </div>
         </div>
         {% endfor %}

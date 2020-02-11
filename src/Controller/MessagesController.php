@@ -28,13 +28,23 @@ class MessagesController extends AbstractController
 
             //contact
             $campus = $_SESSION['USER']->getCampus();
-            $AllContact = (new Messages)->afficherContact($campus);
-            //$AllLastMsg = ();
+            $AllContact = (new Utilisateur)->SqlGetBy(Bdd::GetInstance(), 'SELECT * FROM UTILISATEUR
+                WHERE UTI_CAMPUS=:param', $campus);
 
+
+            $Conversations = [];
+            foreach ($AllContact as $contact) {
+                $message = (new Messages)->getLastMsg(Bdd::GetInstance(), $contact->getUID(), $_SESSION['USER']->getUID());
+
+                $Conversations[] = [
+                    'contact' => $contact,
+                    'messageContent' => $message['MES_CONTENU'],
+                    'messageDate' => $message['MES_DATE']
+                ];
+            }
             return $this->twig->render(
                 'Messages/listuser.html.twig', [
-                'allContact' => $AllContact,
-                //'allLastMsg' => $allLastMsg
+                'conversations' => $Conversations
             ]);
 
 
@@ -50,6 +60,8 @@ class MessagesController extends AbstractController
             $modelMsg = new Messages();
             $allMsg = $modelMsg->afficherAncienMsg($_SESSION['USER']->getUID(), $id);
             $user = (new Utilisateur)->SqlGet(Bdd::GetInstance(), $id);
+
+            (new Messages)->SqlSetToReadMsg(Bdd::GetInstance(), $id, $_SESSION['USER']->getUID());
 
             $token = bin2hex(random_bytes(32));
             $_SESSION['token'] = $token;
