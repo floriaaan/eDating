@@ -84,7 +84,7 @@
             <div class="toast-body">
                 {{ notif.transmitterUser.Prenom }} {{ notif.transmitterUser.Nom }} vous a envoyé un message
                 <hr>
-                {{ notif.messageContent }}
+                {{ notif.messageContent|length > 50 ? notif.messageContent|slice(0, 50) ~ '...' : notif.messageContent }}
             </div>
         </div>
         {% endfor %}
