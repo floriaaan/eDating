@@ -414,13 +414,7 @@
 }
 
 .wrapper-img-grid {
-    background-color: #E7E7E7;
-    /*border: 1px solid rgba(121, 121, 121, 0.418);*/
-    width: 640px;
-    height: 360px;
     border-radius: 5px;
-    margin-left: auto;
-    margin-right: auto;
 }
 
 /* width */
