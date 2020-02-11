@@ -493,6 +493,39 @@
     right: 0;
 }
 
+.p-top{
+    padding-top: 7vh;
+}
+
+.bg-fmm {
+
+    background-color: #730EBD;
+}
+
+.btn-link {
+    font-weight: 400;
+    color: #730EBD;
+    text-decoration: none;
+}
+
+.btn-link:hover {
+    color: #8325bd;
+    text-decoration: underline;
+}
+
+.form-control:focus {
+    color: #495057;
+    background-color: #fff;
+    border-color: #935cbd;
+    outline: 0;
+    box-shadow: 0 0 0 0.2rem rgba(147, 92, 189, 0.25);
+}
+
+.btn:focus, .btn.focus {
+    outline: 0;
+    box-shadow: 0 0 0 0.2rem rgba(147, 92, 189, 0.25);
+}
+
 @media (max-width: 576px) {
     .body {
         background: url("../doc/wall-login-small.svg") no-repeat fixed;

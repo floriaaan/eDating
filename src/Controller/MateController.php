@@ -17,7 +17,7 @@ class MateController extends AbstractController
         if (isset($_SESSION['USER'])) {
             $user = new Utilisateur();
             $user = $user->SqlGet(Bdd::GetInstance(), $id);
-            return $this->twig->render('mate.html.twig', [
+            return $this->twig->render('Mates/mate.html.twig', [
                     'user' => $user,
                     'affinites' => (new Affinites)->SqlGetAll(Bdd::GetInstance(), $id),
                 ]
@@ -72,7 +72,7 @@ class MateController extends AbstractController
 
             if ($listUser != null) {
                 return $this->twig->render(
-                    'search.html.twig', [
+                    'Mates/listmates.html.twig', [
                         'listUser' => $listUser,
 
                     ]

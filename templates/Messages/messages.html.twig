@@ -6,15 +6,15 @@
     <link rel="stylesheet" href="/css/stylechat.css"> {% endblock %}
 {% block body %}
 
-    <div class="px-4 py-5 chat-box bg-white">
+    <div class="px-4 chat-box bg-white" id="chatbox">
 
 
         <!-- Sender Message-->
         {% for msg in allMsg %}
             {% if msg.ID_UTILISATEUR == user.UID and msg.UTI_ID_UTILISATEUR == userr.UID %}
-                <div class="media w-50 mb-3"><img
+                <div class="media w-50 mt-3"><img
                             src="/uploads/images/{{ user.ProfilImgRepo }}/{{ user.ProfilImgName }}"
-                            alt="{{user.Prenom}} {{user.Nom}}"
+                            alt="{{ user.Prenom }} {{ user.Nom }}"
                             width="50" class="rounded-circle">
                     <div class="media-body ml-3">
                         <div class="bg-light rounded py-2 px-3 mb-2">
@@ -27,9 +27,9 @@
 
                 <!-- Reciever Message-->
             {% elseif msg.ID_UTILISATEUR == userr.UID and msg.UTI_ID_UTILISATEUR == user.UID %}
-                <div class="media w-50 ml-auto mb-3">
+                <div class="media w-50 ml-auto mt-3">
                     <div class="media-body">
-                        <div class="bg-primary rounded py-2 px-3 mb-2">
+                        <div class="bg-fmm rounded py-2 px-3 mb-2">
                             <p class="text-small mb-0 text-white">{{ msg.MES_CONTENU }}</p>
                         </div>
                         <p class="small text-muted">{{ msg.MES_DATE }}</p>
@@ -41,27 +41,34 @@
 
     </div>
 
-
-    <!-- Typing area -->
-    <form action="/Messages/" method="post" class="bg-light">
-        <div class="input-group">
-            <input value="" type="text" name="msg" placeholder="Envoyer un message" aria-describedby="button-addon2"
-                   class="form-control rounded-0 border-0 py-4 bg-light">
-            <div class="input-group-append">
-                <button id="button-addon2" type="submit" class="btn btn-link"><i class="fa fa-paper-plane"></i></button>
+    <div class="p-fixed">
+        <form action="/Messages/" method="post" class="bg-light">
+            <div class="input-group">
+                <input value="" type="text" name="msg" placeholder="Envoyer un message" aria-describedby="button-addon2"
+                       class="form-control rounded-0 border-0 py-4 bg-light">
+                <div class="input-group-append">
+                    <button id="button-addon2" type="submit" class="btn btn-link"><i class="fa fa-paper-plane"></i>
+                    </button>
+                </div>
             </div>
-        </div>
-        <input type="hidden" name="sendToUser" value="{{ user.UID }}">
-        <input type="hidden" name="crsf" value="{{ token }}">
-    </form>
+            <input type="hidden" name="sendToUser" value="{{ user.UID }}">
+            <input type="hidden" name="crsf" value="{{ token }}">
+        </form>
+    </div>
 
 
-<script>
-    $(document).ready(function () {
-        $('.chat-box').scrollTop(100);
-    });
-
-</script>
 
 
+{% endblock %}
+{% block js %}
+    <script>
+        $(document).ready(function () {
+
+            var objDiv = document.getElementById("chatbox");
+            console.log('top', objDiv.scrollTop);
+            console.log('height', objDiv.scrollHeight);
+            objDiv.scrollTop = objDiv.scrollHeight;
+        });
+
+    </script>
 {% endblock %}

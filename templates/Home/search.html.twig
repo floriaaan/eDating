@@ -2,9 +2,9 @@
 {% block title %}{{ parent() }} - Recherche{% endblock %}
 
 {% block body %}
-    <div class="display-3 wall-white ml-5 mt-5 wall-white">{% block search %}Vous cherchez : {{ search }}{% endblock %}</div>
-    <hr class="ml-4 wall-white">
-    <div class="container-fluid p-3 mx-2 wall-white">
+    <div class="display-4 ml-5 mt-5">{% block search %}Vous cherchez : {{ search }}{% endblock %}</div>
+    <hr class="ml-4">
+    <div class="container-fluid p-3 mx-2">
         <div class="card-columns">
             {% for user in listUser %}
 

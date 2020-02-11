@@ -11,9 +11,9 @@
     <link rel="stylesheet" href="/css/fmm.css">
     {% block css %}{% endblock %}
 </head>
-<body>
+<body class="p-top">
 
-<nav class="navbar sticky-top nav-pills navbar-light bg-light justify-content-between wall-white-nav">
+<nav class="navbar fixed-top nav-pills navbar-light bg-light justify-content-between wall-white-nav">
 
 
     <div>
@@ -69,7 +69,7 @@
 
     {% if notifications is defined and notifications is not null %}
 
-    <div class="position-absolute d-flex flex-column justify-content-end w-100 align-items-end p-2" style="z-index: 5000">
+    <div class="position-absolute d-flex flex-column justify-content-end align-items-end p-2" style="z-index: 5000">
 
         {% for notif in notifications %}
         <div class="toast" role="alert" aria-live="assertive" aria-atomic="true" data-autohide="false">
@@ -111,7 +111,7 @@ Footer -->
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
 <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
 <script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.11.4/i18n/jquery-ui-i18n.min.js"></script>
-<script src="chttps://cdnjs.cloudflare.com/ajax/libs/select2/4.0.7/js/select2.min.js"></script>
+
 
 <script>$('.toast').toast('show');</script>
 {% block js %}{% endblock %}

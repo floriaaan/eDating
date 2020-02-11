@@ -27,7 +27,7 @@ class HomeController extends AbstractController
             $user = new Utilisateur();
             $listUser = $user->SqlGetAll(Bdd::GetInstance());
             return $this->twig->render(
-                'map.html.twig', [
+                'Home/map.html.twig', [
                 'userList' => $listUser
             ]);
         } else {
@@ -62,7 +62,7 @@ class HomeController extends AbstractController
 
                 if ($listUser != null && $_POST['origin'] == "index") {
                     return $this->twig->render(
-                        'search.html.twig', [
+                        'Home/search.html.twig', [
                             'listUser' => $listUser,
                             'search' => $_POST['search']
 
@@ -70,7 +70,7 @@ class HomeController extends AbstractController
                     );
                 } elseif ($listUser != null && $_POST['origin'] == "affinites") {
                     return $this->twig->render(
-                        'affsearch.html.twig', [
+                        'Home/affsearch.html.twig', [
                             'listUser' => $listUser,
                             'search' => $_POST['search']
 
