@@ -35,7 +35,7 @@ class AbstractController {
                     $notifsWithUser[] = [
                         'transmitterUser' => (new Utilisateur)->SqlGet(Bdd::GetInstance(), $notification['ID_UTILISATEUR']),
                         'messageContent' => $notification['MES_CONTENU'],
-                        'messageDate' => $notification['MES_DATE']
+                        'messageDate' => $notification['MES_DATE'],
                     ];
                 }
                 $this->twig->addGlobal('notifications', $notifsWithUser);

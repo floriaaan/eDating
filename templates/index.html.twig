@@ -43,7 +43,8 @@
     <div class="dropleft ">
 
         <a href="#" class="dropdown-toggle no-hover" id="navbarDropdown" data-toggle="dropdown" aria-expanded="false">
-            <img src="/uploads/images/{{userr.ProfilImgRepo}}/{{userr.ProfilImgName}}" alt="Utilisateur" style="height: 40px; width: 40px"
+            <img src="/uploads/images/{{ userr.ProfilImgRepo }}/{{ userr.ProfilImgName }}" alt="Utilisateur"
+                 style="height: 40px; width: 40px"
                  class="img-thumbnail rounded-circle">
         </a>
 
@@ -67,11 +68,12 @@
 
 </nav>
 
-    {% if notifications is defined and notifications is not null %}
+{% if notifications is defined and notifications is not null %}
 
-    <div class="position-absolute d-flex flex-column justify-content-end align-items-end p-2" style="z-index: 5000">
+<div class="position-absolute d-flex flex-column justify-content-end align-items-end p-2" style="z-index: 5000">
 
-        {% for notif in notifications %}
+    {% for notif in notifications %}
+
         <div class="toast" role="alert" aria-live="assertive" aria-atomic="true" data-autohide="false">
             <div class="toast-header">
                 <img src="/doc/fmm.svg" class="rounded mr-2" height="20px" alt="...">
@@ -81,16 +83,19 @@
                     <span aria-hidden="true">&times;</span>
                 </button>
             </div>
-            <div class="toast-body">
-                {{ notif.transmitterUser.Prenom }} {{ notif.transmitterUser.Nom }} vous a envoyé un message
-                <hr>
-                {{ notif.messageContent|length > 50 ? notif.messageContent|slice(0, 50) ~ '...' : notif.messageContent }}
-            </div>
+            <a href="/Messages/Contact/{{ notif.transmitterUser.UID }}" class="no-hover mb-1">
+                <div class="toast-body">
+                    {{ notif.transmitterUser.Prenom }} {{ notif.transmitterUser.Nom }} vous a envoyé un message
+                    <hr>
+                    {{ notif.messageContent|length > 50 ? notif.messageContent|slice(0, 50) ~ '...' : notif.messageContent }}
+                </div>
+            </a>
         </div>
-        {% endfor %}
+
+    {% endfor %}
 
     {% endif %}
-    </div>
+</div>
 <!-- Footer
 <footer class="fixed-bottom-custom responsive-dnone font-small wall-white-nav">
 

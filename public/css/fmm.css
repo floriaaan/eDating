@@ -350,7 +350,12 @@
     font-size: 2em;
 }
 
+.no-hover {
+    color:initial;
+}
+
 .no-hover:hover {
+    color:initial;
     text-decoration: none;
 }
 
@@ -526,7 +531,7 @@
         background-size: cover;
     }
 
-    .sticky-top {
+    .fixed-top {
         top: initial;
         position: fixed;
         right: 0;
@@ -545,6 +550,17 @@
     .toast-fmm {
         bottom: initial;
         top: 0;
+    }
+
+    .p-top {
+        padding-top: 0;
+    }
+
+    .dropleft .dropdown-menu {
+        top: auto;
+        bottom: 100%;
+        margin-top: 0;
+        margin-bottom: 0.125rem;
     }
 }
 
