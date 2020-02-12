@@ -72,6 +72,39 @@ class Utilisateur implements \JsonSerializable
 
     }
 
+    public function SqlUpdate(\PDO $bdd)
+    {
+            $requete = $bdd->prepare('UPDATE UTILISATEUR SET 
+                UTI_NOM =:Nom, UTI_PRENOM=:Prenom, UTI_DATE_INSCRIPTION =:DateInscription, UTI_EMAIL=:Email,
+                 UTI_TITRE=:Titre, UTI_DESCRIPTION=:Description, UTI_SEXE=:Sexe, UTI_VILLE=:Ville,
+                 UTI_TEL=:Telephone, UTI_MDP=:Mdp, UTI_CAMPUS=:Campus, UTI_SITUATION=:Situation, UTI_AGE=:Age,
+                  UTI_ATTIRANCE=:Attirance, UTI_IMAGE_NOM =:ProfilImgName, UTI_IMAGE_LIEN=:ProfilImgRepo,
+                   UTI_POS_LAT=:Latitude, UTI_POS_LONG=:Longitude WHERE ID_UTILISATEUR=:UID');
+            return $requete->execute([
+                'Nom' => $this->getNom(),
+                'Prenom' => $this->getPrenom(),
+                'DateInscription' => $this->getDateInscription(),
+                'Email' => $this->getEmail(),
+                'Titre' => $this->getTitre(),
+                'Description' => $this->getDescription(),
+                'Sexe' => $this->getSexe(),
+                'Ville' => $this->getVille(),
+                'Telephone' => $this->getTelephone(),
+                'Mdp' => $this->getMotDePasse(),
+                'Campus' => $this->getCampus(),
+                'Situation' => $this->getSituation(),
+                'Age' => $this->getAge(),
+                'Attirance' => $this->getAttirance(),
+                'ProfilImgName' => $this->getProfilImgName(),
+                'ProfilImgRepo' => $this->getProfilImgRepo(),
+                'Latitude' => $this->getLatitude(),
+                'Longitude' => $this->getLongitude(),
+                'UID' => $this->getUID()
+            ]);
+
+
+    }
+
     public function SqlGetAll(\PDO $bdd)
     {
         $query = $bdd->prepare('SELECT * FROM UTILISATEUR');

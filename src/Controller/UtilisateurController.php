@@ -60,7 +60,7 @@ class UtilisateurController extends AbstractController
         if ($_POST) {
             if ($_POST['tokenCRSF'] == $_SESSION['token']) {
                 $dateNow = new DateTime();
-                
+
 
                 $user = new Utilisateur();
                 $user->setMotDePasse(password_hash($_POST['registerMotDePasse'], PASSWORD_BCRYPT))
@@ -260,12 +260,13 @@ class UtilisateurController extends AbstractController
 
     }
 
-    public function ModifyGet(){
-        if(isset($_SESSION['USER'])) {
+    public function ModifyGet()
+    {
+        if (isset($_SESSION['USER'])) {
             $token = bin2hex(random_bytes(32));
             $_SESSION['token'] = $token;
             return $this->twig->render('Utilisateur/modify.html.twig', [
-                'crsf' => $token
+                'token' => $token
             ]);
         } else {
             header('Location:/Utilisateur/Login');
@@ -273,38 +274,39 @@ class UtilisateurController extends AbstractController
         return;
     }
 
-    public function ModifyPost(){
-        if(isset($_SESSION['USER'])) {
-            if($_POST && $_POST['crsf'] == $_SESSION['token']) {
-                $modifUser = new Utilisateur();
-                if(isset($_POST['mTitre'])) {
-                    $modifUser= $modifUser->setTitre($_POST['mTitre']);
+    public function ModifyPost()
+    {
+        if (isset($_SESSION['USER'])) {
+            if ($_POST && $_POST['crsf'] == $_SESSION['token']) {
+                $modifUser = (new Utilisateur)->SqlGet(Bdd::GetInstance(), $_SESSION['USER']->getUID());
+                if (isset($_POST['mTitre'])) {
+                    $modifUser = $modifUser->setTitre($_POST['mTitre']);
                 }
-                if(isset($_POST['mDescription'])) {
-                    $modifUser= $modifUser->setDescription($_POST['mDescription']);
+                if (isset($_POST['mDescription'])) {
+                    $modifUser = $modifUser->setDescription($_POST['mDescription']);
                 }
-                if(isset($_POST['mVille'])) {
-                    $modifUser= $modifUser->setVille($_POST['mVille']);
+                if (isset($_POST['mVille'])) {
+                    $modifUser = $modifUser->setVille($_POST['mVille']);
                 }
-                if(isset($_POST['mCampus'])) {
-                    $modifUser= $modifUser->setCampus($_POST['mCampus']);
+                if (isset($_POST['mCampus'])) {
+                    $modifUser = $modifUser->setCampus($_POST['mCampus']);
                 }
-                if(isset($_POST['mSituaton'])) {
-                    $modifUser= $modifUser->setSituation($_POST['mSituation']);
+                if (isset($_POST['mSituaton'])) {
+                    $modifUser = $modifUser->setSituation($_POST['mSituation']);
                 }
-                if(isset($_POST['mAge'])) {
-                    $modifUser= $modifUser->setAge($_POST['mAge']);
+                if (isset($_POST['mAge'])) {
+                    $modifUser = $modifUser->setAge($_POST['mAge']);
                 }
-                if(isset($_POST['mAttirance'])) {
-                    $modifUser= $modifUser->setAttirance($_POST['mAttirance']);
-                }   
-                if(isset($_POST['mLong'])) {
-                    $modifUser= $modifUser->setLongitude($_POST['mlong']);
-                }   
-                if(isset($_POST['mLat'])) {
-                    $modifUser= $modifUser->setLatitude($_POST['mlat']);
-                }   
-                if(isset($_FILES['mProfilImg']['name'])) {
+                if (isset($_POST['mAttirance'])) {
+                    $modifUser = $modifUser->setAttirance($_POST['mAttirance']);
+                }
+                if (isset($_POST['mLong'])) {
+                    $modifUser = $modifUser->setLongitude($_POST['mlong']);
+                }
+                if (isset($_POST['mLat'])) {
+                    $modifUser = $modifUser->setLatitude($_POST['mlat']);
+                }
+                if (isset($_FILES['mProfilImg']['name'])) {
                     $sqlRepository = null;
                     $nomImage = null;
                     if (!empty($_FILES['mProfilImg']['name'])) {
@@ -312,7 +314,7 @@ class UtilisateurController extends AbstractController
                         $extension = pathinfo($_FILES['mProfilImg']['name'], PATHINFO_EXTENSION);
                         if (in_array(strtolower($extension), $tabExt)) {
                             $nomImage = md5(uniqid()) . '.' . $extension;
-    
+
                             $sqlRepository = $_SESSION['USER']->getEmail();
                             $repository = './uploads/images/' . $_SESSION['USER']->getEmail();
                             if (!is_dir($repository)) {
@@ -323,11 +325,12 @@ class UtilisateurController extends AbstractController
                     }
                     $modifUser->setProfilImgName($nomImage);
                     $modifUser->setProfilImgRepo($sqlRepository);
-                }     
+                }
+
+                $modifUser->SqlUpdate(Bdd::GetInstance());
             }
-            
-            
-           
+
+
             /*if(!empty($_FILES['mImages'])){
                 foreach($_FILES['mImages'] as $image){
                     $sqlRepository = null;
@@ -351,9 +354,8 @@ class UtilisateurController extends AbstractController
 
                 }
             }*/
-            
-            $modifUser->SqlUpdate(Bdd::GetInstance());
-            
+
+
             header('Location:/Utilisateur/Profile');
         } else {
             header('Location:/Utilisateur/Login');
