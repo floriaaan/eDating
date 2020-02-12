@@ -34,6 +34,7 @@ class Utilisateur implements \JsonSerializable
     private $Affinites;
     private $Likes;
     private $Permission;
+    private $Reports;
 
 
     public function SqlAdd(\PDO $bdd)
@@ -101,7 +102,8 @@ class Utilisateur implements \JsonSerializable
                 ->setLongitude($userSQL['UTI_POS_LONG'])
                 ->setPhotos((new Photos)->SqlGetAll($bdd, $userSQL['ID_UTILISATEUR']))
                 ->setLikes((new Like)->SqlGetAll($bdd, $userSQL['ID_UTILISATEUR']))
-                ->setPermission((new Permission)->SqlGetAll($bdd, $userSQL['ID_UTILISATEUR']));
+                ->setPermission((new Permission)->SqlGetAll($bdd, $userSQL['ID_UTILISATEUR']))
+                ->setReports((new Avertissement)->SqlGetWarnedUser($bdd, $userSQL['ID_UTILISATEUR']));
 
             $listUser[] = $user;
         }
@@ -136,7 +138,8 @@ class Utilisateur implements \JsonSerializable
             ->setLongitude($userSQL['UTI_POS_LONG'])
             ->setPhotos((new Photos)->SqlGetAll($bdd, $userSQL['ID_UTILISATEUR']))
             ->setLikes((new Like)->SqlGetAll($bdd, $userSQL['ID_UTILISATEUR']))
-            ->setPermission((new Permission)->SqlGetAll($bdd, $userSQL['ID_UTILISATEUR']));
+            ->setPermission((new Permission)->SqlGetAll($bdd, $userSQL['ID_UTILISATEUR']))
+            ->setReports((new Avertissement)->SqlGetWarnedUser($bdd, $userSQL['ID_UTILISATEUR']));
         return $user;
     }
 
@@ -172,7 +175,8 @@ class Utilisateur implements \JsonSerializable
                 ->setLongitude($userSQL['UTI_POS_LONG'])
                 ->setPhotos((new Photos)->SqlGetAll($bdd, $userSQL['ID_UTILISATEUR']))
                 ->setLikes((new Like)->SqlGetAll($bdd, $userSQL['ID_UTILISATEUR']))
-                ->setPermission((new Permission)->SqlGetAll($bdd, $userSQL['ID_UTILISATEUR']));
+                ->setPermission((new Permission)->SqlGetAll($bdd, $userSQL['ID_UTILISATEUR']))
+                ->setReports((new Avertissement)->SqlGetWarnedUser($bdd, $userSQL['ID_UTILISATEUR']));
 
             $listUser[] = $user;
         }
@@ -212,7 +216,8 @@ class Utilisateur implements \JsonSerializable
                 ->setLongitude($userSQL['UTI_POS_LONG'])
                 ->setPhotos((new Photos)->SqlGetAll($bdd, $userSQL['ID_UTILISATEUR']))
                 ->setLikes((new Like)->SqlGetAll($bdd, $userSQL['ID_UTILISATEUR']))
-                ->setPermission((new Permission)->SqlGetAll($bdd, $userSQL['ID_UTILISATEUR']));
+                ->setPermission((new Permission)->SqlGetAll($bdd, $userSQL['ID_UTILISATEUR']))
+                ->setReports((new Avertissement)->SqlGetWarnedUser($bdd, $userSQL['ID_UTILISATEUR']));
 
             $listUser[] = $user;
         }
@@ -718,6 +723,26 @@ class Utilisateur implements \JsonSerializable
         return $this;
     }
 
+
+
+    /**
+     * @return mixed
+     */
+    public function getReports()
+    {
+        return $this->Reports;
+    }
+
+    /**
+     * @param mixed $Reports
+     * @return Utilisateur
+     */
+    public function setReports($Reports)
+    {
+        $this->Reports = $Reports;
+        return $this;
+    }
+
     /**
      * @inheritDoc
      */
@@ -746,7 +771,8 @@ class Utilisateur implements \JsonSerializable
             'Photos' => $this->getPhotos(),
             'Affinites' => $this->getAffinites(),
             'Likes' => $this->getLikes(),
-            'Permissions' =>$this->getPermission()
+            'Permissions' =>$this->getPermission(),
+            'Reports' => $this->getReports()
         ];
     }
 
