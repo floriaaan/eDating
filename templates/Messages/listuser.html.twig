@@ -1,28 +1,45 @@
 {% extends "index.html.twig" %}
 {% block title %}{{ parent() }} - Messages {% endblock %}
 
-
 {% block css %}
-    <link rel="stylesheet" href="/css/stylechat.css"> {% endblock %}
+
+    <style>
+        .fmm-active {
+            background-image: linear-gradient(to left bottom, #730ebd, #9600b4, #b000aa, #c600a0, #d80096);
+            transition: 0.5s;
+            background-size: 200% auto;
+            border-bottom: solid 1px white;
+        }
+
+        .fmm-active:hover {
+            background-position: right center;
+
+        }
+
+    </style>
+
+{% endblock %}
+
 {% block body %}
 
 
 
     <div class="rounded-lg overflow-hidden shadow">
     <!-- Users box-->
-    <div class="col-5 px-0">
+    <div class="px-0">
         <div class="bg-white">
 
             <div class="bg-gray px-4 py-2 bg-light">
-                <p class="h5 mb-0 py-1">Messages</p>
+                <p class="display-3 mb-3 py-1">Messages</p>
             </div>
 
+            <hr>
             <div class="messages-box">
                 <div class="list-group rounded-0">
 
                     {% for conversation in conversations %}
 
-                        <a class="list-group-item list-group-item-action active text-white rounded-0"
+                        <a class="list-group-item list-group-item-action fmm-active text-white  mb-2"
                            href='/Messages/Contact/{{ conversation.contact.UID }}'>
                             <div class="media"><img
                                         src="/uploads/images/{{ conversation.contact.ProfilImgRepo }}/{{ conversation.contact.ProfilImgName }}"

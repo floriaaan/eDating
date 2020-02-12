@@ -1,0 +1,38 @@
+{% extends "index.html.twig" %}
+
+{% block body %}
+
+    <h5 class="display-3 ml-2">Signaler {{ warnUser.Prenom }} {{ warnUser.Nom }}</h5>
+    <hr>
+
+    <div class="container mb-3">
+        <form method="post" action="/Mate/Report/">
+            <div class="form-group mb-3">
+                <label for="wID">Utilisateur signalé.e.s</label>
+                <input type="text" class="form-control form-control-lg" readonly id="wID"
+                       value="{{ warnUser.Prenom }} {{ warnUser.Nom }}">
+                <input type="hidden" name="wUID" value="{{ warnUser.UID }}">
+            </div>
+            <div class="form-group mb-3">
+                <label for="wType">Type du signalement</label>
+                <select class="form-control" id="wType" name="wType" required>
+                    <option>Contenu inapproprié ou dangereux</option>
+                    <option>Contenu trop explicite</option>
+                    <option>Harcèlement</option>
+                    <option>Suspect ou publie du spam</option>
+                    <option>Exprime des tendances autodestructrices ou suicidaires</option>
+                </select>
+            </div>
+
+            <div class="form-group mb-4">
+                <label for="wContenu">Contenu du signalement</label>
+                <textarea class="form-control" id="wContenu" name="wContenu" rows="10" required></textarea>
+            </div>
+
+            <button type="submit" class="btn btn-danger mb-2">Signaler</button>
+
+            <input type="hidden" name="crsf" value="{{ token }}">
+        </form>
+    </div>
+
+{% endblock %}

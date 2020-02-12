@@ -33,6 +33,7 @@ class Utilisateur implements \JsonSerializable
     private $Photos;
     private $Affinites;
     private $Likes;
+    private $Permission;
 
 
     public function SqlAdd(\PDO $bdd)
@@ -99,7 +100,8 @@ class Utilisateur implements \JsonSerializable
                 ->setLatitude($userSQL['UTI_POS_LAT'])
                 ->setLongitude($userSQL['UTI_POS_LONG'])
                 ->setPhotos((new Photos)->SqlGetAll($bdd, $userSQL['ID_UTILISATEUR']))
-                ->setLikes((new Like)->SqlGetAll($bdd, $userSQL['ID_UTILISATEUR']));
+                ->setLikes((new Like)->SqlGetAll($bdd, $userSQL['ID_UTILISATEUR']))
+                ->setPermission((new Permission)->SqlGetAll($bdd, $userSQL['ID_UTILISATEUR']));
 
             $listUser[] = $user;
         }
@@ -133,7 +135,8 @@ class Utilisateur implements \JsonSerializable
             ->setLatitude($userSQL['UTI_POS_LAT'])
             ->setLongitude($userSQL['UTI_POS_LONG'])
             ->setPhotos((new Photos)->SqlGetAll($bdd, $userSQL['ID_UTILISATEUR']))
-            ->setLikes((new Like)->SqlGetAll($bdd, $userSQL['ID_UTILISATEUR']));
+            ->setLikes((new Like)->SqlGetAll($bdd, $userSQL['ID_UTILISATEUR']))
+            ->setPermission((new Permission)->SqlGetAll($bdd, $userSQL['ID_UTILISATEUR']));
         return $user;
     }
 
@@ -168,7 +171,8 @@ class Utilisateur implements \JsonSerializable
                 ->setLatitude($userSQL['UTI_POS_LAT'])
                 ->setLongitude($userSQL['UTI_POS_LONG'])
                 ->setPhotos((new Photos)->SqlGetAll($bdd, $userSQL['ID_UTILISATEUR']))
-                ->setLikes((new Like)->SqlGetAll($bdd, $userSQL['ID_UTILISATEUR']));
+                ->setLikes((new Like)->SqlGetAll($bdd, $userSQL['ID_UTILISATEUR']))
+                ->setPermission((new Permission)->SqlGetAll($bdd, $userSQL['ID_UTILISATEUR']));
 
             $listUser[] = $user;
         }
@@ -207,7 +211,8 @@ class Utilisateur implements \JsonSerializable
                 ->setLatitude($userSQL['UTI_POS_LAT'])
                 ->setLongitude($userSQL['UTI_POS_LONG'])
                 ->setPhotos((new Photos)->SqlGetAll($bdd, $userSQL['ID_UTILISATEUR']))
-                ->setLikes((new Like)->SqlGetAll($bdd, $userSQL['ID_UTILISATEUR']));
+                ->setLikes((new Like)->SqlGetAll($bdd, $userSQL['ID_UTILISATEUR']))
+                ->setPermission((new Permission)->SqlGetAll($bdd, $userSQL['ID_UTILISATEUR']));
 
             $listUser[] = $user;
         }
@@ -696,6 +701,24 @@ class Utilisateur implements \JsonSerializable
 
 
     /**
+     * @return mixed
+     */
+    public function getPermission()
+    {
+        return $this->Permission;
+    }
+
+    /**
+     * @param mixed $Permission
+     * @return Utilisateur
+     */
+    public function setPermission($Permission)
+    {
+        $this->Permission = $Permission;
+        return $this;
+    }
+
+    /**
      * @inheritDoc
      */
     public function jsonSerialize()
@@ -722,7 +745,8 @@ class Utilisateur implements \JsonSerializable
             'Longitude' => $this->getLatitude(),
             'Photos' => $this->getPhotos(),
             'Affinites' => $this->getAffinites(),
-            'Likes' => $this->getLikes()
+            'Likes' => $this->getLikes(),
+            'Permissions' =>$this->getPermission()
         ];
     }
 

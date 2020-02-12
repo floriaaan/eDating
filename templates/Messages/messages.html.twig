@@ -2,6 +2,7 @@
 {% block title %}{{ parent() }} - Messages {% endblock %}
 
 
+
 {% block css %}
     <link rel="stylesheet" href="/css/stylechat.css"> {% endblock %}
 {% block body %}
@@ -44,6 +45,7 @@
     <div class="p-fixed">
         <form action="/Messages/" method="post" class="bg-light">
             <div class="input-group">
+                <a href="/Messages/" class="btn btn-link my-auto"><i class="fas fa-chevron-circle-left"></i></a>
                 <input value="" type="text" name="msg" placeholder="Envoyer un message" aria-describedby="button-addon2"
                        class="form-control rounded-0 border-0 py-4 bg-light" required>
                 <div class="input-group-append">

@@ -40,15 +40,21 @@ $router->post('/Utilisateur/ChangePassword/', 'Utilisateur#ChangePassword');
 
 //Mates Routes
 $router->get('/Mate/', 'Mate#Mates');
-$router->get('/Mate/List/', 'Mate#Mates');
+$router->get('/Mate/List/', 'Mate#ListMates');
 $router->get('/Mate/Profile/:id', "Mate#Mate#id");
 $router->get('/Mate/Like/:id', 'Mate#Like#id');
+$router->get('/Mate/Report/:id', 'Mate#ReportForm#id');
+$router->post('/Mate/Report/', 'Mate#ReportPost');
 
 //Message Routes
 $router->get('/Messages/', 'Messages#Index');
 $router->get('/Messages/List', 'Messages#Index');
 $router->get('/Messages/Contact/:id', 'Messages#ContactForm#id');
 $router->post('/Messages', 'Messages#envoyerMsg');
+
+//Admin Routes
+$router->get('/Admin/Test', 'Admin#Test');
+
 
 
 echo $router->run();
