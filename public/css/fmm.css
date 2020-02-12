@@ -578,4 +578,14 @@
     .responsive-dyes {
         display: block;
     }
+    .card-body{
+        width: 90vw;
+    }
 }
+@media (min-width: 576px){
+    .card-columns .card {
+    display: inline-block;
+    width: 90vw;
+}
+}
+
