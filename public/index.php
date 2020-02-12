@@ -55,6 +55,8 @@ $router->post('/Messages', 'Messages#envoyerMsg');
 //Admin Routes
 $router->get('/Admin/Test', 'Admin#Test');
 $router->get('/Admin/', 'Admin#Panel');
+$router->get('/Admin/Report/:id', 'Admin#Report#id');
+$router->get('/Admin/Report/Delete/:id', 'Admin#ReportDelete#id');
 
 
 
