@@ -58,8 +58,7 @@ class UtilisateurController extends AbstractController
         if ($_POST) {
             if ($_POST['tokenCRSF'] == $_SESSION['token']) {
                 $dateNow = new DateTime();
-                $sqlRepository = null;
-                $nomImage = null;
+                
 
                 $user = new Utilisateur();
                 $user->setMotDePasse(password_hash($_POST['registerMotDePasse'], PASSWORD_BCRYPT))
@@ -79,6 +78,9 @@ class UtilisateurController extends AbstractController
                     ->setLatitude($_POST['registerLat'])
                     ->setLongitude($_POST['registerLong']);
 
+
+                $sqlRepository = null;
+                $nomImage = null;
                 if (!empty($_FILES['registerImg']['name'])) {
                     $tabExt = array('jpg', 'gif', 'png', 'jpeg');    // Extensions autorisees
                     $extension = pathinfo($_FILES['registerImg']['name'], PATHINFO_EXTENSION);
@@ -282,8 +284,32 @@ class UtilisateurController extends AbstractController
                 $_POST['mAttirance'];
                 $_POST['mLongitude'];
                 $_POST['mlatitude'];
-                $_POST['mImage'];
+                $_POST['mImageProfil'];
 
+                if(!empty($_FILES['mImages'])){
+                    foreach($_FILES['mImages'] as $image){
+                        $sqlRepository = null;
+                $nomImage = null;
+                if (!empty($_FILES['mImages']['name'])) {
+                    $tabExt = array('jpg', 'gif', 'png', 'jpeg');    // Extensions autorisees
+                    $extension = pathinfo($_FILES['mImages']['name'], PATHINFO_EXTENSION);
+                    if (in_array(strtolower($extension), $tabExt)) {
+                        $nomImage = md5(uniqid()) . '.' . $extension;
+
+                        $sqlRepository = $_POST['registerEmail'];
+                        $repository = './uploads/images/' . $_POST['registerEmail'];
+                        if (!is_dir($repository)) {
+                            mkdir($repository, 0777, true);
+                        }
+                        move_uploaded_file($_FILES['mImages']['tmp_name'], $repository . '/' . $nomImage);
+                    }
+                }
+                $modifUser->setProfilImgName($nomImage);
+                $modifUser->setProfilImgRepo($sqlRepository);
+
+                    }
+                }
+            
             
             
         } else {
