@@ -5,6 +5,7 @@ namespace src\Controller;
 
 
 use src\Model\Affinites;
+use src\Model\Avertissement;
 use src\Model\Bdd;
 use src\Model\Like;
 use src\Model\Utilisateur;
@@ -47,7 +48,7 @@ class MateController extends AbstractController
         }
     }
 
-    public function Mates()
+    public function ListMates()
     {
         if (isset($_SESSION['USER'])) {
             $_SESSION['USER'] = (new Utilisateur)->SqlGet(Bdd::GetInstance(), $_SESSION['USER']->getUID());
@@ -83,6 +84,40 @@ class MateController extends AbstractController
 
                 );
             }
+        } else {
+            header('Location:/Error/NoUser');
+        }
+    }
+
+    public function ReportForm($id){
+
+        if (isset($_SESSION['USER'])) {
+            $warnUser = (new Utilisateur)->SqlGet(Bdd::GetInstance(), $id);
+            $token = bin2hex(random_bytes(32));
+            $_SESSION['token'] = $token;
+            return $this->twig->render(
+                'Mates/report.html.twig', [
+                    'warnUser' => $warnUser,
+                    'token' => $token
+                ]
+            );
+
+        } else {
+            header('Location:/Error/NoUser');
+        }
+    }
+
+    public function ReportPost(){
+        if (isset($_SESSION['USER']) && $_POST && $_POST['crsf'] == $_SESSION['token']) {
+
+            $warn = new Avertissement();
+            $warn->setDate((new \DateTime)->format('Y-m-d H:m:s'))
+                ->setType(htmlspecialchars($_POST['wType']))
+                ->setContenu(htmlspecialchars($_POST['wContenu']));
+            $warn->SqlAdd(Bdd::GetInstance(), $_POST['wUID'], $_SESSION['USER']->getUID());
+
+            header('Location:/');
+
         } else {
             header('Location:/Error/NoUser');
         }
