@@ -54,11 +54,21 @@
 
         <div class="dropdown-menu" aria-labelledby="navbarDropdown">
             {% if userr is defined %}
+                <a class="dropdown-item" href="/">Accueil</a>
+                <h6 class="dropdown-header">Fonctionnalités</h6>
                 <a class="dropdown-item" href="/Messages/">Vos Messages</a>
                 <a class="dropdown-item" href="/Mate/List">Vos Mates</a>
                 <a class="dropdown-item" href="/Utilisateur/Profile">Votre compte</a>
-                <a class="dropdown-item" href="/Utilisateur/Profile/Settings">Vos paramètres</a>
+
+                {% if admin %}
+                    <div class="dropdown-divider"></div>
+                    <h6 class="dropdown-header">Administrateur</h6>
+                    <a class="dropdown-item" href="/Admin">Panneau d'administrateur</a>
+                {% endif %}
+
                 <div class="dropdown-divider"></div>
+                <h6 class="dropdown-header">Paramètres</h6>
+                <a class="dropdown-item" href="/Utilisateur/Profile/Settings">Modifier votre profil</a>
                 <a class="dropdown-item" href="/Utilisateur/Disconnect">Se déconnecter</a>
             {% else %}
 
@@ -68,7 +78,6 @@
         </div>
 
     </div>
-
 
 
 </nav>

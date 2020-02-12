@@ -33,6 +33,19 @@ class Avertissement
         return $listWarn;
     }
 
+    public function SqlGet(\PDO $bdd, $warnID) {
+        $query = $bdd->prepare('SELECT * FROM SIGNALEMENT WHERE ID_SIGNALEMENT =:ID');
+        $query->execute(['ID' => $warnID]);
+        $rSql = $query->fetch();
+        $w = new Avertissement();
+        $w->setType($rSql['SIG_TYPE'])
+            ->setContenu($rSql['SIG_CONTENU'])
+            ->setDate($rSql['SIG_DATE'])
+            ->setWID($rSql['ID_SIGNALEMENT']);
+
+        return $w;
+    }
+
     public function SqlAdd(\PDO $bdd, $userID, $sessionID)
     {
         try {

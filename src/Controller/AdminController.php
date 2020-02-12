@@ -4,6 +4,7 @@
 namespace src\Controller;
 
 
+use src\Model\Avertissement;
 use src\Model\Bdd;
 use src\Model\Utilisateur;
 
@@ -21,6 +22,22 @@ class AdminController extends AbstractController
         return $this->twig->render('Admin/panel.html.twig', [
             'listUser' => $listUser
         ]);
+    }
+
+    public function Report($id) {
+        self::roleNeed();
+        $rep = (new Avertissement)->SqlGetWarnedUser(Bdd::GetInstance(), $id);
+        $user = (new Utilisateur)->SqlGet(Bdd::GetInstance(), $id);
+        return $this->twig->render('Admin/report.html.twig', [
+            'listReports' => $rep,
+            'user' => $user
+        ]);
+    }
+
+    public function ReportDelete($id) {
+        self::roleNeed();
+        $rep = (new Avertissement)->SqlDelete(Bdd::GetInstance(), $id);
+        header('Location:/Admin/');
     }
 
     /**
