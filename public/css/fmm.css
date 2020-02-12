@@ -529,11 +529,8 @@
     display: none;
 }
 
-@media (max-width: 576px) {
-    .body {
-        background: url("../doc/wall-login-small.svg") no-repeat fixed;
-        background-size: cover;
-    }
+@media (max-width: 900px) {
+    
 
     .fixed-top {
         top: initial;
@@ -579,7 +576,7 @@
         display: block;
     }
     .card-body{
-        width: 90vw;
+        
     }
 }
 
@@ -710,3 +707,4 @@
 .has-val.input100 + .focus-input100::before {
     width: 100%;
 }
+
