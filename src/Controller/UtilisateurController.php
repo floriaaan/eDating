@@ -12,6 +12,8 @@ use Swift_Mailer;
 use Swift_Message;
 use Swift_SmtpTransport;
 
+$modifUser = new Utilisateur();
+
 class UtilisateurController extends AbstractController
 {
     public function Index()
@@ -273,45 +275,86 @@ class UtilisateurController extends AbstractController
 
     public function ModifyPost(){
         if(isset($_SESSION['USER'])) {
-            if($_POST && $_POST['crsf'] == $_SESSION['token']) 
-            $modifUser = new Utilisateur();
-                $_POST['mTitre'];
-                $_POST['mDescription'];
-                $_POST['mVille'];
-                $_POST['mCampus'];
-                $_POST['mSituation'];
-                $_POST['mAge'];
-                $_POST['mAttirance'];
-                $_POST['mLongitude'];
-                $_POST['mlatitude'];
-                $_POST['mImageProfil'];
-
-                if(!empty($_FILES['mImages'])){
-                    foreach($_FILES['mImages'] as $image){
-                        $sqlRepository = null;
-                $nomImage = null;
-                if (!empty($_FILES['mImages']['name'])) {
-                    $tabExt = array('jpg', 'gif', 'png', 'jpeg');    // Extensions autorisees
-                    $extension = pathinfo($_FILES['mImages']['name'], PATHINFO_EXTENSION);
-                    if (in_array(strtolower($extension), $tabExt)) {
-                        $nomImage = md5(uniqid()) . '.' . $extension;
-
-                        $sqlRepository = $_POST['registerEmail'];
-                        $repository = './uploads/images/' . $_POST['registerEmail'];
-                        if (!is_dir($repository)) {
-                            mkdir($repository, 0777, true);
-                        }
-                        move_uploaded_file($_FILES['mImages']['tmp_name'], $repository . '/' . $nomImage);
-                    }
+            if($_POST && $_POST['crsf'] == $_SESSION['token']) {
+                $modifUser = new Utilisateur();
+                if(isset($_POST['mTitre'])) {
+                    $modifUser= $modifUser->setTitre($_POST['mTitre']);
                 }
+                if(isset($_POST['mDescription'])) {
+                    $modifUser= $modifUser->setDescription($_POST['mDescription']);
+                }
+                if(isset($_POST['mVille'])) {
+                    $modifUser= $modifUser->setVille($_POST['mVille']);
+                }
+                if(isset($_POST['mCampus'])) {
+                    $modifUser= $modifUser->setCampus($_POST['mCampus']);
+                }
+                if(isset($_POST['mSituaton'])) {
+                    $modifUser= $modifUser->setSituation($_POST['mSituation']);
+                }
+                if(isset($_POST['mAge'])) {
+                    $modifUser= $modifUser->setAge($_POST['mAge']);
+                }
+                if(isset($_POST['mAttirance'])) {
+                    $modifUser= $modifUser->setAttirance($_POST['mAttirance']);
+                }   
+                if(isset($_POST['mLong'])) {
+                    $modifUser= $modifUser->setLongitude($_POST['mlong']);
+                }   
+                if(isset($_POST['mLat'])) {
+                    $modifUser= $modifUser->setLatitude($_POST['mlat']);
+                }   
+                if(isset($_FILES['mProfilImg']['name'])) {
+                    $sqlRepository = null;
+                    $nomImage = null;
+                    if (!empty($_FILES['mProfilImg']['name'])) {
+                        $tabExt = array('jpg', 'gif', 'png', 'jpeg');    // Extensions autorisees
+                        $extension = pathinfo($_FILES['mProfilImg']['name'], PATHINFO_EXTENSION);
+                        if (in_array(strtolower($extension), $tabExt)) {
+                            $nomImage = md5(uniqid()) . '.' . $extension;
+    
+                            $sqlRepository = $_SESSION['USER']->getEmail();
+                            $repository = './uploads/images/' . $_SESSION['USER']->getEmail();
+                            if (!is_dir($repository)) {
+                                mkdir($repository, 0777, true);
+                            }
+                            move_uploaded_file($_FILES['mProfilImg']['tmp_name'], $repository . '/' . $nomImage);
+                        }
+                    }
+                    $modifUser->setProfilImgName($nomImage);
+                    $modifUser->setProfilImgRepo($sqlRepository);
+                }     
+            }
+            
+            
+           
+            /*if(!empty($_FILES['mImages'])){
+                foreach($_FILES['mImages'] as $image){
+                    $sqlRepository = null;
+                    $nomImage = null;
+                    if (!empty($_FILES['mImages']['name'])) {
+                        $tabExt = array('jpg', 'gif', 'png', 'jpeg');    // Extensions autorisees
+                        $extension = pathinfo($_FILES['mImages']['name'], PATHINFO_EXTENSION);
+                        if (in_array(strtolower($extension), $tabExt)) {
+                            $nomImage = md5(uniqid()) . '.' . $extension;
+
+                            $sqlRepository = $_POST['registerEmail'];
+                            $repository = './uploads/images/' . $_POST['registerEmail'];
+                            if (!is_dir($repository)) {
+                                mkdir($repository, 0777, true);
+                            }
+                            move_uploaded_file($_FILES['mImages']['tmp_name'], $repository . '/' . $nomImage);
+                        }
+                    }
                     $modifUser->setProfilImgName($nomImage);
                     $modifUser->setProfilImgRepo($sqlRepository);
 
                 }
-            }
+            }*/
             
+            $modifUser->SqlUpdate(Bdd::GetInstance());
             
-            
+            header('Location:/Utilisateur/Profile');
         } else {
             header('Location:/Utilisateur/Login');
         }
