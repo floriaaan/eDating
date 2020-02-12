@@ -27,22 +27,16 @@
 
                     <input type="text" name="mDescription" class="form-control mb-2" value="{{ userr.Description }}">
 
-<<<<<<< HEAD
-                    <input type="text" name="mVille" class="form-control mb-2" value="{{ userr.Ville }}">
-
-                    <input type="text" name="mVille" class="form-control mb-2" value="{{ userr.Affinites }}">
-=======
            
->>>>>>> 567442107412f59ced4c5dbf32feb0512e6c773d
 
-<div class="mt-5 d-flex justify-content-between">
+                    <div class="mt-5 d-flex justify-content-between">
 
                    
 
                 </div>
 
 
-                <hr>
+                </hr>
 
 
               
@@ -54,7 +48,7 @@
                 <div class=" mt-4 d-flex justify-content-between">
                     <div class="col-sm-4 text-muted">
                         <label for="registerSituation">Situation</label>
-                        <select id="registerSituation" name="registerSituation" class="form-control">
+                        <select id="registerSituation" name="mSituation" class="form-control">
                             <option>Célibataire</option>
                             <option>En couple</option>
                             <option>Marié</option>
@@ -64,7 +58,7 @@
 
                     <div class="col-sm-4 text-muted">
                         <label for="registerAge">Age</label>
-                        <input type="number" id="registerAge" name="registerAge" min="18" max="100" value="18"
+                        <input type="number" id="registerAge" name="mAge" min="18" max="100" value="18"
                                class="form-control" aria-describedby="warnAge">
                         <small id="warnAge" class="form-text text-muted">Personnes majeures uniquement.
                             &#128286;</small>
@@ -73,7 +67,7 @@
 
                     <div class="col-sm-4 text-muted">
                         <label for="registerAttirance">Attirance</label>
-                        <select id="registerAttirance" name="registerAttirance" class="form-control">
+                        <select id="registerAttirance" name="mAttirance" class="form-control">
                             <option>Hétérosexuel</option>
                             <option>Homosexuel</option>
                             <option>Bisexuel</option>
@@ -83,20 +77,20 @@
                 </div>
 
                 <div class=" wrap-input100 validate-input mt-4">
-                    <input class="input100" type="text" id="registerTitre" name="registerTitre">
+                    <input class="input100" type="text" id="mTitre" name="registerTitre">
                     <span class="focus-input100" data-placeholder="Une brève description de vous"></span>
 
 
                 </div>
 
                 <div class=" wrap-input100 validate-input mt-5">
-                    <textarea class="input100 textarea100" id="registerDescription" name="registerDescription"
+                    <textarea class="input100 textarea100" id="mDescription" name="registerDescription"
                               rows="5"></textarea>
                     <span class="focus-input100" data-placeholder="Dites nous en plus"></span>
                 </div>
 
                 <div class="custom-file mt-4">
-                    <input type="file" class="custom-file-input" id="registerImg" name="registerImg">
+                    <input type="file" class="custom-file-input" id="registerImg" name="mImg">
                     <label class="custom-file-label" for="registerImg" id="registerImgName">Choisissez une photo de
                         profil</label>
                 </div>
@@ -113,7 +107,7 @@
 
                     <div class="col-sm-4 wrap-input100 validate-input">
                         <label for="registerCampus">Campus</label>
-                        <select id="registerCampus" name="registerCampus" class="form-control">
+                        <select id="registerCampus" name="mCampus" class="form-control">
                             <option>Madrillet</option>
                             <option>Mont-Saint-Aignan</option>
                             <option>Saint-Marc</option>
@@ -125,7 +119,7 @@
                 </div>
                 <div class="mt-4 mb-3 d-flex justify-content-between">
                     <div class="col-sm-7 wrap-input100 validate-input">
-                        <input type="text" class="input100" id="registerTelephone" name="registerTelephone">
+                        <input type="text" class="input100" id="registerTelephone" name="mTelephone">
                         <span class="focus-input100" data-placeholder="Téléphone"></span>
                     </div>
                     <div class="col-sm-4">
