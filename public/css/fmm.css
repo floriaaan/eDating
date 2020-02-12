@@ -529,7 +529,11 @@
     display: none;
 }
 
-@media (max-width: 900px) {
+.w-95 {
+    width: 95%;
+}
+
+@media (max-width: 576px) {
     
 
     .fixed-top {

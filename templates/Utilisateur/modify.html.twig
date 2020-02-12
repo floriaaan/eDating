@@ -31,81 +31,83 @@
                 </div>
                 <hr>
             </div>
+            <div class="container container-fluid">
+                <div class=" mt-4 d-flex justify-content-between">
+                    <div class="col-sm-4">
+                        <label for="mSituation">Situation</label>
+                        <select id="mSituation" name="mSituation" class="form-control">
+                            {% set ListSituation = ["Célibataire", "En couple", "Marié", "Autre"] %}
+                            {% for situation in ListSituation %}
+                                <option {% if userr.Situation == situation %} selected {% endif %}>{{ situation }}</option>
+                            {% endfor %}
+                        </select>
+                    </div>
 
-            <div class=" mt-4 d-flex justify-content-between">
-                <div class="col-sm-4 text-muted">
-                    <label for="mSituation">Situation</label>
-                    <select id="mSituation" name="mSituation" class="form-control">
-                        <option>Célibataire</option>
-                        <option>En couple</option>
-                        <option>Marié</option>
-                        <option>Autre</option>
-                    </select>
+                    <div class="col-sm-4">
+                        <label for="registerAge">Age</label>
+                        <input type="number" id="registerAge" name="mAge" min="18" max="100" value="{{ userr.Age }}"
+                               class="form-control" aria-describedby="warnAge">
+                        <small id="warnAge" class="form-text text-muted">Personnes majeures uniquement.
+                            &#128286;</small>
+                    </div>
+
+
+                    <div class="col-sm-4">
+                        <label for="registerAttirance">Attirance</label>
+                        <select id="registerAttirance" name="mAttirance" class="form-control">
+
+                            {% set ListAttirance = ["Hétérosexuel", "Homosexuel", "Bisexuel", "Autre"] %}
+                            {% for attirance in ListAttirance %}
+                                <option {% if userr.Attirance == attirance %} selected {% endif %}>{{ attirance }}</option>
+                            {% endfor %}
+
+                        </select>
+                    </div>
+                </div>
+                <div class="custom-file mx-auto mt-2">
+                    <input type="file" class="custom-file-input" id="mProfilImg" name="mProfilImg">
+                    <label class="custom-file-label" for="mProfilImg" id="mProfilImg">Choisissez une photo de
+                        profil</label>
                 </div>
 
-                <div class="col-sm-4 text-muted">
-                    <label for="registerAge">Age</label>
-                    <input type="number" id="registerAge" name="mAge" min="18" max="100" value="{{ userr.Age }}"
-                           class="form-control" aria-describedby="warnAge">
-                    <small id="warnAge" class="form-text text-muted">Personnes majeures uniquement.
-                        &#128286;</small>
+
+                <hr>
+
+
+                <div class=" mt-4 d-flex justify-content-between">
+                    <div class="col-sm-8 form-group mb-3">
+                        <label for="mVille">Ville</label>
+                        <input type="text" class="form-control" id="mVille" name="mVille" value="{{ userr.Ville }}">
+
+                    </div>
+
+
+                    <div class="col-sm-4">
+                        <label for="registerCampus">Campus</label>
+                        <select id="registerCampus" name="mCampus" class="form-control">
+                            {% set ListCampus = ["Madrillet", "Mont-Saint-Aignan", "Saint-Marc", "Pasteur", "UFR Santé", "Autre"] %}
+                            {% for campus in ListCampus %}
+                                <option {% if userr.Campus == campus %} selected {% endif %}>{{ campus }}</option>
+                            {% endfor %}
+
+                        </select>
+                    </div>
                 </div>
+                <div class="mt-4 mb-3 d-flex justify-content-between">
+                    <div class="col-sm-7 form-group">
+                        <label for="mTelephone">Téléphone</label>
+                        <input type="text" class="form-control" id="mTelephone" name="mTelephone" value="{{ userr.Telephone }}">
 
+                    </div>
 
-                <div class="col-sm-4 text-muted">
-                    <label for="registerAttirance">Attirance</label>
-                    <select id="registerAttirance" name="mAttirance" class="form-control">
-                        <option>Hétérosexuel</option>
-                        <option>Homosexuel</option>
-                        <option>Bisexuel</option>
-                        <option>Autre</option>
-                    </select>
+                    <div class="col-sm-4">
+                        <input type="button" class="btn btn-outline-fmm" value="Localisation auto."
+                               id="locationAutoBtn"/>
+                    </div>
+
+                    <span id="locationTicked"></span>
                 </div>
             </div>
-            <div class="custom-file mt-4">
-                <input type="file" class="custom-file-input" id="mProfilImg" name="mProfilImg">
-                <label class="custom-file-label" for="mProfilImg" id="mProfilImg">Choisissez une photo de
-                    profil</label>
-            </div>
-
-
-            <hr>
-
-
-            <div class=" mt-4 d-flex justify-content-between">
-                <div class="col-sm-8 wrap-input100 validate-input">
-                    <input type="text" class="input100" id="mVille" name="mVille" value="{{ userr.Ville }}">
-                    <span class="focus-input100" data-placeholder="Ville"></span>
-                </div>
-
-                <div class="col-sm-4 wrap-input100 validate-input">
-                    <label for="registerCampus">Campus</label>
-                    <select id="registerCampus" name="mCampus" class="form-control">
-                        <option>Madrillet</option>
-                        <option>Mont-Saint-Aignan</option>
-                        <option>Saint-Marc</option>
-                        <option>Pasteur</option>
-                        <option>UFR Santé</option>
-                        <option>Autre</option>
-                    </select>
-                </div>
-            </div>
-            <div class="mt-4 mb-3 d-flex justify-content-between">
-                <div class="col-sm-7 wrap-input100 validate-input">
-                    <input type="text" class="input100" id="registerTelephone" name="mTelephone"
-                           value="{{ userr.Telephone }}">
-                    <span class="focus-input100" data-placeholder="Téléphone"></span>
-                </div>
-                <div class="col-sm-4">
-                    <input type="button" class="btn btn-outline-fmm" value="Localisation auto."
-                           id="locationAutoBtn"/>
-                </div>
-
-                <span id="locationTicked"></span>
-            </div>
-
-        </div>
-        </div>
         </div>
 
 
@@ -118,14 +120,14 @@
                 {% endif %}
                 <div class="col-lg-4">
                     <div class="wrapper-img-grid">
-                        <img class="card-img-top" src="/uploads/images/{{ photo.PhotoDossier }}/{{ photo.PhotoName }}"
-                             alt="Photo de {{ userr.Prenom }}">
+                        <label><img class="card-img-top" src="/uploads/images/{{ photo.PhotoDossier }}/{{ photo.PhotoName }}"
+                             alt="Photo de {{ userr.Prenom }}"></label>
                     </div>
                     <div class="input-group mb-3">
 
                         <div class="custom-file">
-                            <input type="file" class="custom-file-input" id="inputGroupFile01">
-                            <label class="custom-file-label" for="inputGroupFile01" width="6">Modifier l'image</label>
+                            <input type="file" class="custom-file-input" name="photo{{ loop.index0 }}" id="photo{{ loop.index0 }}">
+                            <label class="custom-file-label" for="photo{{ loop.index0 }}" width="6">Modifier l'image</label>
                         </div>
                     </div>
 
@@ -144,6 +146,48 @@
             </div>
         {% endif %}
 
+
+        <input type="hidden" name="mLat" id="mLat" value="{{ userr.Longitude }}"/>
+        <input type="hidden" name="mLong" id="mLong" value="{{ userr.Longitude }}"/>
         <input type="hidden" name="crsf" value={{ token }}>
     </form>
+{% endblock %}
+
+{% block js %}
+    <script>
+
+        $(document).ready(function() {
+            $('#locationAutoBtn').click(function () {
+                navigator.geolocation.getCurrentPosition(function (pos) {
+                    let crd = pos.coords;
+                    console.log('Votre position actuelle est :');
+                    console.log(`Latitude : ${crd.latitude}`);
+                    console.log(`Longitude : ${crd.longitude}`);
+                    console.log(`La précision est de ${crd.accuracy} mètres.`);
+
+                    $('#mLat').val(`${crd.latitude}`);
+                    $('#mLong').val(`${crd.longitude}`);
+
+                    $('#locationTicked').html('<i class="fas fa-check-circle"></i>');
+
+                }, function (err) {
+                    console.warn(`ERREUR (${err.code}): ${err.message}`);
+                    $('#locationTicked').html('<i class="fas fa-exclamation-circle"></i>');
+
+                }, {
+                    enableHighAccuracy: true,
+                    timeout: 5000,
+                    maximumAge: 0
+                });
+
+
+
+            });
+
+            $('#mProfilImg').on('change',function(){
+                let fileName = document.getElementById("mProfilImg").files[0].name;
+                $('#mProfilImg').addClass("selected").html(fileName);
+            })
+        });
+    </script>
 {% endblock %}
