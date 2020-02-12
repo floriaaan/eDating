@@ -6,12 +6,17 @@
 {% block body %}
     <div class="wall-white">
     <div class="nav-flex d-flex justify-content-start pt-2 px-2">
-        <a href="/Home/" class="btn btn-fmm"><i class="fas fa-chevron-left"></i> Retour</a>
-        <a href="/Mate/Like/{{ user.UID }}"
-           class="btn btn-outline-danger ml-2">
+        <a href="/Home/" class="btn btn-fmm mr-1"><i class="fas fa-chevron-left"></i> Retour</a>
+        <a href="/Mate/Like/{{ user.UID }}" class=" btn mr-1 {% if user.UID in likes %} btn-danger">
+            <i class="fas fa-heart"></i> est Liké</a>
+        {% else %} btn-outline-danger">
             <i class="fas fa-heart"></i> Liker</a>
-        <a href="/Messages/Contact/{{ user.UID }}" class="btn btn-outline-primary ml-2">
+        {% endif %}
+        <a href="/Messages/Contact/{{ user.UID }}" class=" btn mr-1 btn-outline-primary">
             <i class="fas fa-comment-dots"></i> Messages</a>
+        <a href="/Mate/Report/{{ user.UID }}" class=" btn mr-1 btn-outline-warning">
+            <i class="fas fa-exclamation-triangle"></i> Signaler {{ user.Prenom }}</a>
+
     </div>
     <div class="card cardd item-card mt-2" style="width: 30rem;">
         <div class="wrapper-img-profile">

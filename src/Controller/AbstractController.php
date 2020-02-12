@@ -42,6 +42,17 @@ class AbstractController {
             }
 
 
+            $perm = $_SESSION['USER']->getPermission();
+            $admin = false;
+            foreach ($perm as $p) {
+                if($p->getType() == "admin" && $p->getActive() == 1){
+                    $admin = true;
+                }
+            }
+
+            $this->twig->addGlobal('admin', $admin);
+
+
         }
 
 

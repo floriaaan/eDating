@@ -14,6 +14,8 @@
                 <th scope="col">Nom</th>
                 <th scope="col">Permissions</th>
                 <th scope="col">Email</th>
+                <th scope="col">Campus</th>
+                <th scope="col">Likes</th>
                 <th scope="col">Signalements</th>
 
             </tr>
@@ -25,6 +27,8 @@
                     <td>{{ user.Prenom }} {{ user.Nom }}</td>
                     <td>{% for perm in user.Permission %} {% if perm.Active == 1 %} {{ perm.Type }} {% endif %}{% endfor %}</td>
                     <td>{{ user.Email }}</td>
+                    <td>{{ user.Campus }}</td>
+                    <td>{{ user.Likes|length }}</td>
                     <td><a href="/Admin/Report/{{ user.UID }}"> {{ user.Reports|length }}</a></td>
 
 
