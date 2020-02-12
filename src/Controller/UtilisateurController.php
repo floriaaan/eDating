@@ -270,6 +270,27 @@ class UtilisateurController extends AbstractController
     }
 
     public function ModifyPost(){
+        if(isset($_SESSION['USER'])) {
+            if($_POST && $_POST['crsf'] == $_SESSION['token']) 
+            $modifUser = new Utilisateur();
+                $_POST['mTitre'];
+                $_POST['mDescription'];
+                $_POST['mVille'];
+                $_POST['mCampus'];
+                $_POST['mSituation'];
+                $_POST['mAge'];
+                $_POST['mAttirance'];
+                $_POST['mLongitude'];
+                $_POST['mlatitude'];
+                $_POST['mImage'];
+
+            
+            
+        } else {
+            header('Location:/Utilisateur/Login');
+        }
+        return;
+
 
     }
 
