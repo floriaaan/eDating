@@ -304,11 +304,11 @@ class UtilisateurController extends AbstractController
                         move_uploaded_file($_FILES['mImages']['tmp_name'], $repository . '/' . $nomImage);
                     }
                 }
-                $modifUser->setProfilImgName($nomImage);
-                $modifUser->setProfilImgRepo($sqlRepository);
+                    $modifUser->setProfilImgName($nomImage);
+                    $modifUser->setProfilImgRepo($sqlRepository);
 
-                    }
                 }
+            }
             
             
             
