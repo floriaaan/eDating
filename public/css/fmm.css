@@ -525,6 +525,10 @@
     box-shadow: 0 0 0 0.2rem rgba(147, 92, 189, 0.25);
 }
 
+.responsive-dyes {
+    display: none;
+}
+
 @media (max-width: 576px) {
     .body {
         background: url("../doc/wall-login-small.svg") no-repeat fixed;
@@ -562,6 +566,8 @@
         margin-top: 0;
         margin-bottom: 0.125rem;
     }
+
+
 }
 
 @media (max-width: 740px) {
@@ -569,4 +575,7 @@
         display: none;
     }
 
+    .responsive-dyes {
+        display: block;
+    }
 }
