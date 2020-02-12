@@ -529,7 +529,7 @@
     display: none;
 }
 
-@media (max-width: 576px) {
+@media (max-width: 900px) {
     .body {
         background: url("../doc/wall-login-small.svg") no-repeat fixed;
         background-size: cover;
@@ -710,3 +710,4 @@
 .has-val.input100 + .focus-input100::before {
     width: 100%;
 }
+
