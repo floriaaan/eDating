@@ -5,11 +5,11 @@
     <div class="display-4 ml-5 mt-5">{% block search %}Vous cherchez : {{ search }}{% endblock %}</div>
     <hr class="ml-4">
     <div class="container-fluid p-3 mx-2">
-        <div class="row">
+        <div class="row mr-1">
             {% for user in listUser %}
 
-                <div class="col-12 col-md-6 col-lg-5 col-xl-4 px-1">
-                    <div class="card">
+                <div class="col-12 col-md-6 col-lg-6 col-xl-4 px-1">
+                    <div class="card mb-2">
                         <div class="wrapper-img-profile mt-4">
                             <img class="card-img-top-fmm img" src="/uploads/images/{{ user.ProfilImgRepo }}/{{ user.ProfilImgName }}"
                                 alt="{{ user.Prenom }}">
