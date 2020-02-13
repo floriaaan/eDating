@@ -301,10 +301,10 @@ class UtilisateurController extends AbstractController
                     $modifUser = $modifUser->setAttirance($_POST['mAttirance']);
                 }
                 if (isset($_POST['mLong'])) {
-                    $modifUser = $modifUser->setLongitude($_POST['mlong']);
+                    $modifUser = $modifUser->setLongitude($_POST['mLong']);
                 }
                 if (isset($_POST['mLat'])) {
-                    $modifUser = $modifUser->setLatitude($_POST['mlat']);
+                    $modifUser = $modifUser->setLatitude($_POST['mLat']);
                 }
                 if (isset($_FILES['mProfilImg']['name'])) {
                     $sqlRepository = null;
@@ -328,6 +328,7 @@ class UtilisateurController extends AbstractController
                 }
 
                 $modifUser->SqlUpdate(Bdd::GetInstance());
+                $_SESSION['USER'] = $modifUser;
             }
 
 

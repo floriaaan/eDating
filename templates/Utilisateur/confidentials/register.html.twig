@@ -128,9 +128,9 @@
                         <span class="focus-input100" data-placeholder="Ville"></span>
                     </div>
 
-                    <div class="col-sm-4 wrap-input100 validate-input">
+                    <div class="col-sm-4 ">
                         <label for="registerCampus">Campus</label>
-                        <select id="registerCampus" name="registerCampus" class="form-control">
+                        <select id="registerCampus" name="registerCampus" class="form-control" required>
                             <option>Madrillet</option>
                             <option>Mont-Saint-Aignan</option>
                             <option>Saint-Marc</option>
@@ -160,7 +160,7 @@
 
                 <ul class="login-more">
                     <li class="mb-2">
-                        <a href="#" class="txt2">
+                        <a href="/Utilisateur/ForgotPass" class="txt2">
                             Identifiants
                         </a>
                         <span class="txt1">
@@ -175,7 +175,7 @@
 								J'ai déjà un compte,
 							</span>
 
-                        <a href="{{ server.document_root }}/Utilisateur/Login" class="txt2">
+                        <a href="/Utilisateur/Login" class="txt2">
                             je me connecte!
                         </a>
                     </li>
@@ -193,5 +193,5 @@
 {% endblock %}
 
 {% block js %}
-    <script src="{{ server.document_root }}/js/register.js"></script>
+    <script src="/js/register.js"></script>
 {% endblock %}

@@ -455,9 +455,18 @@ iframe {
     left: 0;
 }
 
+body {
+    background: url("../doc/wall-login.svg") no-repeat fixed;
+    background-size: cover;
+}
 
 @media (max-width: 576px) {
     .wrap-login100 {
         width: 80%;
     }
+    body {
+        background: url("../doc/wall-white.svg") no-repeat fixed;
+        background-size: cover;
+    }
 }
+

@@ -6,37 +6,144 @@
     <div class="jumbotron">
         <h1 class="display-4">Liste des membres</h1>
     </div>
-    <div class="container">
-        <table class="table table-striped">
-            <thead>
-            <tr>
-                <th scope="col">#</th>
-                <th scope="col">Nom</th>
-                <th scope="col">Permissions</th>
-                <th scope="col">Email</th>
-                <th scope="col">Campus</th>
-                <th scope="col">Likes</th>
-                <th scope="col">Signalements</th>
-
-            </tr>
-            </thead>
-            <tbody>
-            {% for user in listUser %}
-                <tr>
-                    <th scope="row">#{{ user.UID }}</th>
-                    <td>{{ user.Prenom }} {{ user.Nom }}</td>
-                    <td>{% for perm in user.Permission %} {% if perm.Active == 1 %} {{ perm.Type }} {% endif %}{% endfor %}</td>
-                    <td>{{ user.Email }}</td>
-                    <td>{{ user.Campus }}</td>
-                    <td>{{ user.Likes|length }}</td>
-                    <td><a href="/Admin/Report/{{ user.UID }}"> {{ user.Reports|length }}</a></td>
+    <div class="mx-5 my-2">
 
 
-                </tr>
-            {% endfor %}
+        <div class="row">
+            <div class="col-2">
+                <div class="nav flex-column nav-pills" id="tab" role="tablist" aria-orientation="vertical">
+                    <a class="nav-link active color-fmm" id="home-tab" data-toggle="pill" href="#home" role="tab"
+                       aria-controls="home" aria-selected="true">Accueil</a>
+                    <a class="nav-link color-fmm" id="infos-tab" data-toggle="pill" href="#infos" role="tab"
+                       aria-controls="infos" aria-selected="false">Informations</a>
+                    <a class="nav-link color-fmm" id="actions-tab" data-toggle="pill" href="#actions" role="tab"
+                       aria-controls="actions" aria-selected="false">Actions</a>
+                </div>
+            </div>
+            <div class="col-10">
+                <div class="tab-content" id="tabContent">
+                    <div class="tab-pane fade show active" id="home" role="tabpanel"
+                         aria-labelledby="home-tab">
 
-            </tbody>
-        </table>
+                        <table class="table table-striped">
+                            <thead>
+                            <tr>
+                                <th scope="col">#</th>
+                                <th scope="col">Nom</th>
+                                <th scope="col">Permissions</th>
+                                <th scope="col">Email</th>
+                                <th scope="col">Campus</th>
+                                <th scope="col">Likes</th>
+                                <th scope="col">Signalements</th>
+
+                            </tr>
+                            </thead>
+                            <tbody>
+                            {% for user in listUser %}
+                                <tr>
+                                    <th scope="row">#{{ user.UID }}</th>
+                                    <td>{{ user.Prenom }} {{ user.Nom }}</td>
+                                    <td>{% for perm in user.Permission %} {% if perm.Active == 1 %} {{ perm.Type }} {% endif %}{% endfor %}</td>
+                                    <td>{{ user.Email }}</td>
+                                    <td>{{ user.Campus }}</td>
+                                    <td>{{ user.Likes|length }}</td>
+                                    <td><a href="/Admin/Report/{{ user.UID }}"
+                                           class="color-fmm"> {{ user.Reports|length }}</a></td>
+
+
+                                </tr>
+                            {% endfor %}
+
+                            </tbody>
+                        </table>
+
+
+                    </div>
+                    <div class="tab-pane fade" id="infos" role="tabpanel" aria-labelledby="infos-tab">
+
+                        <table class="table table-striped">
+                            <thead>
+                            <tr>
+                                <th scope="col">#</th>
+                                <th scope="col">Nom</th>
+                                <th scope="col">Age</th>
+                                <th scope="col">Sexe</th>
+                                <th scope="col">Date d'inscription</th>
+                                <th scope="col">Permissions</th>
+                                <th scope="col">Email</th>
+                                <th scope="col">Campus</th>
+
+
+                            </tr>
+                            </thead>
+                            <tbody>
+                            {% for user in listUser %}
+                                <tr>
+                                    <th scope="row">#{{ user.UID }}</th>
+                                    <td>{{ user.Prenom }} {{ user.Nom }}</td>
+                                    <td>{{ user.Age }} ans</td>
+                                    <td>{{ user.Sexe }}</td>
+                                    <td>{{ user.DateInscription }}</td>
+                                    <td>{% for perm in user.Permission %} {% if perm.Active == 1 %} {{ perm.Type }} {% endif %}{% endfor %}</td>
+                                    <td>{{ user.Email }}</td>
+                                    <td>{{ user.Campus }}</td>
+
+
+                                </tr>
+                            {% endfor %}
+
+                            </tbody>
+                        </table>
+
+                    </div>
+                    <div class="tab-pane fade" id="actions" role="tabpanel"
+                         aria-labelledby="actions-tab">
+
+                        <table class="table table-striped">
+                            <thead>
+                            <tr>
+                                <th scope="col">#</th>
+                                <th scope="col">Nom</th>
+                                <th scope="col">Email</th>
+                                <th scope="col">Actions</th>
+
+
+                            </tr>
+                            </thead>
+                            <tbody>
+                            {% for user in listUser %}
+                                <tr>
+                                    <th scope="row">#{{ user.UID }}</th>
+                                    <td>{{ user.Prenom }} {{ user.Nom }}</td>
+                                    <td>{{ user.Email }}</td>
+                                    <td>
+                                        <div class="btn-group" role="group">
+                                            <a href="/Admin/Report/{{ user.UID }}" class=" btn
+                                                {% if user.Reports|length == 0 %} btn-success" {% else %}
+                                               btn-warning" {% endif %}>
+                                            <i class="fas fa-exclamation-triangle"></i> {{ user.Reports|length }}</a>
+                                            <a href="#" class="btn btn-secondary">
+                                                <i class="fas fa-theater-masks"></i></a>
+                                            <a href="#" class="btn btn-danger">
+                                                <i class="fas fa-trash-alt"></i></a>
+                                        </div>
+                                    </td>
+
+
+                                </tr>
+                            {% endfor %}
+
+                            </tbody>
+                        </table>
+
+
+                    </div>
+
+                </div>
+            </div>
+        </div>
+
+
     </div>
 
 

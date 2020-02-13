@@ -57,7 +57,7 @@ class AdminController extends AbstractController
                 header('Location:/');
             }
         } else {
-            header('Location:/Utilisateur/Login');
+            header('Location:/Error/NoUser');
         }
     }
 
