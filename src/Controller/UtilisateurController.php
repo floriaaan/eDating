@@ -5,6 +5,7 @@ namespace src\Controller;
 
 use src\Model\Affinites;
 use src\Model\Like;
+use src\Model\Photos;
 use src\Model\Utilisateur;
 use src\Model\Bdd;
 use DateTime;
@@ -327,7 +328,31 @@ class UtilisateurController extends AbstractController
                     $modifUser->setProfilImgRepo($sqlRepository);
                 }
 
+                if (isset($_FILES['mAddPhoto']['name'])) {
+                    $sqlRepository = null;
+                    $nomImage = null;
+                    if (!empty($_FILES['mAddPhoto']['name'])) {
+                        $tabExt = array('jpg', 'gif', 'png', 'jpeg');    // Extensions autorisees
+                        $extension = pathinfo($_FILES['mAddPhoto']['name'], PATHINFO_EXTENSION);
+                        if (in_array(strtolower($extension), $tabExt)) {
+                            $nomImage = md5(uniqid()) . '.' . $extension;
+
+                            $sqlRepository = $_SESSION['USER']->getEmail();
+                            $repository = './uploads/images/' . $_SESSION['USER']->getEmail();
+                            if (!is_dir($repository)) {
+                                mkdir($repository, 0777, true);
+                            }
+                            move_uploaded_file($_FILES['mAddPhoto']['tmp_name'], $repository . '/' . $nomImage);
+                        }
+                    }
+                    $photo = new Photos();
+                    $photo->setPhotoName($nomImage);
+                    $photo->setPhotoDossier($sqlRepository);
+                    $photo->SqlAdd(Bdd::GetInstance(), $modifUser->getUID());
+                }
+
                 $modifUser->SqlUpdate(Bdd::GetInstance());
+                $modifUser->setPhotos((new Photos)->SqlGetAll(Bdd::GetInstance(), $modifUser->getUID()));
                 $_SESSION['USER'] = $modifUser;
             }
 

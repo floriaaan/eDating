@@ -71,7 +71,6 @@
                 </div>
 
 
-
                 <hr>
 
 
@@ -97,56 +96,62 @@
                 <div class="mt-4 mb-3 d-flex justify-content-between">
                     <div class="col-sm-7 form-group">
                         <label for="mTelephone">Téléphone</label>
-                        <input type="text" class="form-control" id="mTelephone" name="mTelephone" value="{{ userr.Telephone }}">
+                        <input type="text" class="form-control" id="mTelephone" name="mTelephone"
+                               value="{{ userr.Telephone }}">
 
                     </div>
 
-                    <div class="col-sm-4">
+                    <div class="col-sm-4 mb-2">
                         <input type="button" class="btn btn-outline-fmm" value="Localisation auto."
                                id="locationAutoBtn"/>
                     </div>
 
-                    <span id="locationTicked"></span>
+                    <span class="mb-2" id="locationTicked"></span>
                 </div>
             </div>
         </div>
 
+        <div class="mx-5">
+            {% if userr.Photos is not null and userr.Photos is not empty %}
+                <hr>
+                {% for photo in userr.Photos %}
 
-        {% if userr.Photos is not null and userr.Photos is not empty %}
-            <hr>
-            {% for photo in userr.Photos %}
-
-                {% if loop.index0 is divisible by(3) %}
-                    <div class="row mx-2 mb-4">
-                {% endif %}
-                <div class="col-lg-4">
-                    <div class="wrapper-img-grid">
-                        <label><img class="card-img-top" src="/uploads/images/{{ photo.PhotoDossier }}/{{ photo.PhotoName }}"
-                             alt="Photo de {{ userr.Prenom }}"></label>
-                    </div>
-                    <div class="input-group mb-3">
-
-                        <div class="custom-file">
-                            <input type="file" class="custom-file-input" name="photo{{ loop.index0 }}" id="photo{{ loop.index0 }}">
-                            <label class="custom-file-label" for="photo{{ loop.index0 }}" width="6">Modifier l'image</label>
+                    {% if loop.index0 is divisible by(3) %}
+                        <div class="row mx-2 mb-4">
+                    {% endif %}
+                    <div class="col-lg-4">
+                        <div class="wrapper-img-grid">
+                            <label><img class="card-img-top"
+                                        src="/uploads/images/{{ photo.PhotoDossier }}/{{ photo.PhotoName }}"
+                                        alt="Photo de {{ userr.Prenom }}"></label>
                         </div>
+                        <div class="input-group">
+
+                            <div class="custom-file">
+                                <input type="file" class="custom-file-input" name="photo{{ loop.index0 }}"
+                                       id="photo{{ loop.index0 }}">
+                                <label class="custom-file-label" for="photo{{ loop.index0 }}" width="6">Modifier
+                                    l'image</label>
+                            </div>
+                        </div>
+
                     </div>
+                    {% if loop.index0 is divisible by(3) and loop.index0 != 0 %}
+                        </div>
+                    {% endif %}
 
-                </div>
-                {% if loop.index0 is divisible by(3) and loop.index0 != 0 %}
-                    </div>
-                {% endif %}
+                {% endfor %}
+            {% else %}
+                <div class="display-4">Tu n'as pas de photos.</div>
 
-            {% endfor %}
-        {% else %}
-            <div class="display-4">Tu n'as pas de photos.</div>
 
-            <div class="custom-file mt-3">
-                <input type="file" class="custom-file-input" id="inputGroupFile01">
-                <label class="custom-file-label" for="inputGroupFile01" width="6">Ajouter une image</label>
+            {% endif %}
+            <div class="custom-file mt-3 mx-5">
+                <input type="file" class="custom-file-input" id="mAddPhoto" name="mAddPhoto">
+                <label class="custom-file-label" for="mAddPhoto"  width="6">Ajouter une image dans votre Galerie photo</label>
             </div>
-        {% endif %}
 
+        </div>
 
         <input type="hidden" name="mLat" id="mLat" value="{{ userr.Latitude }}"/>
         <input type="hidden" name="mLong" id="mLong" value="{{ userr.Longitude }}"/>
@@ -157,7 +162,7 @@
 {% block js %}
     <script>
 
-        $(document).ready(function() {
+        $(document).ready(function () {
             $('#locationAutoBtn').click(function () {
                 navigator.geolocation.getCurrentPosition(function (pos) {
                     let crd = pos.coords;
@@ -182,13 +187,17 @@
                 });
 
 
-
             });
 
-            $('#mProfilImg').on('change',function(){
+            $('#mAddPhoto').on('change', function () {
+                let fileName = document.getElementById("mAddPhoto").files[0].name;
+                $('#mAddPhoto').addClass("selected").html(fileName);
+            });
+
+            $('#mProfilImg').on('change', function () {
                 let fileName = document.getElementById("mProfilImg").files[0].name;
                 $('#mProfilImg').addClass("selected").html(fileName);
-            })
+            });
         });
     </script>
 {% endblock %}

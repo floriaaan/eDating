@@ -38,24 +38,25 @@
                 <div class="list-group mx-sm-2 mx-lg-4 rounded-0">
 
                     {% for conversation in conversations %}
-
-                        <a class="list-group-item list-group-item-action fmm-active text-white  mb-2"
-                           href='/Messages/Contact/{{ conversation.contact.UID }}'>
-                            <div class="media"><img
-                                        src="/uploads/images/{{ conversation.contact.ProfilImgRepo }}/{{ conversation.contact.ProfilImgName }}"
-                                        alt="{{ conversation.contact.Prenom }} {{ conversation.contact.Nom }}"
-                                        width="50" class="rounded-circle">
-                                <div class="media-body ml-4">
-                                    <div class="d-flex align-items-center justify-content-between mb-1">
-                                        <h6 class="mb-0">{{ conversation.contact.Prenom }} </h6><small
-                                                class="small font-weight-bold">{{ conversation.messageDate| date('H:m - d M Y') }}</small>
+                        {% if conversation.contact.Email != userr.Email %}
+                            <a class="list-group-item list-group-item-action fmm-active text-white  mb-1"
+                               href='/Messages/Contact/{{ conversation.contact.UID }}'>
+                                <div class="media"><img
+                                            src="/uploads/images/{{ conversation.contact.ProfilImgRepo }}/{{ conversation.contact.ProfilImgName }}"
+                                            alt="{{ conversation.contact.Prenom }} {{ conversation.contact.Nom }}"
+                                            width="50" class="rounded-circle">
+                                    <div class="media-body ml-4">
+                                        <div class="d-flex align-items-center justify-content-between mb-1">
+                                            <h6 class="mb-0">{{ conversation.contact.Prenom }} </h6><small
+                                                    class="small font-weight-bold">{{ conversation.messageDate| date('H:m - d M Y') }}</small>
+                                        </div>
+                                        <p class="font-italic mb-0 text-small">
+                                            {{ conversation.messageContent|length > 50 ? conversation.messageContent|slice(0, 50) ~ '...' : conversation.messageContent }}
+                                        </p>
                                     </div>
-                                    <p class="font-italic mb-0 text-small">
-                                        {{ conversation.messageContent|length > 50 ? conversation.messageContent|slice(0, 50) ~ '...' : conversation.messageContent }}
-                                    </p>
                                 </div>
-                            </div>
-                        </a>
+                            </a>
+                        {% endif %}
                     {% endfor %}
                 </div>
             </div>
