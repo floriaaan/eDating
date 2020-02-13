@@ -43,10 +43,12 @@ class MateController extends AbstractController
                 $L = new Like();
                 $L->setUserLiked($id);
                 $L->SqlAdd(Bdd::GetInstance(), $_SESSION['USER']->getUID());
+                $_SESSION['USER'] = (new Utilisateur)->SqlGet(Bdd::GetInstance(), $_SESSION['USER']->getUID());
                 header("location:/Mate/List");
             } else {
                 $L = new Like();
                 $L->SqlDelete(Bdd::GetInstance(), $_SESSION['USER']->getUID(), $id);
+                $_SESSION['USER'] = (new Utilisateur)->SqlGet(Bdd::GetInstance(), $_SESSION['USER']->getUID());
                 header("location:/Mate/List");
             }
         } else {
