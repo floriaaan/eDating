@@ -440,6 +440,12 @@
     background: rgb(207, 207, 207);
 }
 
+.nav-pills .nav-link.active,
+.nav-pills .show > .nav-link {
+    color: #fff;
+    background-color: #730EBD;
+}
+
 .btn-outline-fmm {
     color: #730EBD;
     border-color: #730EBD;
@@ -528,6 +534,10 @@
 
 .w-95 {
     width: 95%;
+}
+
+.color-fmm {
+    color:#730EBD;
 }
 
 @media (max-width: 576px) {
