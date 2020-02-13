@@ -38,6 +38,8 @@
     </div>
     <hr>
 
+    {% if userr.UID in user.Likes %}
+
     {% if user.Photos is not null and user.Photos is not empty %}
         {% for photo in user.Photos %}
 
@@ -62,6 +64,11 @@
         </div>
     {% endif %}
 
+    {% else %}
+        <div class="jumbotron-fluid text-center">
+            <div class="display-4 mt-5 mb-5">{{ user.Prenom }} {{ user.Nom }} ne vous a pas Liké.</div>
+        </div>
+    {% endif %}
 
     {% if affinites is not null and affinites is not empty %}
         <hr>
