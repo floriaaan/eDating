@@ -26,10 +26,16 @@ class AdminController extends AbstractController
 
     public function Report($id) {
         self::roleNeed();
-        $rep = (new Avertissement)->SqlGetWarnedUser(Bdd::GetInstance(), $id);
+        $allRep = (new Avertissement)->SqlGetWarnedUser(Bdd::GetInstance(), $id);
+        $listRep = [];
+        foreach ($allRep as $rep){
+            $listRep[] = ['user' => (new Utilisateur)->SqlGet(Bdd::GetInstance(), $rep->getTransmitterUID()), 'r' => $rep];
+        }
+
+
         $user = (new Utilisateur)->SqlGet(Bdd::GetInstance(), $id);
         return $this->twig->render('Admin/report.html.twig', [
-            'listReports' => $rep,
+            'listReports' => $listRep,
             'user' => $user
         ]);
     }

@@ -11,6 +11,8 @@ class Avertissement
     private $Contenu;
     private $Date;
     private $Type;
+    private $TransmitterUID;
+
 
 
     public function SqlGetWarnedUser(\PDO $bdd, $userID)
@@ -25,6 +27,7 @@ class Avertissement
             $w->setType($warn['SIG_TYPE'])
                 ->setContenu($warn['SIG_CONTENU'])
                 ->setDate($warn['SIG_DATE'])
+                ->setTransmitterUID($warn['ID_UTILISATEUR'])
                 ->setWID($warn['ID_SIGNALEMENT']);
 
             $listWarn[] = $w;
@@ -41,6 +44,7 @@ class Avertissement
         $w->setType($rSql['SIG_TYPE'])
             ->setContenu($rSql['SIG_CONTENU'])
             ->setDate($rSql['SIG_DATE'])
+            ->setTransmitterUID(['ID_UTILISATEUR'])
             ->setWID($rSql['ID_SIGNALEMENT']);
 
         return $w;
@@ -148,6 +152,24 @@ class Avertissement
     public function setWID($wID)
     {
         $this->wID = $wID;
+        return $this;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getTransmitterUID()
+    {
+        return $this->TransmitterUID;
+    }
+
+    /**
+     * @param mixed $TransmitterUID
+     * @return Avertissement
+     */
+    public function setTransmitterUID($TransmitterUID)
+    {
+        $this->TransmitterUID = $TransmitterUID;
         return $this;
     }
 
