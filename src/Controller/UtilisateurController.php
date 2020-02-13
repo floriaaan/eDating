@@ -328,7 +328,7 @@ class UtilisateurController extends AbstractController
                     $modifUser->setProfilImgRepo($sqlRepository);
                 }
 
-                if (isset($_FILES['mAddPhoto']['name'])) {
+                if (isset($_FILES['mAddPhoto']['name']) && $_FILES['mAddPhoto']['name'] != '') {
                     $sqlRepository = null;
                     $nomImage = null;
                     if (!empty($_FILES['mAddPhoto']['name'])) {

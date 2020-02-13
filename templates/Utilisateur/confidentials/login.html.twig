@@ -7,9 +7,9 @@
 {% block body %}
         <div class="container-login100 ">
             <div class="wrap-login100 p-3">
-                <form class="login100-form validate-form mt-5" method="post" action="{{ server.document_root }}/Utilisateur/Login">
+                <form class="login100-form validate-form mt-5" method="post" action="/Utilisateur/Login">
                     <span class="login100-form-avatar">
-						<img src="{{ server.document_root }}/doc/fmm.svg" alt="Find My Mate">
+						<img src="/doc/fmm.svg" alt="Find My Mate">
 					</span>
 					<span class="login100-form-title pb-2">
 						Find My Mate
@@ -37,7 +37,7 @@
 
                     <ul class="login-more">
                         <li class="mb-2">
-                            <a href="{{ server.document_root }}/Utilisateur/ForgotPass" class="txt2">
+                            <a href="/Utilisateur/ForgotPass" class="txt2">
                                 Identifiants
                             </a>
 							<span class="txt1">
@@ -52,7 +52,7 @@
 								Je n'ai pas de compte,
 							</span>
 
-                            <a href="{{ server.document_root }}/Utilisateur/Register" class="txt2">
+                            <a href="/Utilisateur/Register" class="txt2">
                                 je m'inscris !
                             </a>
                         </li>
