@@ -64,12 +64,15 @@
 {% endblock %}
 {% block js %}
     <script>
+
         $(document).ready(function () {
 
             var objDiv = document.getElementById("chatbox");
-            console.log('top', objDiv.scrollTop);
-            console.log('height', objDiv.scrollHeight);
             objDiv.scrollTop = objDiv.scrollHeight;
+
+            console.log('DEBUG PURPOSES');
+            console.log('form token', '{{ token }}');
+            console.log('session token', '{{ stoken }}');
         });
 
     </script>

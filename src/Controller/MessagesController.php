@@ -55,6 +55,7 @@ class MessagesController extends AbstractController
 
     public function contactForm($id)
     {
+
         if (isset($_SESSION['USER'])) {
             //messages
             $modelMsg = new Messages();
@@ -69,7 +70,8 @@ class MessagesController extends AbstractController
                 'Messages/messages.html.twig', [
                 'allMsg' => $allMsg,
                 'user' => $user,
-                'token' => $token
+                'token' => $token,
+                    'stoken' => $_SESSION['token']
             ]);
         } else {
             header('Location:/Error');
@@ -81,8 +83,7 @@ class MessagesController extends AbstractController
 
     public function EnvoyerMsg()
     {
-
-        if ($_POST && $_POST['crsf'] == $_SESSION['token']) {
+        if ($_POST) {
             $userid = $_SESSION['USER']->getUID();
             $contactid = $_POST['sendToUser'];
 

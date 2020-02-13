@@ -48,7 +48,7 @@ Class Messages
 
         $bdd = Bdd::GetInstance();
         $envoyer = $bdd->prepare("INSERT INTO `MESSAGE` (`ID_UTILISATEUR`, `UTI_ID_UTILISATEUR`, `MES_CONTENU`) 
-        VALUES (:userid, :contactid, :contenu);");
+        VALUES (:userid, :contactid, :contenu)");
         $rSql = $envoyer->execute([
             'userid' => $userid,
             'contactid' => $contactid,
