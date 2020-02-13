@@ -16,8 +16,14 @@ class MateController extends AbstractController
     public function Mate($id)
     {
         if (isset($_SESSION['USER'])) {
+
             $user = new Utilisateur();
             $user = $user->SqlGet(Bdd::GetInstance(), $id);
+
+            if($user->getEmail() == $_SESSION['USER']->getEmail()) {
+                header('Location:/Utilisateur/Profile');
+            }
+
             return $this->twig->render('Mates/mate.html.twig', [
                     'user' => $user,
                     'affinites' => (new Affinites)->SqlGetAll(Bdd::GetInstance(), $id),

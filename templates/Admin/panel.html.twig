@@ -121,7 +121,7 @@
                                             <a href="/Admin/Report/{{ user.UID }}" class=" btn
                                                 {% if user.Reports|length == 0 %} btn-success" {% else %}
                                                btn-warning" {% endif %}>
-                                            <i class="fas fa-exclamation-triangle"></i> {{ user.Reports|length }}</a>
+                                            <i class="fas fa-exclamation-triangle"></i> <span class="badge badge-light">{{ user.Reports|length }}</span></a>
                                             <a href="#" class="btn btn-secondary">
                                                 <i class="fas fa-theater-masks"></i></a>
                                             <a href="#" class="btn btn-danger">
