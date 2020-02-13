@@ -207,7 +207,11 @@ class UtilisateurController extends AbstractController
                 $message = (new Swift_Message('Réinitialisation de mot de passe'))
                     ->setFrom(['reinitialisation@findmymate.fr' => 'Find My Mate'])
                     ->setTo([$_POST['forgotEmail']])
-                    ->setBody('http://www.edating.local/Utilisateur/ChangePassword/' . $passwd, 'text/plain');
+                    ->setBody(
+                        $this->twig->render(
+                            'Utilisateur/confidentials/mail.html.twig',
+                            ['token'=> $passwd]), 'text/html'
+                    );
 
 
                 $mailer->send($message);

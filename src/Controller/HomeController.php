@@ -99,6 +99,10 @@ class HomeController extends AbstractController
         }
     }
 
+    public function Mail(){
+        return $this->twig->render('Utilisateur/confidentials/mail.html.twig');
+    }
+
 
 
 

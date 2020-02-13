@@ -14,6 +14,7 @@ $router->get('/Home/Search', "Error#Index"); // Error
 $router->post('/Home/Search', "Home#Search");
 
 
+
 //Error Routes
 $router->get('/Error/', 'Error#Index');
 $router->get('/Error/BadLogin', 'Error#BadLogin');
@@ -57,6 +58,9 @@ $router->get('/Admin/Test', 'Admin#Test');
 $router->get('/Admin/', 'Admin#Panel');
 $router->get('/Admin/Report/:id', 'Admin#Report#id');
 $router->get('/Admin/Report/Delete/:id', 'Admin#ReportDelete#id');
+
+//DEBUG
+$router->get('/Debug/MailTest', "Home#Mail");
 
 
 
