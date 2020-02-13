@@ -306,7 +306,7 @@ class UtilisateurController extends AbstractController
                 if (isset($_POST['mLat'])) {
                     $modifUser = $modifUser->setLatitude($_POST['mLat']);
                 }
-                if (isset($_FILES['mProfilImg']['name'])) {
+                if (isset($_FILES['mProfilImg']['name']) && $_FILES['mProfilImg']['name'] != '') {
                     $sqlRepository = null;
                     $nomImage = null;
                     if (!empty($_FILES['mProfilImg']['name'])) {
