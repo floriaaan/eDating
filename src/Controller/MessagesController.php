@@ -21,7 +21,7 @@ class MessagesController extends AbstractController
         }
 
     }
-
+    // Affichage de la liste de contact
     public function ListUser()
     {
         if (isset($_SESSION['USER'])) {
@@ -52,7 +52,7 @@ class MessagesController extends AbstractController
             header('Location:/Error');
         }
     }
-
+    // Affichage de tous les messages par utilisateur
     public function contactForm($id)
     {
         if (isset($_SESSION['USER'])) {
@@ -78,7 +78,7 @@ class MessagesController extends AbstractController
 
     }
 
-
+    // Envoyer un messages non vide
     public function EnvoyerMsg()
     {
 
