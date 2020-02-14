@@ -22,6 +22,7 @@ class MessagesController extends AbstractController
 
     }
 
+    // Affichage de la liste de contact
     public function ListUser()
     {
         if (isset($_SESSION['USER'])) {
@@ -53,9 +54,9 @@ class MessagesController extends AbstractController
         }
     }
 
+    // Affichage de tous les messages par utilisateur
     public function contactForm($id)
     {
-
         if (isset($_SESSION['USER'])) {
             //messages
             $modelMsg = new Messages();
@@ -71,7 +72,7 @@ class MessagesController extends AbstractController
                 'allMsg' => $allMsg,
                 'user' => $user,
                 'token' => $token,
-                    'stoken' => $_SESSION['token']
+                'stoken' => $_SESSION['token']
             ]);
         } else {
             header('Location:/Error');
@@ -80,7 +81,7 @@ class MessagesController extends AbstractController
 
     }
 
-
+    // Envoyer un messages non vide
     public function EnvoyerMsg()
     {
         if ($_POST) {
