@@ -11,11 +11,13 @@ use src\Model\Utilisateur;
 class AdminController extends AbstractController
 {
 
-    public function Test(){
-        self::roleNeed();
-        var_dump($_SESSION['USER']->getPermission());
-    }
-
+    /**
+     * @return string
+     * @throws \Twig\Error\LoaderError
+     * @throws \Twig\Error\RuntimeError
+     * @throws \Twig\Error\SyntaxError
+     * Affiche la vue twig correspondant au panneau admin
+     */
     public function Panel(){
         self::roleNeed();
         $listUser = (new Utilisateur)->SqlGetAll(Bdd::GetInstance());
@@ -24,6 +26,14 @@ class AdminController extends AbstractController
         ]);
     }
 
+    /**
+     * @param $id
+     * @return string
+     * @throws \Twig\Error\LoaderError
+     * @throws \Twig\Error\RuntimeError
+     * @throws \Twig\Error\SyntaxError
+     * Envoie un avertissement dans la bdd à propos de l'utilisateur correspondant à $ID
+     */
     public function Report($id) {
         self::roleNeed();
         $allRep = (new Avertissement)->SqlGetWarnedUser(Bdd::GetInstance(), $id);
@@ -40,6 +50,10 @@ class AdminController extends AbstractController
         ]);
     }
 
+    /**
+     * @param $id
+     * Supprime l'avertissement $id
+     */
     public function ReportDelete($id) {
         self::roleNeed();
         $rep = (new Avertissement)->SqlDelete(Bdd::GetInstance(), $id);

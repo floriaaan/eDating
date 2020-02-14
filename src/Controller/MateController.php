@@ -13,6 +13,14 @@ use src\Model\Utilisateur;
 class MateController extends AbstractController
 {
 
+    /**
+     * @param $id
+     * @return string
+     * @throws \Twig\Error\LoaderError
+     * @throws \Twig\Error\RuntimeError
+     * @throws \Twig\Error\SyntaxError
+     * Affiche un profil qui n'est pas celui de l'utilisateur connecté
+     */
     public function Mate($id)
     {
         if (isset($_SESSION['USER'])) {
@@ -35,6 +43,10 @@ class MateController extends AbstractController
         }
     }
 
+    /**
+     * @param $id
+     * Envoie un Like en bdd ou supprime un Like si déjà existant
+     */
     public function Like($id)
     {
         if (isset($_SESSION['USER'])) {
@@ -56,6 +68,13 @@ class MateController extends AbstractController
         }
     }
 
+    /**
+     * @return string
+     * @throws \Twig\Error\LoaderError
+     * @throws \Twig\Error\RuntimeError
+     * @throws \Twig\Error\SyntaxError
+     * Affiche la vue Twig de la liste des gens likés ou des gens qui ont likés l'utilisateur connecté
+     */
     public function ListMates()
     {
         if (isset($_SESSION['USER'])) {
@@ -97,6 +116,14 @@ class MateController extends AbstractController
         }
     }
 
+    /**
+     * @param $id
+     * @return string
+     * @throws \Twig\Error\LoaderError
+     * @throws \Twig\Error\RuntimeError
+     * @throws \Twig\Error\SyntaxError
+     * Affiche la vue Twig correspondant au formulaire de signalement
+     */
     public function ReportForm($id){
 
         if (isset($_SESSION['USER'])) {
@@ -115,6 +142,11 @@ class MateController extends AbstractController
         }
     }
 
+
+    /**
+     * @throws \Exception
+     * Envoie le signalement en bdd
+     */
     public function ReportPost(){
         if (isset($_SESSION['USER']) && $_POST && $_POST['crsf'] == $_SESSION['token']) {
 

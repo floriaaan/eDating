@@ -11,6 +11,10 @@ use src\Model\Utilisateur;
 
 class HomeController extends AbstractController
 {
+    /**
+     * @return string
+     * Redirirge vers Map si on est connecté
+     */
     public function Index()
     {
         if (isset($_SESSION['USER'])) {
@@ -21,6 +25,13 @@ class HomeController extends AbstractController
 
     }
 
+    /**
+     * @return string
+     * @throws \Twig\Error\LoaderError
+     * @throws \Twig\Error\RuntimeError
+     * @throws \Twig\Error\SyntaxError
+     * Affiche la vue Twig correspondant à la map
+     */
     public function Map()
     {
         if (isset($_SESSION['USER'])) {
@@ -35,6 +46,14 @@ class HomeController extends AbstractController
         }
     }
 
+
+    /**
+     * @return string
+     * @throws \Twig\Error\LoaderError
+     * @throws \Twig\Error\RuntimeError
+     * @throws \Twig\Error\SyntaxError
+     * Moteur de recherche
+     */
     public function Search()
     {
         if (isset($_SESSION['USER'])) {
@@ -99,6 +118,13 @@ class HomeController extends AbstractController
         }
     }
 
+    /**
+     * @return string
+     * @throws \Twig\Error\LoaderError
+     * @throws \Twig\Error\RuntimeError
+     * @throws \Twig\Error\SyntaxError
+     * Debug purposes (Print PasswordReset Mail)
+     */
     public function Mail(){
         return $this->twig->render('Utilisateur/confidentials/mail.html.twig');
     }

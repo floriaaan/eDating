@@ -2,6 +2,7 @@
 <html lang="fr">
 <head>
     <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="icon" href="favicon.png" />
     <title>{% block title %}Find My Mate{% endblock %}</title>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
@@ -17,9 +18,9 @@
 <nav class="navbar {% block navclass %}fixed-top {% endblock %} nav-pills navbar-light bg-light justify-content-between wall-white-nav">
 
 
-    <div>
+    <div class="w-75-responsive">
         <form class="form-inline input-group" method="post" action="/Home/Search">
-            <input class="form-control fontawesome" type="search" placeholder="Rechercher votre Mate" name="search"
+            <input class="form-control fontawesome" width="70" type="search" placeholder="Rechercher votre Mate" name="search"
                    required>
             <input type="hidden" name="origin" value="index">
             <input type="hidden" name="tokencsrf" value="{{ tokenCRSF }}">
@@ -39,13 +40,12 @@
     </button>-
     <div class="collapse navbar-collapse" id="navbarTogglerDemo02">-->
     <!--<div class="row">-->
-
     <a class="responsive-dyes" href="/">
         <img src="/doc/fmm.svg" width="30" height="30" class="d-inline-block align-top"
              alt="Find My Mate">
 
     </a>
-    <div class="dropleft ">
+    <div class="dropleft">
 
         <a href="#" class="dropdown-toggle no-hover" id="navbarDropdown" data-toggle="dropdown" aria-expanded="false">
             <img src="/uploads/images/{{ userr.ProfilImgRepo }}/{{ userr.ProfilImgName }}" alt="Utilisateur"

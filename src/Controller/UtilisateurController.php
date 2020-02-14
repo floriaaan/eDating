@@ -13,10 +13,16 @@ use Swift_Mailer;
 use Swift_Message;
 use Swift_SmtpTransport;
 
-$modifUser = new Utilisateur();
 
 class UtilisateurController extends AbstractController
 {
+    /**
+     * @return string
+     * Redirige vers son propre profile
+     * @throws \Twig\Error\LoaderError
+     * @throws \Twig\Error\RuntimeError
+     * @throws \Twig\Error\SyntaxError
+     */
     public function Index()
     {
         if (isset($_SESSION['USER'])) {
@@ -27,6 +33,13 @@ class UtilisateurController extends AbstractController
 
     }
 
+    /**
+     * @return string
+     * @throws \Twig\Error\LoaderError
+     * @throws \Twig\Error\RuntimeError
+     * @throws \Twig\Error\SyntaxError
+     * Affiche la vue twig correspondant à la vue du profil
+     */
     public function Me()
     {
         if (isset($_SESSION['USER'])) {
@@ -42,6 +55,9 @@ class UtilisateurController extends AbstractController
 
     }
 
+    /*
+     * Vue alternative
+     */
     public function MeAlt()
     {
         if (isset($_SESSION['USER'])) {
@@ -56,6 +72,13 @@ class UtilisateurController extends AbstractController
 
     }
 
+    /**
+     * @return string
+     * @throws \Twig\Error\LoaderError
+     * @throws \Twig\Error\RuntimeError
+     * @throws \Twig\Error\SyntaxError
+     * Affiche et traite l'inscription (POST && GET)
+     */
     public function Register()
     {
         if ($_POST) {
@@ -134,6 +157,13 @@ class UtilisateurController extends AbstractController
         }
     }
 
+    /**
+     * @return string
+     * @throws \Twig\Error\LoaderError
+     * @throws \Twig\Error\RuntimeError
+     * @throws \Twig\Error\SyntaxError
+     * Affiche et traite la connexion (POST && GET)
+     */
     public function Login()
     {
 
@@ -176,12 +206,22 @@ class UtilisateurController extends AbstractController
         }
     }
 
+    /**
+     * Unset SESSION User
+     */
     public function Disconnect()
     {
         session_unset();
         header('Location:/Utilisateur/Login');
     }
 
+    /**
+     * @return string
+     * @throws \Twig\Error\LoaderError
+     * @throws \Twig\Error\RuntimeError
+     * @throws \Twig\Error\SyntaxError
+     * Affiche et traite la réinitialisation de mot de passe (GET && POST)
+     */
     public function ForgotPass()
     {
 
@@ -232,6 +272,14 @@ class UtilisateurController extends AbstractController
         }
     }
 
+    /**
+     * @param string $id
+     * @return string
+     * @throws \Twig\Error\LoaderError
+     * @throws \Twig\Error\RuntimeError
+     * @throws \Twig\Error\SyntaxError
+     * Change le mot de passe dans la bdd
+     */
     public function ChangePassword($id = '')
     {
         $user = new Utilisateur();
@@ -265,6 +313,13 @@ class UtilisateurController extends AbstractController
 
     }
 
+    /**
+     * @return string|void
+     * @throws \Twig\Error\LoaderError
+     * @throws \Twig\Error\RuntimeError
+     * @throws \Twig\Error\SyntaxError
+     * Affiche la vue Twig de la modification de profil
+     */
     public function ModifyGet()
     {
         if (isset($_SESSION['USER'])) {
@@ -279,6 +334,9 @@ class UtilisateurController extends AbstractController
         return;
     }
 
+    /**
+     * Modifie le profil
+     */
     public function ModifyPost()
     {
         if (isset($_SESSION['USER'])) {
