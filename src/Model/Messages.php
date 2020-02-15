@@ -32,14 +32,14 @@ Class Messages
     {
 
         $bdd = Bdd::GetInstance();
-        $afficher = $bdd->prepare("SELECT * FROM MESSAGE
-        WHERE ID_UTILISATEUR LIKE ? OR ID_UTILISATEUR LIKE  ?
-        AND UTI_ID_UTILISATEUR LIKE ? OR UTI_ID_UTILISATEUR LIKE ?
-        ORDER BY MES_DATE LIMIT 50;");
-        $afficher->execute(array($userid, $contactid, $contactid, $userid));
+        $afficher = $bdd->prepare("SELECT * FROM MESSAGE WHERE (ID_UTILISATEUR =:userID AND UTI_ID_UTILISATEUR =:contactID)
+                                    OR (UTI_ID_UTILISATEUR =:userID AND ID_UTILISATEUR =:contactID)
+                                    ORDER BY MES_DATE LIMIT 50;");
+        $afficher->execute([
+            'userID' => $userid,
+            'contactID' => $contactid
+        ]);
         $msg = $afficher->fetchAll();
-        $afficher->closeCursor();
-
         return $msg;
     }
 

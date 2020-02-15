@@ -81,7 +81,7 @@ class MessagesController extends AbstractController
 
     }
 
-    // Envoyer un messages non vide
+    // Envoyer un message non vide
     public function EnvoyerMsg()
     {
         if ($_POST) {
