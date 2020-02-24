@@ -250,7 +250,7 @@ class UtilisateurController extends AbstractController
                     ->setBody(
                         $this->twig->render(
                             'Utilisateur/confidentials/mail.html.twig',
-                            ['token'=> $passwd]), 'text/html'
+                            ['token' => $passwd]), 'text/html'
                     );
 
 
@@ -411,10 +411,24 @@ class UtilisateurController extends AbstractController
                     $photo->setPhotoName($nomImage);
                     $photo->setPhotoDossier($sqlRepository);
                     $photo->SqlAdd(Bdd::GetInstance(), $modifUser->getUID());
+                    $modifUser->setPhotos((new Photos)->SqlGetAll(Bdd::GetInstance(), $modifUser->getUID()));
+                }
+                if (isset($_POST['mAffinites'])) {
+                    (new Affinites)->SqlDeleteAllFromUser(Bdd::GetInstance(), $modifUser->getUID());
+                    $listAffinites = explode(',', $_POST['mAffinites']);
+
+
+                    foreach ($listAffinites as $aff) {
+                        $affinites = new Affinites();
+                        $affinites->setAffinites($aff);
+                        $affinites->SqlAdd(Bdd::GetInstance(), $modifUser->getUID());
+                    }
+                    $modifUser->setAffinites((new Affinites)->SqlGetAll(Bdd::GetInstance(), $modifUser->getUID()));
                 }
 
+
                 $modifUser->SqlUpdate(Bdd::GetInstance());
-                $modifUser->setPhotos((new Photos)->SqlGetAll(Bdd::GetInstance(), $modifUser->getUID()));
+
                 $_SESSION['USER'] = $modifUser;
             }
 

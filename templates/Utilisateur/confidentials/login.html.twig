@@ -5,62 +5,77 @@
 
 
 {% block body %}
-        <div class="container-login100 ">
-            <div class="wrap-login100 p-3">
-                <form class="login100-form validate-form mt-5" method="post" action="/Utilisateur/Login">
+    <div class="position-absolute d-flex flex-column justify-content-end align-items-end p-2" style="z-index: 5000">
+        <div class="alert alert-warning alert-dismissible fade show" role="alert" id="alert">
+            <h4 class="alert-heading">Attention</h4>
+            <p>Cette application n'est pas le Portfolio de Florian Leroux.</p>
+            <hr>
+            <p class="mb-0">Mais vous êtes à la bonne adresse.</p>
+            <p class="mb-0">Ce projet n'étant pas totalement terminé, je suis donc dans l'obligation de laisser
+                l'application Find My Mate à disposition.</p>
+            <p>Mon portfolio reviendra d'ici le Vendredi 28 Février.</p>
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+            </button>
+        </div>
+    </div>
+
+    <div class="container-login100 ">
+        <div class="wrap-login100 p-3">
+            <form class="login100-form validate-form mt-5" method="post" action="/Utilisateur/Login">
                     <span class="login100-form-avatar">
 						<img src="/doc/fmm.svg" alt="Find My Mate">
 					</span>
-					<span class="login100-form-title pb-2">
+                <span class="login100-form-title pb-2">
 						Find My Mate
 					</span>
-                    <div class="display-4 pb-1 text-center">
-						Connexion
-					</div>
+                <div class="display-4 pb-1 text-center">
+                    Connexion
+                </div>
 
 
-                    <div class="wrap-input100 validate-input mt-5" data-validate = "Email obligatoire">
-                        <input class="input100" type="mail" name="loginEmail" required>
-                        <span class="focus-input100" data-placeholder="Adresse e-mail"></span>
-                    </div>
+                <div class="wrap-input100 validate-input mt-5" data-validate="Email obligatoire">
+                    <input class="input100" type="mail" name="loginEmail" required>
+                    <span class="focus-input100" data-placeholder="Adresse e-mail"></span>
+                </div>
 
-                    <div class="wrap-input100 validate-input mt-4 mb-5" data-validate="Mot de passe obligatoire">
-                        <input class="input100" type="password" name="loginPassword" required>
-                        <span class="focus-input100" data-placeholder="Mot de passe"></span>
-                    </div>
+                <div class="wrap-input100 validate-input mt-4 mb-5" data-validate="Mot de passe obligatoire">
+                    <input class="input100" type="password" name="loginPassword" required>
+                    <span class="focus-input100" data-placeholder="Mot de passe"></span>
+                </div>
 
-                    <div class="container-login100-form-btn mb-5">
-                        <button class="login100-form-btn">
-                            Se connecter
-                        </button>
-                    </div>
+                <div class="container-login100-form-btn mb-5">
+                    <button class="login100-form-btn">
+                        Se connecter
+                    </button>
+                </div>
 
-                    <ul class="login-more">
-                        <li class="mb-2">
-                            <a href="/Utilisateur/ForgotPass" class="txt2">
-                                Identifiants
-                            </a>
-							<span class="txt1">
+                <ul class="login-more">
+                    <li class="mb-2">
+                        <a href="/Utilisateur/ForgotPass" class="txt2">
+                            Identifiants
+                        </a>
+                        <span class="txt1">
 								oubliés ?
 							</span>
 
 
-                        </li>
+                    </li>
 
-                        <li>
+                    <li>
 							<span class="txt1">
 								Je n'ai pas de compte,
 							</span>
 
-                            <a href="/Utilisateur/Register" class="txt2">
-                                je m'inscris !
-                            </a>
-                        </li>
-                    </ul>
-                    <input type="hidden" name="tokenCRSF" value="{{ token }}">
-                </form>
-            </div>
+                        <a href="/Utilisateur/Register" class="txt2">
+                            je m'inscris !
+                        </a>
+                    </li>
+                </ul>
+                <input type="hidden" name="tokenCRSF" value="{{ token }}">
+            </form>
         </div>
+    </div>
 
 
     <div id="dropDownSelect1"></div>

@@ -136,6 +136,7 @@ class Utilisateur implements \JsonSerializable
                 ->setPhotos((new Photos)->SqlGetAll($bdd, $userSQL['ID_UTILISATEUR']))
                 ->setLikes((new Like)->SqlGetAll($bdd, $userSQL['ID_UTILISATEUR']))
                 ->setPermission((new Permission)->SqlGetAll($bdd, $userSQL['ID_UTILISATEUR']))
+                ->setAffinites((new Affinites)->SqlGetAll($bdd, $userSQL['ID_UTILISATEUR']))
                 ->setReports((new Avertissement)->SqlGetWarnedUser($bdd, $userSQL['ID_UTILISATEUR']));
 
             $listUser[] = $user;
@@ -172,6 +173,7 @@ class Utilisateur implements \JsonSerializable
             ->setPhotos((new Photos)->SqlGetAll($bdd, $userSQL['ID_UTILISATEUR']))
             ->setLikes((new Like)->SqlGetAll($bdd, $userSQL['ID_UTILISATEUR']))
             ->setPermission((new Permission)->SqlGetAll($bdd, $userSQL['ID_UTILISATEUR']))
+            ->setAffinites((new Affinites)->SqlGetAll($bdd, $userSQL['ID_UTILISATEUR']))
             ->setReports((new Avertissement)->SqlGetWarnedUser($bdd, $userSQL['ID_UTILISATEUR']));
         return $user;
     }
@@ -209,6 +211,7 @@ class Utilisateur implements \JsonSerializable
                 ->setPhotos((new Photos)->SqlGetAll($bdd, $userSQL['ID_UTILISATEUR']))
                 ->setLikes((new Like)->SqlGetAll($bdd, $userSQL['ID_UTILISATEUR']))
                 ->setPermission((new Permission)->SqlGetAll($bdd, $userSQL['ID_UTILISATEUR']))
+                ->setAffinites((new Affinites)->SqlGetAll($bdd, $userSQL['ID_UTILISATEUR']))
                 ->setReports((new Avertissement)->SqlGetWarnedUser($bdd, $userSQL['ID_UTILISATEUR']));
 
             $listUser[] = $user;
@@ -250,6 +253,7 @@ class Utilisateur implements \JsonSerializable
                 ->setPhotos((new Photos)->SqlGetAll($bdd, $userSQL['ID_UTILISATEUR']))
                 ->setLikes((new Like)->SqlGetAll($bdd, $userSQL['ID_UTILISATEUR']))
                 ->setPermission((new Permission)->SqlGetAll($bdd, $userSQL['ID_UTILISATEUR']))
+                ->setAffinites((new Affinites)->SqlGetAll($bdd, $userSQL['ID_UTILISATEUR']))
                 ->setReports((new Avertissement)->SqlGetWarnedUser($bdd, $userSQL['ID_UTILISATEUR']));
 
             $listUser[] = $user;

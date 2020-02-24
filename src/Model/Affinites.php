@@ -15,14 +15,14 @@ class Affinites
         $rSQL = $query->fetchAll();
         $listAffinites = [];
         foreach ($rSQL as $affinite) {
-            $a = new Affinites();
-            $a->setAffinites($affinite['AFF_AFFINITE']);
 
-            $listAffinites[] = $a;
+            $listAffinites[] = $affinite['AFF_AFFINITE'];
         }
 
         return $listAffinites;
     }
+
+
 
     public function SqlDelete(\PDO $bdd, $userID, $affID)
     {
@@ -45,6 +45,11 @@ class Affinites
 
         }
         return $return;
+    }
+
+    public function SqlDeleteAllFromUser(\PDO $bdd, $userID) {
+        $query = $bdd->prepare('DELETE FROM AFFINITE WHERE ID_UTILISATEUR=:userID');
+        return $query->execute(['userID' => $userID]);
     }
 
 

@@ -32,6 +32,9 @@
 
                     <input type="text" name="mDescription" class="form-control mb-2" value="{{ userr.Description }}">
 
+                    <label for="mAffinites" id="mAffinites">Vos affinités (séparées par une virgule)</label>
+                    <input type="text" name="mAffinites" id="mAffinites" class="form-control mb-2" value="{% for aff in userr.Affinites %}{{ aff }},{% endfor %}">
+
 
                 </div>
                 <hr>
@@ -146,9 +149,10 @@
 
 
             {% endif %}
-            <div class="custom-file mt-3 mx-5">
+            <div class="custom-file mt-3 mx-5 mb-5">
                 <input type="file" class="custom-file-input" id="mAddPhoto" name="mAddPhoto">
-                <label class="custom-file-label" for="mAddPhoto"  width="6">Ajouter une image dans votre Galerie photo</label>
+                <label class="custom-file-label" for="mAddPhoto" width="6">Ajouter une image dans votre Galerie
+                    photo</label>
             </div>
 
         </div>

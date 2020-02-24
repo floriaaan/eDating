@@ -70,26 +70,26 @@
         </div>
     {% endif %}
 
-    {% if affinites is not null and affinites is not empty %}
+    {% if user.affinites is not null and user.affinites is not empty %}
         <hr>
-        {% for aff in affinites %}
+        {% for aff in user.affinites %}
             {% if loop.index0 is divisible by(3) %}
                 <div class="row mx-2 mb-4">
             {% endif %}
             <div class=" col-lg-4 p-2 mb-2">
                 <div class="card card-body">
-                    <h5 class="card-title">{{ aff.Affinites }}</h5>
+                    <h5 class="card-title">{{ aff }}</h5>
                     <h6 class="card-subtitle mb-2 text-muted">Affinité</h6>
                     <p class="card-text">Tu peux rencontrer des gens qui aime les mêmes choses</p>
                     <form action="/Home/Search/" method="post">
-                        <input type="submit" class="btn btn-outline-fmm" value="{{ aff.Affinites }}" name="search">
+                        <input type="submit" class="btn btn-outline-fmm" value="{{ aff }}" name="search">
                         <input type="hidden" name="origin" value="affinites">
                     </form>
 
 
                 </div>
             </div>
-            {% if loop.index0 is divisible by(3) and loop.index0 != 0 %}
+            {% if loop.index is divisible by(3) and loop.index0 != 0 %}
                 </div>
             {% endif %}
         {% endfor %}

@@ -2,6 +2,21 @@
 {% block title %}{{ parent() }} - Carte {% endblock %}
 
 {% block body %}
+    <div class="position-absolute d-flex flex-column justify-content-end align-items-end p-2" style="z-index: 5000" id="alert">
+        <div class="alert alert-warning alert-dismissible fade show" role="alert">
+            <h4 class="alert-heading">Attention</h4>
+            <p>Cette application n'est pas le Portfolio de Florian Leroux.</p>
+            <hr>
+            <p class="mb-0">Mais vous êtes à la bonne adresse.</p>
+            <p class="mb-0">Ce projet n'étant pas totalement terminé, je suis donc dans l'obligation de laisser
+                l'application Find My Mate à disposition.</p>
+            <p>Mon portfolio reviendra d'ici le Vendredi 28 Février.</p>
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+            </button>
+        </div>
+    </div>
+
     <link rel="stylesheet" href="https://unpkg.com/leaflet@1.5.1/dist/leaflet.css" integrity="sha512-xwE/Az9zrjBIphAcBb3F6JVqxf46+CDLwfLMHloNu6KEQCAWi6HcDUbeOfBIptF7tcCzusKFjFw2yuvEpDL9wQ==" crossorigin=""/>
     <script src="https://unpkg.com/leaflet@1.5.1/dist/leaflet.js" integrity="sha512-GffPMF3RvMeYyc1LWMHtK8EbPv0iNZ8/oTtHPx9/cc2ILxQ+u905qIwdpULaqDkyBKgOaB57QTMg7ztg8Jm2Og==" crossorigin=""></script>
 
@@ -13,6 +28,12 @@
 
 {% block js %}
     <script src="/js/map.js"></script>
+
+    <script>
+        $(".alert").delay(4000).slideUp(200, function() {
+            $(this).alert('close');
+        });
+    </script>
     <script>
 
 
